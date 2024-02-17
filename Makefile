@@ -6,9 +6,12 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/16 22:38:47 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/17 01:16:27 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+RED = \033[1;31m
+RESET = \033[0m
 
 NAME = cub3d
 RULE = .all
@@ -42,7 +45,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(RULE)
 	@$(MAKE) -s -C $(LIBFT)
-	@$(MAKE) -s -C $(MLX)
+	@$(MAKE) -s makemlx
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -I $(DEPS_PATH) $(LIBFLAGS)
 
 	@echo "\nCub3D compiled\n"
@@ -61,7 +64,7 @@ $(RULE_BONUS): $(OBJ_BONUS)
 	@touch $(RULE_BONUS)
 	@rm -f $(RULE)
 	@$(MAKE) -s -C $(LIBFT)
-	@$(MAKE) -s -C $(MLX)
+	@$(MAKE) -s makemlx
 	$(CC) $(FLAGS) $(OBJ_BONUS) -o $(NAME) -I $(DEPS_PATH_BONUS) $(LIBFLAGS)
 
 	@echo "\nCub3D_bonus compiled\n"
@@ -81,11 +84,16 @@ fclean: clean
 
 re: fclean all
 
+makemlx:
+	@$(MAKE) -s -C $(MLX) || $(MAKE) -s download && $(MAKE) -s -C $(MLX)
+
 download:
 	@echo "\nDownloading mlx\n"
-	@wget https://cdn.intra.42.fr/document/document/22624/minilibx-linux.tgz
+	@wget https://cdn.intra.42.fr/document/document/22624/minilibx-linux.tgz || \
+	(echo "$(RED)\nMlx download failed\nPlease download it manually\n\n$(RESET)" && exit 1)
 	@tar -xvf minilibx-linux.tgz
 	@rm -f minilibx-linux.tgz
+	@rm -rf minilibx-linux/.git minilibx-linux/.gitignore minilibx-linux/.github
 	@echo "\nMlx downloaded\n"
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus makemlx
