@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/17 01:16:27 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/17 01:25:32 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(RULE_BONUS): $(OBJ_BONUS)
 	@$(MAKE) -s makemlx
 	$(CC) $(FLAGS) $(OBJ_BONUS) -o $(NAME) -I $(DEPS_PATH_BONUS) $(LIBFLAGS)
 
-	@echo "\nCub3D_bonus compiled\n"
+	@echo "\nCub3D with bonus compiled\n"
 
 $(OBJ_PATH)%_bonus.o: %_bonus.c $(DEPS_BONUS)
 	@mkdir -p $(OBJ_PATH)
