@@ -6,7 +6,15 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/16 15:27:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:39:01 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/cub3d.h"
+
+int	parse_file(t_game *game, char *file)
+{
+	(void)game;
+	(void)file;
+	return (0);
+}
