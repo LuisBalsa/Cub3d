@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/17 11:51:08 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/17 23:24:35 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <fcntl.h>
 # include "../../Libft/libft.h"
 # include "../../minilibx-linux/mlx.h"
+
+# define NBR_PARAMS 6
 
 typedef struct s_game
 {

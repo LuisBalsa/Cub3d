@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/17 12:08:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/17 23:00:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	free_game(t_game *game)
 
 int	error_exit(t_game *game, char *message)
 {
-	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(RED"Error", 2);
 	ft_putendl_fd(message, 2);
+	ft_putstr_fd(RESET, 2);
 	free_game(game);
 	exit(errno);
 }
