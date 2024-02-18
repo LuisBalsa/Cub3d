@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/17 01:25:32 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/18 14:48:40 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = cub3d
 RULE = .all
 RULE_BONUS = .bonus
 
-SRC = main parse
+SRC = main parse check_open
 DEPS = cub3d.h
 DEPS_PATH = mandatory/includes/
 
