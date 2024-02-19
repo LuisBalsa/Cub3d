@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/18 14:55:20 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:34:43 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ static int	assign_color(t_game *game, t_color color, char **tokens)
 	return (true);
 }
 
-static int	lexer(t_game *game, char **tokens)
+static int	lexer(t_game *game, char *line, char **tokens)
 {
 	if (!ft_strncmp(tokens[0], "NO", 3))
-		return (assign_texture(game, no, tokens));
+		return (free(line), assign_texture(game, no, tokens));
 	if (!ft_strncmp(tokens[0], "SO", 3))
-		return (assign_texture(game, so, tokens));
+		return (free(line), assign_texture(game, so, tokens));
 	if (!ft_strncmp(tokens[0], "WE", 3))
-		return (assign_texture(game, we, tokens));
+		return (free(line), assign_texture(game, we, tokens));
 	if (!ft_strncmp(tokens[0], "EA", 3))
-		return (assign_texture(game, ea, tokens));
+		return (free(line), assign_texture(game, ea, tokens));
 	if (!ft_strncmp(tokens[0], "C", 2))
-		return (assign_color(game, clg, tokens));
+		return (free(line), assign_color(game, clg, tokens));
 	if (!ft_strncmp(tokens[0], "F", 2))
-		return (assign_color(game, flr, tokens));
-	return (error_exit(game, "Invalid parameter identifier"));
+		return (free(line), assign_color(game, flr, tokens));
+	return (free(line), error_exit(game, "Invalid parameter"));
 }
 
 static void	tokenizer(t_game *ga, char *line, char **tokens)
@@ -126,16 +126,15 @@ int	parse_file(t_game *game, char *file)
 		if (*tokens && ft_isdigit(tokens[0][0]))
 			break ;
 		if (*tokens)
-			valid_params += lexer(game, tokens);
-		free(line);
+			valid_params += lexer(game, line, tokens);
+		else
+			free(line);
 	}
 	if (valid_params != NBR_PARAMS)
 		return (error_exit(game, "Parameters missing"));
-//===>> dentro do parse map
-	printf("\nmap\n\n %s\n", line);
-	free(line);
+//	parse_map(game, fd, line);
+	free(line); // inside parse_map
 	print_params_and_colors(game);
-//<<===
 	close(fd);
 	return (0);
 }
