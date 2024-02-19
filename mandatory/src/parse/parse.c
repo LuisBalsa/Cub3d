@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/19 22:34:43 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:39:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,20 @@ static int	assign_color(t_game *game, t_color color, char **tokens)
 
 static int	lexer(t_game *game, char *line, char **tokens)
 {
+	free(line);
 	if (!ft_strncmp(tokens[0], "NO", 3))
-		return (free(line), assign_texture(game, no, tokens));
+		return (assign_texture(game, no, tokens));
 	if (!ft_strncmp(tokens[0], "SO", 3))
-		return (free(line), assign_texture(game, so, tokens));
+		return (assign_texture(game, so, tokens));
 	if (!ft_strncmp(tokens[0], "WE", 3))
-		return (free(line), assign_texture(game, we, tokens));
+		return (assign_texture(game, we, tokens));
 	if (!ft_strncmp(tokens[0], "EA", 3))
-		return (free(line), assign_texture(game, ea, tokens));
+		return (assign_texture(game, ea, tokens));
 	if (!ft_strncmp(tokens[0], "C", 2))
-		return (free(line), assign_color(game, clg, tokens));
+		return (assign_color(game, clg, tokens));
 	if (!ft_strncmp(tokens[0], "F", 2))
-		return (free(line), assign_color(game, flr, tokens));
-	return (free(line), error_exit(game, "Invalid parameter"));
+		return (assign_color(game, flr, tokens));
+	return (error_exit(game, "Invalid parameter"));
 }
 
 static void	tokenizer(t_game *ga, char *line, char **tokens)
