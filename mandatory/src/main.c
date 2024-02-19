@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/18 14:08:44 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:54:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_game(t_game *game)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
 		free(game->mlx);
+	if (game->file_line)
+		free(game->file_line);
 	i = -1;
 	while (++i < 4)
 		if (game->texture[i])

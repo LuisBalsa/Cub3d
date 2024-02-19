@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/19 22:39:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:59:31 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ static int	assign_color(t_game *game, t_color color, char **tokens)
 	return (true);
 }
 
-static int	lexer(t_game *game, char *line, char **tokens)
+static int	lexer(t_game *game, char **tokens)
 {
-	free(line);
 	if (!ft_strncmp(tokens[0], "NO", 3))
 		return (assign_texture(game, no, tokens));
 	if (!ft_strncmp(tokens[0], "SO", 3))
@@ -83,28 +82,28 @@ static int	lexer(t_game *game, char *line, char **tokens)
 	return (error_exit(game, "Invalid parameter"));
 }
 
-static void	tokenizer(t_game *ga, char *line, char **tokens)
+static void	tokenizer(t_game *ga, char **tokens)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	while (line[i] && ft_strchr(" \t\n", line[i]))
+	while (ga->file_line[i] && ft_strchr(" \t\n", ga->file_line[i]))
 		i++;
-	if (!line[i])
+	if (!ga->file_line[i])
 		return (tokens[0] = NULL, (void)(0));
-	while (line[i])
+	while (ga->file_line[i])
 	{
-		tokens[j++] = line + i;
-		while (line[i] && !ft_strchr(" \t\n,", line[i]))
+		tokens[j++] = ga->file_line + i;
+		while (ga->file_line[i] && !ft_strchr(" \t\n,", ga->file_line[i]))
 			i++;
-		if (line[i])
-			line[i++] = '\0';
-		while (line[i] && ft_strchr(" \t\n", line[i]))
+		if (ga->file_line[i])
+			ga->file_line[i++] = '\0';
+		while (ga->file_line[i] && ft_strchr(" \t\n", ga->file_line[i]))
 			i++;
 		if (j > 4)
-			return (free(line), error_exit(ga, "Invalid parameter"), (void)(0));
+			return (error_exit(ga, "Invalid parameter"), (void)(0));
 	}
 	tokens[j] = NULL;
 }
@@ -112,7 +111,6 @@ static void	tokenizer(t_game *ga, char *line, char **tokens)
 int	parse_file(t_game *game, char *file)
 {
 	int		fd;
-	char	*line;
 	char	*tokens[5];
 	int		valid_params;
 
@@ -120,21 +118,19 @@ int	parse_file(t_game *game, char *file)
 	valid_params = 0;
 	while (1)
 	{
-		line = get_next_line(fd);
-		if (!line)
+		game->file_line = get_next_line(fd);
+		if (!game->file_line)
 			return (error_exit(game, "No map found"));
-		tokenizer(game, line, tokens);
+		tokenizer(game, tokens);
 		if (*tokens && ft_isdigit(tokens[0][0]))
 			break ;
 		if (*tokens)
-			valid_params += lexer(game, line, tokens);
-		else
-			free(line);
+			valid_params += lexer(game, tokens);
+		free(game->file_line);
 	}
 	if (valid_params != NBR_PARAMS)
 		return (error_exit(game, "Parameters missing"));
-//	parse_map(game, fd, line);
-	free(line); // inside parse_map
+//	parse_map(game, fd, line); // free(game->file_line); game->file_line = NULL;
 	print_params_and_colors(game);
 	close(fd);
 	return (0);

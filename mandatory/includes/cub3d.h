@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/18 19:32:24 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:16:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
+	char	*file_line;
 	char	*texture[4];
 	int		color[2];
 	char	**map;
