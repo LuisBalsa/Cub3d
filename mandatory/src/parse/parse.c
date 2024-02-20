@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/20 03:21:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/20 03:39:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,16 @@ static void	tokenizer(t_game *ga, char **tokens)
 	comma = 0;
 	while (ga->file_line[i] && ft_strchr(" \t\n", ga->file_line[i]))
 		i++;
-	if (!ga->file_line[i])
-		return (tokens[0] = NULL, (void)(0));
 	while (ga->file_line[i])
 	{
 		tokens[j++] = ga->file_line + i;
 		while (ga->file_line[i] && !ft_strchr(" \t\n,", ga->file_line[i]))
 			i++;
-		comma += (ga->file_line[i] == ',') * (j != 1);
+		comma += (ga->file_line[i] == ',') * (j != 1) * j;
 		if (ga->file_line[i])
 			ga->file_line[i++] = '\0';
 		while (ga->file_line[i] && ft_strchr(" \t\n,", ga->file_line[i]))
-			comma += (ga->file_line[i++] == ',') * (j != 1);
+			comma += (ga->file_line[i++] == ',') * (j != 1) * j;
 		if (j > 4 || (j == 4 && ft_strchr("CF", tokens[0][0]) && comma != 5))
 			return (error_exit(ga, "Invalid parameter"), (void)(0));
 	}
