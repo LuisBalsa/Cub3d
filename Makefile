@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/18 14:48:40 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/20 15:12:10 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,12 +45,13 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(RULE)
 	@$(MAKE) -s -C $(LIBFT)
-	@$(MAKE) -s makemlx
+	@$(MAKE) -s makemlx 2> /dev/null || echo "$(RED)Mlx not found$(RESET)"
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME) -I $(DEPS_PATH) $(LIBFLAGS)
 
 	@echo "\nCub3D compiled\n"
 
 $(OBJ_PATH)%.o: %.c $(DEPS)
+	@find $(MLX) -name "mlx.h" -type f > /dev/null || $(MAKE) -s download
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH) $(LIBFLAGS)
 
@@ -70,6 +71,7 @@ $(RULE_BONUS): $(OBJ_BONUS)
 	@echo "\nCub3D with bonus compiled\n"
 
 $(OBJ_PATH)%_bonus.o: %_bonus.c $(DEPS_BONUS)
+	@find $(MLX) -name "mlx.h" -type f > /dev/null || $(MAKE) -s download
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH_BONUS) $(LIBFLAGS)
 
@@ -80,7 +82,7 @@ fclean: clean
 	@ rm -f $(RULE) $(RULE_BONUS)
 	rm -f $(NAME)
 	@$(MAKE) -s -C $(LIBFT) fclean
-	@$(MAKE) -s -C $(MLX) clean
+	@$(MAKE) -s -C $(MLX) clean 2> /dev/null || echo "$(RED)Mlx not found$(RESET)"
 
 re: fclean all
 
@@ -88,12 +90,12 @@ makemlx:
 	@$(MAKE) -s -C $(MLX) || $(MAKE) -s download && $(MAKE) -s -C $(MLX)
 
 download:
-	@echo "\nDownloading mlx\n"
-	@wget https://cdn.intra.42.fr/document/document/22624/minilibx-linux.tgz || \
+	@echo "\nDownloading mlx"
+	@wget https://cdn.intra.42.fr/document/document/22624/minilibx-linux.tgz 2> /dev/null || \
 	(echo "$(RED)\nMlx download failed\nPlease download it manually\n\n$(RESET)" && exit 1)
-	@tar -xvf minilibx-linux.tgz
+	@tar -xvf minilibx-linux.tgz > /dev/null
 	@rm -f minilibx-linux.tgz
 	@rm -rf minilibx-linux/.git minilibx-linux/.gitignore minilibx-linux/.github
-	@echo "\nMlx downloaded\n"
+	@echo "Mlx downloaded\n"
 
 .PHONY: all clean fclean re bonus makemlx

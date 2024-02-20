@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/19 23:16:28 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:12:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,32 @@ typedef enum e_color
 	flr
 }	t_color;
 
-typedef struct s_point
+typedef struct s_vi2d
 {
 	int	x;
 	int	y;
-}	t_point;
+}	t_vi2d;
 
-typedef struct s_fl_point
+typedef struct s_vf2d
 {
 	double	x;
 	double	y;
-}	t_fl_point;
+}	t_vf2d;
 
 typedef struct s_player
 {
-	t_fl_point	pos;
-	t_fl_point	dir;
-	t_fl_point	plane;
+	t_vf2d	pos;
 }	t_player;
 
 typedef struct s_game
 {
-	void	*mlx;
-	void	*win;
-	char	*file_line;
-	char	*texture[4];
-	int		color[2];
-	char	**map;
+	void		*mlx;
+	void		*win;
+	char		*file_line;
+	char		*texture[NBR_TEXTURES];
+	int			color[2];
+	char		**map;
+	t_player	pl;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
