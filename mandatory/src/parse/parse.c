@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/20 03:39:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:29:11 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ static void	tokenizer(t_game *ga, char **tokens)
 	while (ga->file_line[i])
 	{
 		tokens[j++] = ga->file_line + i;
+		if (j == 1 && ft_isdigit(ga->file_line[i]))
+			break;
 		while (ga->file_line[i] && !ft_strchr(" \t\n,", ga->file_line[i]))
 			i++;
 		comma += (ga->file_line[i] == ',') * (j != 1) * j;
@@ -133,6 +135,7 @@ int	parse_file(t_game *game, char *file)
 		return (error_exit(game, "Parameters missing"));
 //	parse_map(game, fd, line); // free(game->file_line); game->file_line = NULL;
 	print_params_and_colors(game); // testes
+	printf("Map: %s\n", game->file_line); // testes
 	close(fd);
 	return (0);
 }
