@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/20 15:12:10 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/22 19:36:37 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main parse check_open
 DEPS = cub3d.h
 DEPS_PATH = mandatory/includes/
 
-SRC_BONUS = main_bonus
+SRC_BONUS = parse_map_bonus check_open_bonus parse_bonus main_bonus
 DEPS_BONUS = cub3d_bonus.h
 DEPS_PATH_BONUS = bonus/includes/
 
