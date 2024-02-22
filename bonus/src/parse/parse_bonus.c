@@ -6,11 +6,11 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 19:20:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:11:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 static void	print_params_and_colors(t_game *game) // testes
 {
@@ -133,9 +133,8 @@ int	parse_file(t_game *game, char *file)
 	}
 	if (valid_params != NBR_PARAMS)
 		return (error_exit(game, "Parameters missing"));
-//	parse_map(game, fd, line); // free(game->file_line); game->file_line = NULL;
 	print_params_and_colors(game); // testes
-	printf("Map: %s\n", game->file_line); // testes
+	parse_map(game, fd);
 	close(fd);
 	return (0);
 }

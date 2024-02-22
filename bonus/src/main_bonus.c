@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 19:20:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:13:45 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_game(t_game *game)
 	while (++i < 4)
 		if (game->texture[i])
 			free(game->texture[i]);
+	if (game->map)
+		ft_free_array(game->map);
 }
 
 int	error_exit(t_game *game, char *message)

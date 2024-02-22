@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 19:21:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:15:11 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@
 
 # define NBR_PARAMS 6
 # define NBR_TEXTURES 4
+# define VALID_CHARS " 012NSEW\n"
 # define PI 3.14159265358979323846
 # define TWO_PI 6.28318530717958647692
+
+typedef struct s_game	t_game;
 
 typedef enum e_texture
 {
@@ -53,6 +56,7 @@ typedef struct s_vf2d
 
 typedef struct s_player
 {
+	t_game	*g;
 	t_vf2d	pos;
 }	t_player;
 
@@ -72,6 +76,6 @@ void	free_game(t_game *game);
 int		check_open(t_game *game, char *file, char *extension);
 
 int		parse_file(t_game *game, char *file);
-void	parse_map(t_game *game, int fd, char *line);
+void	parse_map(t_game *game, int fd);
 
 #endif

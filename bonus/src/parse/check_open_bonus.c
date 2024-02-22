@@ -6,11 +6,11 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:46:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 19:20:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/22 19:51:42 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d_bonus.h"
+#include "../../includes/cub3d_bonus.h"
 
 int	check_open(t_game *game, char *file, char *extension)
 {
