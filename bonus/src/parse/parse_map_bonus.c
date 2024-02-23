@@ -6,11 +6,17 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 21:27:49 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 10:42:51 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+static void	print_player(t_player *pl) // testes
+{
+	printf("Player position: %f, %f\n", pl->pos.x, pl->pos.y);
+	printf("Player direction: %f, %f\n", pl->ray_dir.x, pl->ray_dir.y);
+}
 
 static void	print_map(t_game *game) // testes
 {
@@ -19,6 +25,52 @@ static void	print_map(t_game *game) // testes
 	i = -1;
 	while (game->map[++i])
 		printf("%s\n", game->map[i]);
+}
+
+static void	set_spawn(t_game *game, char spawn, int x, int y)
+{
+	if (game->pl.g)
+		error_exit(game, "Map has multiple spawn points");
+	game->pl.pos = (t_vf2d){x + 0.5, y + 0.5};
+	if (spawn == 'N')
+		game->pl.ray_dir = (t_vf2d){0, -1};
+	else if (spawn == 'S')
+		game->pl.ray_dir = (t_vf2d){0, 1};
+	else if (spawn == 'W')
+		game->pl.ray_dir = (t_vf2d){-1, 0};
+	else if (spawn == 'E')
+		game->pl.ray_dir = (t_vf2d){1, 0};
+	game->map[y][x] = FLOOR;
+	game->pl.g = game;
+	game->pl.map = game->map;
+}
+
+static void	validate_map_and_set_spawn(t_game *game)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (game->map[++y])
+	{
+		x = -1;
+		while (game->map[y][++x])
+		{
+			if (ft_strchr(INSIDE_CHARS, game->map[y][x]))
+				if (x == 0 || y == 0 || !game->map[y + 1]
+					|| !game->map[y][x + 1]
+					|| x >= (int)ft_strlen(game->map[y + 1])
+					|| game->map[y][x - 1] == ' ' || game->map[y][x + 1] == ' '
+					|| game->map[y - 1][x] == ' ' || game->map[y + 1][x] == ' ')
+					error_exit(game, "Map is not closed");
+			if (ft_strchr(SPAWN_CHARS, game->map[y][x]))
+				set_spawn(game, game->map[y][x], x, y);
+			if (game->map[y][x] == DOOR &&
+				(game->map[y][x - 1] != WALL || game->map[y][x + 1] != WALL) &&
+				(game->map[y - 1][x] != WALL || game->map[y + 1][x] != WALL))
+				error_exit(game, "Map has invalid door");
+		}
+	}
 }
 
 static int	line_has_valid_content(t_game *game, char *line)
@@ -77,8 +129,10 @@ void	parse_map(t_game *game, int fd)
 
 	tmp_map = load_map(game, fd);
 	game->map = ft_split(tmp_map, '\n');
+	free(tmp_map);
 	if (!game->map)
 		error_exit(game, "Failed to allocate memory");
 	print_map(game); // testes
-	free(tmp_map);
+	validate_map_and_set_spawn(game);
+	print_player(&game->pl); // testes
 }

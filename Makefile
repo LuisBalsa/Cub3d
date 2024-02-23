@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/22 19:36:37 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/23 10:41:52 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,5 +97,8 @@ download:
 	@rm -f minilibx-linux.tgz
 	@rm -rf minilibx-linux/.git minilibx-linux/.gitignore minilibx-linux/.github
 	@echo "Mlx downloaded\n"
+
+leaks:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 1.cub
 
 .PHONY: all clean fclean re bonus makemlx
