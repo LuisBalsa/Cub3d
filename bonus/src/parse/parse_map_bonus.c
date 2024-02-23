@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 13:50:32 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:35:48 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	print_player(t_player *pl) // testes
 {
 	printf("Player position: %f, %f\n", pl->pos.x, pl->pos.y);
 	printf("Player direction: %f, %f\n", pl->ray_dir.x, pl->ray_dir.y);
+	printf("Player plane: %f, %f\n", pl->plane.x, pl->plane.y);
 }
 
 static void	print_map(t_game *game) // testes
@@ -27,16 +28,20 @@ static void	print_map(t_game *game) // testes
 		printf("%s\n", game->map[i]);
 }
 
-static void	set_spawn(t_game *game, char dir, int x, int y)
+static void	set_spawn(t_game *ga, char dir, int x, int y)
 {
-	if (game->pl.g)
-		error_exit(game, "Map has multiple spawn points");
-	game->pl.pos = (t_vf2d){x + 0.5, y + 0.5};
-	game->pl.ray_dir = (t_vf2d){(dir == 'E') - (dir == 'W'),
+	t_player	*pl;
+
+	if (ga->pl.g)
+		error_exit(ga, "Map has multiple spawn points");
+	pl = &ga->pl;
+	pl->pos = (t_vf2d){x + 0.5, y + 0.5};
+	pl->ray_dir = (t_vf2d){(dir == 'E') - (dir == 'W'),
 		(dir == 'S') - (dir == 'N')};
-	game->map[y][x] = FLOOR;
-	game->pl.g = game;
-	game->pl.map = game->map;
+	pl->plane = (t_vf2d){pl->ray_dir.y * FOV, -(pl->ray_dir.x * FOV)};
+	ga->map[y][x] = FLOOR;
+	pl->g = ga;
+	pl->map = ga->map;
 }
 
 static void	validate_map_and_set_spawn(t_game *game)

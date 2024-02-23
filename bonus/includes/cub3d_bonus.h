@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 10:09:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:54:44 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define FOV 0.66
+# define TILE_SIZE 64
 # define PI 3.14159265358979323846
 # define TWO_PI 6.28318530717958647692
 
@@ -65,9 +67,9 @@ typedef struct s_player
 	char	**map;
 	t_vf2d	pos;
 	t_vf2d	ray_dir;
-	t_vf2d	camera;
-	t_vf2d	side_len;
-	t_vf2d	ray_len;
+	t_vf2d	plane;
+	t_vf2d	side_dist;
+	t_vf2d	delta_dist;
 	t_vi2d	map_check;
 	t_vi2d	step;
 }	t_player;
