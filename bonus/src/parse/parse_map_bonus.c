@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 10:42:51 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:25:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,13 @@ static void	print_map(t_game *game) // testes
 		printf("%s\n", game->map[i]);
 }
 
-static void	set_spawn(t_game *game, char spawn, int x, int y)
+static void	set_spawn(t_game *game, char dir, int x, int y)
 {
 	if (game->pl.g)
 		error_exit(game, "Map has multiple spawn points");
 	game->pl.pos = (t_vf2d){x + 0.5, y + 0.5};
-	if (spawn == 'N')
-		game->pl.ray_dir = (t_vf2d){0, -1};
-	else if (spawn == 'S')
-		game->pl.ray_dir = (t_vf2d){0, 1};
-	else if (spawn == 'W')
-		game->pl.ray_dir = (t_vf2d){-1, 0};
-	else if (spawn == 'E')
-		game->pl.ray_dir = (t_vf2d){1, 0};
+	game->pl.ray_dir = (t_vf2d){(dir == 'E') - (dir == 'W'),
+		(dir == 'S') - (dir == 'N')};
 	game->map[y][x] = FLOOR;
 	game->pl.g = game;
 	game->pl.map = game->map;
