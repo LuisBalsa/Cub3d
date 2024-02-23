@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 14:54:44 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:47:58 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ typedef struct s_game
 
 int		error_exit(t_game *game, char *message);
 void	free_game(t_game *game);
-int		check_open(t_game *game, char *file, char *extension);
 
 int		parse_file(t_game *game, char *file);
+int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
 
 #endif
