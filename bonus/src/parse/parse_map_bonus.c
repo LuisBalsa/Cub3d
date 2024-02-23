@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 11:25:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:50:32 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	line_has_valid_content(t_game *game, char *line)
 	return (true);
 }
 
-static char	*load_map(t_game *game, int fd)
+static char	*load_map_and_check_content(t_game *game, int fd)
 {
 	char	*tmp_map;
 	char	*old_temp_map;
@@ -121,7 +121,7 @@ void	parse_map(t_game *game, int fd)
 {
 	char	*tmp_map;
 
-	tmp_map = load_map(game, fd);
+	tmp_map = load_map_and_check_content(game, fd);
 	game->map = ft_split(tmp_map, '\n');
 	free(tmp_map);
 	if (!game->map)
