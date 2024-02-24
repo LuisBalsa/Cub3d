@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 15:47:58 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:09:25 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../../Libft/libft.h"
 # include "../../minilibx-linux/mlx.h"
 
+# define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
 # define NBR_TEXTURES 4
 # define VALID_CHARS " 012NSEW\n"
@@ -29,6 +30,8 @@
 # define WALL '1'
 # define DOOR '2'
 # define FOV 0.66
+# define SCREEN_WIDTH 1080
+# define SCREEN_HEIGHT 720
 # define TILE_SIZE 64
 # define PI 3.14159265358979323846
 # define TWO_PI 6.28318530717958647692
@@ -61,6 +64,17 @@ typedef struct s_vf2d
 	double	y;
 }	t_vf2d;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+
 typedef struct s_player
 {
 	t_game	*g;
@@ -80,16 +94,21 @@ typedef struct s_game
 	void		*win;
 	char		*file_line;
 	char		*texture[NBR_TEXTURES];
+	t_img		img[NBR_TEXTURES];
+	t_img		screen;
 	int			color[2];
 	char		**map;
 	t_player	pl;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
-void	free_game(t_game *game);
+int		free_game(t_game *game);
 
 int		parse_file(t_game *game, char *file);
 int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
+void	init_mlx_and_textures(t_game *game);
+void	raycasting(t_game *game);
+void	my_pixel_put(t_img *img, int x, int y, int color);
 
 #endif

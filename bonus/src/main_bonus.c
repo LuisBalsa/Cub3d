@@ -6,22 +6,37 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/22 21:13:45 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:42:10 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-void	free_game(t_game *game)
+static void	free_game_mlx(t_game *game)
+{
+	int	i;
+
+	i = -1;
+	while (++i < NBR_TEXTURES)
+		if (game->img[i].img)
+			mlx_destroy_image(game->mlx, game->img[i].img);
+	if (game->screen.img)
+		mlx_destroy_image(game->mlx, game->screen.img);
+	mlx_clear_window(game->mlx, game->win);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+}
+
+int	free_game(t_game *game)
 {
 	int	i;
 
 	if (!game)
-		return ;
-	if (game->mlx && game->win)
-		mlx_destroy_window(game->mlx, game->win);
+		return (0);
 	if (game->mlx)
-		free(game->mlx);
+		free_game_mlx(game);
 	if (game->file_line)
 		free(game->file_line);
 	i = -1;
@@ -30,6 +45,7 @@ void	free_game(t_game *game)
 			free(game->texture[i]);
 	if (game->map)
 		ft_free_array(game->map);
+	exit(0);
 }
 
 int	error_exit(t_game *game, char *message)
@@ -50,6 +66,10 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (error_exit(NULL, "Invalid number of arguments"));
 	parse_file(&game, argv[1]);
+	init_mlx_and_textures(&game);
+	raycasting(&game);
+	mlx_hook(game.win, 17, 1L << 0, &free_game, &game);
+	mlx_loop(game.mlx);
 	free_game(&game);
 	return (0);
 }
