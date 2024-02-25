@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/25 15:55:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:51:25 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ static void	get_draw_data(t_player *pl, t_draw *draw)
 {
 	int		line_height;
 
-	line_height = (int)(SCREEN_HEIGHT / pl->hit_dist);
-	draw->start = -line_height / 2 + SCREEN_HEIGHT / 2;
+	line_height = fabs((double)SCREEN_HEIGHT / pl->hit_dist);
+	draw->start = SCREEN_HEIGHT / 2 - line_height / 2;
 	if (draw->start < 0)
 		draw->start = 0;
-	draw->end = line_height / 2 + SCREEN_HEIGHT / 2;
+	draw->end = SCREEN_HEIGHT / 2 + line_height / 2;
 	if (draw->end >= SCREEN_HEIGHT)
 		draw->end = SCREEN_HEIGHT - 1;
 	draw->step = 1.0 * TEXTURE_HEIGHT / line_height;
@@ -137,10 +137,12 @@ static void	draw_walls(t_game *game, t_player *pl, int x)
 	}
 }
 
-/* static void ft_debug(t_player *pl)
+static void ft_debug(t_player *pl, int x)
 {
-	init_raycaster(pl, SCREEN_WIDTH / 2 - 150);
-	perform_dda(pl);
+	if (x != 10)
+		return ;
+/* 	init_raycaster(pl, SCREEN_WIDTH / 2 - 150);
+	perform_dda(pl); */
 	printf("pos_x: %f\n", pl->pos.x);
 	printf("pos_y: %f\n", pl->pos.y);
 	printf("dir_x: %f\n", pl->dir.x);
@@ -164,7 +166,7 @@ static void	draw_walls(t_game *game, t_player *pl, int x)
 	printf("draw_end: %d\n", pl->draw.end);
 	printf("draw step: %f\n", pl->draw.step);
 	printf("draw pos: %f\n", pl->draw.pos);
-} */
+}
 
 void	raycasting(t_game *game)
 {
@@ -176,10 +178,10 @@ void	raycasting(t_game *game)
 	{
 		init_raycaster(&game->pl, x);
 		perform_dda(&game->pl);
+		ft_debug(&game->pl, x);
 		draw_walls(game, &game->pl, x);
 	}
-/* 	ft_debug(&game->pl);
-	draw_background(game);
-	draw_walls(game, &game->pl, 0); */
+/* 	draw_background(game);
+	draw_walls(game, &game->pl, 50); */
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 }
