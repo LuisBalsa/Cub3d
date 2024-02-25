@@ -1,0 +1,20 @@
+C 1,1,224
+F 100, 2, 100
+
+NO north_wall.xpm
+SO south_wall.xpm
+
+
+WE        west_wall.xpm
+EA east_wall.xpm
+
+
+  1111  1111
+110001  10201
+100001  1111
+100001
+111101
+1E0001
+111111
+
+
