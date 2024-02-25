@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 18:09:25 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/24 23:46:58 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define INDEX_DOOR_IMAGE 4
 # define FOV 0.66
 # define SCREEN_WIDTH 1080
 # define SCREEN_HEIGHT 720
-# define TILE_SIZE 64
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 # define PI 3.14159265358979323846
 # define TWO_PI 6.28318530717958647692
 
@@ -58,11 +60,45 @@ typedef struct s_vi2d
 	int	y;
 }	t_vi2d;
 
+typedef enum e_key
+{
+	W = 119,
+	A = 97,
+	S = 115,
+	D = 100,
+	ESC = 65307,
+	UP = 65362,
+	LEFT = 65361,
+	DOWN = 65364,
+	RIGHT = 65363,
+}				t_key;
+
+typedef struct s_key_state
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	esc;
+	int	up;
+	int	left;
+	int	down;
+	int	right;
+}	t_key_state;
+
 typedef struct s_vf2d
 {
 	double	x;
 	double	y;
 }	t_vf2d;
+
+typedef struct s_draw
+{
+	int		start;
+	int		end;
+	double	step;
+	double	pos;
+}	t_draw;
 
 typedef struct s_img
 {
@@ -77,15 +113,22 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	t_game	*g;
-	char	**map;
-	t_vf2d	pos;
-	t_vf2d	ray_dir;
-	t_vf2d	plane;
-	t_vf2d	side_dist;
-	t_vf2d	delta_dist;
-	t_vi2d	map_check;
-	t_vi2d	step;
+	t_game		*g;
+	char		**map;
+	t_vf2d		pos;
+	t_vf2d		dir;
+	t_vf2d		ray_dir;
+	t_vf2d		plane;
+	int			pitch;
+	int			img_index;
+	t_vf2d		diagonal_dist;
+	t_vf2d		delta_dist;
+	t_vi2d		map_check;
+	t_vi2d		step;
+	double		hit_dist;
+	int			hit_x;
+	t_draw		draw;
+	t_key_state	key;
 }	t_player;
 
 typedef struct s_game

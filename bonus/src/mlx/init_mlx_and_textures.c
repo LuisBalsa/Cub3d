@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 18:29:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:23:17 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_mlx_and_textures(t_game *game)
 	if (!game->mlx)
 		error_exit(game, "Failed to initialize mlx");
 	load_textures(game);
-	game->screen.width = 1080;
-	game->screen.height = 720;
+	game->screen.width = (int)SCREEN_WIDTH;
+	game->screen.height = (int)SCREEN_HEIGHT;
 	game->screen.img = mlx_new_image(game->mlx, game->screen.width,
 			game->screen.height);
 	if (!game->screen.img)

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 15:59:45 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/24 21:03:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	set_spawn(t_game *ga, char dir, int x, int y)
 		error_exit(ga, "Map has multiple spawn points");
 	pl = &ga->pl;
 	pl->pos = (t_vf2d){x + 0.5, y + 0.5};
-	pl->ray_dir = (t_vf2d){(dir == 'E') - (dir == 'W'),
+	pl->dir = (t_vf2d){(dir == 'E') - (dir == 'W'),
 		(dir == 'S') - (dir == 'N')};
-	pl->plane = (t_vf2d){pl->ray_dir.y * FOV, -(pl->ray_dir.x * FOV)};
+	pl->plane = (t_vf2d){pl->dir.y * FOV, -(pl->dir.x * FOV)};
 	ga->map[y][x] = FLOOR;
 	pl->g = ga;
 	pl->map = ga->map;
