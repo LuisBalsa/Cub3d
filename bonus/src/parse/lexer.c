@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:43:08 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 15:59:46 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:55:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	assign_texture(t_game *game, t_texture texture, char **tokens)
 		return (error_exit(game, "Invalid texture path"));
 	close(check_open(game, tokens[1], ".xpm"));
 	game->texture[texture] = ft_strdup(tokens[1]);
+	printf("Texture %d: %s\n", texture, game->texture[texture]);
 	if (!game->texture[texture])
 		return (error_exit(game, "Failed to assign texture"));
 	return (true);

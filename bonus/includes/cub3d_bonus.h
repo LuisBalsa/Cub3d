@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 23:46:58 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:21:54 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define DOOR '2'
 # define INDEX_DOOR_IMAGE 4
 # define FOV 0.66
-# define SCREEN_WIDTH 1080
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1024
+# define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define PI 3.14159265358979323846
@@ -42,10 +42,10 @@ typedef struct s_game	t_game;
 
 typedef enum e_texture
 {
-	no,
-	so,
 	we,
-	ea
+	ea,
+	no,
+	so
 }	t_texture;
 
 typedef enum e_color
@@ -153,5 +153,6 @@ void	parse_map(t_game *game, int fd);
 void	init_mlx_and_textures(t_game *game);
 void	raycasting(t_game *game);
 void	my_pixel_put(t_img *img, int x, int y, int color);
+int		my_pixel_get(t_img *img, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 21:03:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/25 15:51:08 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_player(t_player *pl) // testes
 {
 	printf("Player position: %f, %f\n", pl->pos.x, pl->pos.y);
-	printf("Player direction: %f, %f\n", pl->ray_dir.x, pl->ray_dir.y);
+	printf("Player direction: %f, %f\n", pl->dir.x, pl->dir.y);
 	printf("Player plane: %f, %f\n", pl->plane.x, pl->plane.y);
 }
 
