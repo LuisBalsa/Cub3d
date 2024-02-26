@@ -6,25 +6,37 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/25 20:51:25 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:53:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/cub3d_bonus.h"
 
+	int		global_x;
+
 static void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step)
 {
-	if (pl->map[check.y][check.x] == '1')
+	if (pl->map[check.x][check.y] == '1')
 		pl->img_index = side - (side == 1 && step.x < 0) - (side == 3 && step.y < 0);
-	if (pl->map[check.y][check.x] == '2')
+	if (pl->map[check.x][check.y] == '2')
 		pl->img_index = INDEX_DOOR_IMAGE;
+	if (global_x == 10)
+	{
+		printf("map[check.y][check.x]: %c\n", pl->map[check.y][check.x]);
+		printf("pl->img_index: %d\n", pl->img_index);
+		printf("side: %d\n", side);
+		printf("diag_dist.x: %f\n", pl->diagonal_dist.x);
+		printf("diag_dist.y: %f\n", pl->diagonal_dist.y);
+		printf("check.x: %d\n", check.x);
+		printf("check.y: %d\n", check.y);
+	}
 }
 
 static void	get_hit_distances(t_player *pl, int side)
 {
 	double	hit_x;
 
-	if (pl->diagonal_dist.x < pl->diagonal_dist.y)
+	if (side == 1)
 		pl->hit_dist = pl->diagonal_dist.x - pl->delta_dist.x;
 	else
 		pl->hit_dist = pl->diagonal_dist.y - pl->delta_dist.y;
@@ -113,7 +125,6 @@ static void	draw_background(t_game *game)
 		y = -1;
 		while (++y < game->screen.height / 2)
 			my_pixel_put(&game->screen, x, y, game->color[clg]);
-		y--;
 		while (++y < game->screen.height)
 			my_pixel_put(&game->screen, x, y, game->color[flr]);
 	}
@@ -170,16 +181,14 @@ static void ft_debug(t_player *pl, int x)
 
 void	raycasting(t_game *game)
 {
-	int		x;
-
 	draw_background(game);
-	x = -1;
-	while (++x < game->screen.width)
+	global_x = -1;
+	while (++global_x < game->screen.width)
 	{
-		init_raycaster(&game->pl, x);
+		init_raycaster(&game->pl, global_x);
 		perform_dda(&game->pl);
-		ft_debug(&game->pl, x);
-		draw_walls(game, &game->pl, x);
+		ft_debug(&game->pl, global_x);
+		draw_walls(game, &game->pl, global_x);
 	}
 /* 	draw_background(game);
 	draw_walls(game, &game->pl, 50); */

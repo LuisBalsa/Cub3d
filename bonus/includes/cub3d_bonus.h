@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/25 15:21:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:55:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define PI 3.14159265358979323846
-# define TWO_PI 6.28318530717958647692
 
 typedef struct s_game	t_game;
 
