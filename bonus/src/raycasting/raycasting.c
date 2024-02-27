@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/26 14:53:39 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 00:08:58 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ static void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step)
 		pl->img_index = INDEX_DOOR_IMAGE;
 	if (global_x == 10)
 	{
-		printf("map[check.y][check.x]: %c\n", pl->map[check.y][check.x]);
+		printf("\nmap[check.y][check.x]: %c\n", pl->map[check.x][check.y]);
 		printf("pl->img_index: %d\n", pl->img_index);
 		printf("side: %d\n", side);
 		printf("diag_dist.x: %f\n", pl->diagonal_dist.x);
 		printf("diag_dist.y: %f\n", pl->diagonal_dist.y);
 		printf("check.x: %d\n", check.x);
-		printf("check.y: %d\n", check.y);
+		printf("check.y: %d\n\n", check.y);
 	}
 }
 
