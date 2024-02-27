@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 00:08:58 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 01:11:23 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 static void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step)
 {
-	if (pl->map[check.x][check.y] == '1')
+	if (pl->map[check.y][check.x] == '1')
 		pl->img_index = side - (side == 1 && step.x < 0) - (side == 3 && step.y < 0);
-	if (pl->map[check.x][check.y] == '2')
+	if (pl->map[check.y][check.x] == '2')
 		pl->img_index = INDEX_DOOR_IMAGE;
-	if (global_x == 10)
+	if (global_x == SCREEN_WIDTH / 2)
 	{
 		printf("\nmap[check.y][check.x]: %c\n", pl->map[check.x][check.y]);
 		printf("pl->img_index: %d\n", pl->img_index);
@@ -46,9 +46,9 @@ static void	get_hit_distances(t_player *pl, int side)
 		hit_x = pl->pos.x + pl->hit_dist * pl->ray_dir.x;
 	hit_x -= floor(hit_x);
 	pl->hit_x = (int)(hit_x * (double)TEXTURE_WIDTH);
-	if (side == 1 && pl->ray_dir.x > 0)
+	if (side == 1 && pl->ray_dir.x < 0)
 		pl->hit_x = TEXTURE_WIDTH - pl->hit_x - 1;
-	if (side == 3 && pl->ray_dir.y < 0)
+	if (side == 3 && pl->ray_dir.y > 0)
 		pl->hit_x = TEXTURE_WIDTH - pl->hit_x - 1;
 }
 
