@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 02:59:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:40:42 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	validate_map_and_set_spawn(t_game *game)
 			if (ft_strchr(INSIDE_CHARS, game->map[y][x]))
 				if (x == 0 || y == 0 || !game->map[y + 1]
 					|| !game->map[y][x + 1]
+					|| x >= (int)ft_strlen(game->map[y - 1])
 					|| x >= (int)ft_strlen(game->map[y + 1])
 					|| game->map[y][x - 1] == ' ' || game->map[y][x + 1] == ' '
 					|| game->map[y - 1][x] == ' ' || game->map[y + 1][x] == ' ')
