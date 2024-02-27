@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 19:46:38 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:40:43 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	free_game_mlx(t_game *game)
 			mlx_destroy_image(game->mlx, game->img[i].img);
 	if (game->screen.img)
 		mlx_destroy_image(game->mlx, game->screen.img);
-	mlx_clear_window(game->mlx, game->win);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
@@ -40,7 +39,7 @@ int	free_game(t_game *game)
 	if (game->file_line)
 		free(game->file_line);
 	i = -1;
-	while (++i < 4)
+	while (++i < NBR_TEXTURES)
 		if (game->texture[i])
 			free(game->texture[i]);
 	if (game->map)

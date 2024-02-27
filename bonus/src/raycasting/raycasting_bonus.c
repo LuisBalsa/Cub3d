@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 03:02:01 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:45:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	perform_dda(t_player *pl)
 			pl->map_check.y += pl->step.y;
 			side = 3;
 		}
-		check_hit(pl, side, pl->map_check, pl->step);
+		check_hit(pl, &side, pl->map_check, pl->step);
 	}
 	get_hit_distances(pl, side);
 	get_draw_data(pl, &pl->draw);

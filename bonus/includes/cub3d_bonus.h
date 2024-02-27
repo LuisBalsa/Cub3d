@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 03:01:33 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:38:59 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
-# define NBR_TEXTURES 4
-# define VALID_CHARS " 012NSEW\n"
+# define NBR_TEXTURES 6
+# define VALID_CHARS " 0123NSEW\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "02NSEW"
+# define INSIDE_CHARS "023NSEW"
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
@@ -35,6 +35,9 @@
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+
+# define DOOR_IMAGE "textures/door.xpm"
+# define DOOR_FRAME "textures/door_frame.xpm"
 
 typedef struct s_game	t_game;
 
@@ -150,7 +153,7 @@ int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
 void	init_mlx_and_textures(t_game *game);
 void	raycasting(t_game *game);
-void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step);
+void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
 
 #endif

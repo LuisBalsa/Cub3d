@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx_and_textures.c                            :+:      :+:    :+:   */
+/*   init_mlx_and_textures_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/24 20:23:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:39:37 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	load_textures(t_game *game)
 {
 	int		i;
 
+	game->texture[INDEX_DOOR_IMAGE] = ft_strdup(DOOR_IMAGE);
+	game->texture[INDEX_DOOR_IMAGE + 1] = ft_strdup(DOOR_FRAME);
 	i = -1;
 	while (++i < NBR_TEXTURES)
 	{
