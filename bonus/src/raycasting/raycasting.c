@@ -6,13 +6,14 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 01:11:23 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 01:25:07 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../../includes/cub3d_bonus.h"
 
 	int		global_x;
+	int		global_pitch = 200;
 
 static void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step)
 {
@@ -57,14 +58,14 @@ static void	get_draw_data(t_player *pl, t_draw *draw)
 	int		line_height;
 
 	line_height = fabs((double)SCREEN_HEIGHT / pl->hit_dist);
-	draw->start = SCREEN_HEIGHT / 2 - line_height / 2;
+	draw->start = SCREEN_HEIGHT / 2 - line_height / 2 + pl->pitch;
 	if (draw->start < 0)
 		draw->start = 0;
-	draw->end = SCREEN_HEIGHT / 2 + line_height / 2;
+	draw->end = SCREEN_HEIGHT / 2 + line_height / 2 + pl->pitch;
 	if (draw->end >= SCREEN_HEIGHT)
 		draw->end = SCREEN_HEIGHT - 1;
 	draw->step = 1.0 * TEXTURE_HEIGHT / line_height;
-	draw->pos = (draw->start - (double)SCREEN_HEIGHT / 2 +
+	draw->pos = (draw->start - pl->pitch - (double)SCREEN_HEIGHT / 2 +
 		(double)line_height / 2) * draw->step;
 }
 
@@ -105,7 +106,7 @@ static void	init_raycaster(t_player *pl, int x)
 		fabs(1.0 / (pl->ray_dir.x + (pl->ray_dir.x == 0)));
 	pl->delta_dist.y = 1e30 * (pl->ray_dir.y == 0) +
 		fabs(1.0 / (pl->ray_dir.y + (pl->ray_dir.y == 0)));
-	pl->img_index = -1; // ????
+	pl->img_index = -1;
 	pl->step.x = (pl->ray_dir.x < 0) * -2 + 1;
 	pl->diagonal_dist.x = fabs((pl->pos.x - pl->map_check.x) -
 		(pl->ray_dir.x > 0)) * pl->delta_dist.x;
