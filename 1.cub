@@ -1,5 +1,6 @@
-C 1,1,224
-F 100, 2, 100
+C 135,206,250
+
+F 92,92,92
 
 NO north_wall.xpm
 SO south_wall.xpm

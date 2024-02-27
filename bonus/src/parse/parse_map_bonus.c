@@ -6,27 +6,11 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 01:09:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 02:59:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
-static void	print_player(t_player *pl) // testes
-{
-	printf("Player position: %f, %f\n", pl->pos.x, pl->pos.y);
-	printf("Player direction: %f, %f\n", pl->dir.x, pl->dir.y);
-	printf("Player plane: %f, %f\n", pl->plane.x, pl->plane.y);
-}
-
-static void	print_map(t_game *game) // testes
-{
-	int	i;
-
-	i = -1;
-	while (game->map[++i])
-		printf("%s\n", game->map[i]);
-}
 
 static void	set_spawn(t_game *ga, char dir, int x, int y)
 {
@@ -131,7 +115,5 @@ void	parse_map(t_game *game, int fd)
 	free(tmp_map);
 	if (!game->map)
 		error_exit(game, "Failed to allocate memory");
-	print_map(game); // testes
 	validate_map_and_set_spawn(game);
-	print_player(&game->pl); // testes
 }

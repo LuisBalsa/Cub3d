@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/26 12:55:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 03:01:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
 void	init_mlx_and_textures(t_game *game);
 void	raycasting(t_game *game);
-void	my_pixel_put(t_img *img, int x, int y, int color);
-int		my_pixel_get(t_img *img, int x, int y);
+void	check_hit(t_player *pl, int side, t_vi2d check, t_vi2d step);
+void	draw_walls_and_background(t_game *game, t_player *pl, int x);
 
 #endif

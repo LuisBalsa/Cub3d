@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:27:11 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/23 15:59:48 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/27 02:48:32 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,6 @@ static int	check_open(t_game *game, char *file, char *extension)
 		return (error_exit(game, "Failed to open file"));
 	return (fd);
 }
-
-static void	print_params_and_colors(t_game *game) // testes
-{
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-		printf("Texture %d: %s\n", i, game->texture[i]);
-	printf("Ceiling color: %d\n", game->color[clg]);
-	printf("Floor color: %d\n", game->color[flr]);
-}
-
 
 static void	tokenizer(t_game *ga, char **tokens)
 {
@@ -88,8 +76,7 @@ int	parse_file(t_game *game, char *file)
 		free(game->file_line);
 	}
 	if (valid_params != NBR_PARAMS)
-		return (error_exit(game, "Parameters missing"));
-	print_params_and_colors(game); // testes
+		return (error_exit(game, "Wrong number of parameters"));
 	parse_map(game, fd);
 	close(fd);
 	return (0);
