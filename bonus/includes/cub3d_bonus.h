@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 11:12:28 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/28 17:11:46 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define WALL '1'
 # define DOOR '2'
 # define FOV 0.66
+# define PITCH 200
+# define PITCH_SPD 15
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
@@ -162,5 +164,7 @@ void	raycasting(t_game *game);
 void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
 int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+void	input_handler(t_game *game);
 
 #endif

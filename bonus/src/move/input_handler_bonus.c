@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_press_bonus.c                                  :+:      :+:    :+:   */
+/*   input_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 10:54:22 by luide-so         ###   ########.fr       */
+/*   Created: 2024/02/28 16:51:14 by luide-so          #+#    #+#             */
+/*   Updated: 2024/02/28 17:03:49 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,19 @@ static void	spinning(t_player *pl, int direction)
 	pl->plane.y = old_plane_x * SIN * direction + pl->plane.y * COS;
 }
 
-static void	move(t_game *game)
+static void	pitch(t_player *pl, int direction)
 {
+	pl->pitch += PITCH_SPD * direction;
+	if (pl->pitch > PITCH)
+		pl->pitch = PITCH;
+	if (pl->pitch < -PITCH)
+		pl->pitch = -PITCH;
+}
+
+void	input_handler(t_game *game)
+{
+	if (game->key.esc >= 1)
+		free_game(game);
 	if (game->key.w)
 		linear_movement(&game->pl, 1);
 	if (game->key.s)
@@ -69,27 +80,9 @@ static void	move(t_game *game)
 		spinning(&game->pl, -1);
 	if (game->key.right)
 		spinning(&game->pl, 1);
+	if (game->key.up)
+		pitch(&game->pl, 1);
+	if (game->key.down)
+		pitch(&game->pl, -1);
 	raycasting(game);
-}
-
-int	key_press(int keycode, t_game *game)
-{
-	if (keycode == W)
-		game->key.w = 1;
-	else if (keycode == A)
-		game->key.a = 1;
-	else if (keycode == S)
-		game->key.s = 1;
-	else if (keycode == D)
-		game->key.d = 1;
-	else if (keycode == LEFT)
-		game->key.left = 1;
-	else if (keycode == RIGHT)
-		game->key.right = 1;
-	else if (keycode == ESC)
-		free_game(game);
-	else
-		return (0);
-	move(game);
-	return (0);
 }
