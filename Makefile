@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/27 03:28:22 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/28 11:00:34 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DEPS = cub3d.h
 DEPS_PATH = mandatory/includes/
 
 SRC_BONUS = parse_map_bonus lexer_bonus parse_bonus main_bonus init_mlx_and_textures_bonus \
-	raycasting_bonus draw_bonus check_hit_bonus
+	raycasting_bonus draw_bonus check_hit_bonus key_press_bonus
 DEPS_BONUS = cub3d_bonus.h
 DEPS_PATH_BONUS = bonus/includes/
 

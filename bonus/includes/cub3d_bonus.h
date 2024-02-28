@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 15:38:59 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:12:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,19 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
-# define INDEX_DOOR_IMAGE 4
 # define FOV 0.66
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
+# define MV_SPD 0.1
+# define COS 0.99500416527
+# define SIN 0.09983341664
+
 # define DOOR_IMAGE "textures/door.xpm"
 # define DOOR_FRAME "textures/door_frame.xpm"
+# define INDEX_DOOR_IMAGE 4
 
 typedef struct s_game	t_game;
 
@@ -67,6 +71,7 @@ typedef enum e_key
 	A = 97,
 	S = 115,
 	D = 100,
+	P = 112,
 	ESC = 65307,
 	UP = 65362,
 	LEFT = 65361,
@@ -142,6 +147,7 @@ typedef struct s_game
 	t_img		screen;
 	int			color[2];
 	char		**map;
+	t_key_state	key;
 	t_player	pl;
 }	t_game;
 
@@ -155,5 +161,6 @@ void	init_mlx_and_textures(t_game *game);
 void	raycasting(t_game *game);
 void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+int		key_press(int keycode, t_game *game);
 
 #endif

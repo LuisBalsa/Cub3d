@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 16:45:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:34:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static void	perform_dda(t_player *pl)
 	{
 		if (pl->diagonal_dist.x < pl->diagonal_dist.y)
 		{
+			side = 1;
 			pl->diagonal_dist.x += pl->delta_dist.x;
 			pl->map_check.x += pl->step.x;
-			side = 1;
 		}
 		else
 		{
+			side = 3;
 			pl->diagonal_dist.y += pl->delta_dist.y;
 			pl->map_check.y += pl->step.y;
-			side = 3;
 		}
 		check_hit(pl, &side, pl->map_check, pl->step);
 	}
