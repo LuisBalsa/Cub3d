@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 14:40:42 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:10:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,8 @@ static void	set_spawn(t_game *ga, char dir, int x, int y)
 	pl->map = ga->map;
 }
 
-static void	validate_map_and_set_spawn(t_game *game)
+static int	validate_map_and_set_spawn(t_game *game, int x, int y)
 {
-	int	x;
-	int	y;
-
-	y = -1;
 	while (game->map[++y])
 	{
 		x = -1;
@@ -55,6 +51,7 @@ static void	validate_map_and_set_spawn(t_game *game)
 				error_exit(game, "Map has invalid door");
 		}
 	}
+	return (y);
 }
 
 static int	line_has_valid_content(t_game *game, char *line)
@@ -116,5 +113,7 @@ void	parse_map(t_game *game, int fd)
 	free(tmp_map);
 	if (!game->map)
 		error_exit(game, "Failed to allocate memory");
-	validate_map_and_set_spawn(game);
+	game->map_height = validate_map_and_set_spawn(game, -1, -1);
+	if (game->pl.g == NULL)
+		error_exit(game, "Map has no spawn point");
 }
