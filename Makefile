@@ -6,14 +6,14 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/28 17:05:29 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/29 20:06:39 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 RED = \033[1;31m
 RESET = \033[0m
 
-NAME = cub3d
+NAME = cub3D
 RULE = .all
 RULE_BONUS = .bonus
 
