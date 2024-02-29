@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_open.c                                       :+:      :+:    :+:   */
+/*   check_hit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 14:46:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/18 14:47:41 by luide-so         ###   ########.fr       */
+/*   Created: 2024/02/27 02:52:37 by luide-so          #+#    #+#             */
+/*   Updated: 2024/02/29 21:10:50 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-int	check_open(t_game *game, char *file, char *extension)
+void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step)
 {
-	int	fd;
-	int	len;
-
-	len = ft_strlen(file);
-	if (ft_strncmp(file + len - 4, extension, 4) || len < 5)
-		return (error_exit(game, "Invalid file/texture extension"));
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (error_exit(game, "Failed to open file/texture"));
-	return (fd);
+	if (pl->map[check.y][check.x] == '1')
+		pl->img_index = *side - (*side == 1 && step.x < 0)
+			- (*side == 3 && step.y < 0);
 }
