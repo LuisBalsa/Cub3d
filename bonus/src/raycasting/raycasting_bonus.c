@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 12:34:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:11:38 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,11 @@ static void	init_raycaster(t_player *pl, int x)
 			- (pl->ray_dir.y > 0)) * pl->delta_dist.y;
 }
 
-void	raycasting(t_game *game)
+int	raycasting(t_game *game)
 {
 	int	x;
 
+	input_handler(game);
 	x = -1;
 	while (++x < game->screen.width)
 	{
@@ -106,4 +107,5 @@ void	raycasting(t_game *game)
 		draw_walls_and_background(game, &game->pl, x);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
+	return (0);
 }

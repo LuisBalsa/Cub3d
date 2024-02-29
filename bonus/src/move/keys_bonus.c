@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 17:09:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 22:02:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ static void	print_debug(t_game *game) //testes
 	printf("Player draw pos: %f\n", game->pl.draw.pos);
 }
 
+static void	door(t_game *game)
+{
+	int			x;
+	int			y;
+	char		cell;
+	t_player	*pl;
+
+	pl = &game->pl;
+	x = (int)(pl->pos.x + pl->dir.x / 2);
+	y = (int)(pl->pos.y + pl->dir.y / 2);
+	cell = pl->map[y][x];
+	if (x == (int)pl->pos.x && y == (int)pl->pos.y)
+		return ;
+	if (cell == '2')
+		pl->map[y][x] = '3';
+	else if (cell == '3')
+		pl->map[y][x] = '2';
+
+}
+
 int	key_release(int keycode, t_game *game)
 {
 	if (keycode == W)
@@ -60,9 +80,6 @@ int	key_release(int keycode, t_game *game)
 		print_debug(game);
 	else if (keycode == ESC)
 		game->key.esc += 1;
-	else
-		return (0);
-	input_handler(game);
 	return (0);
 }
 
@@ -76,6 +93,8 @@ int	key_press(int keycode, t_game *game)
 		game->key.s = 1;
 	else if (keycode == D)
 		game->key.d = 1;
+	else if (keycode == E)
+		door(game);
 	else if (keycode == LEFT)
 		game->key.left = 1;
 	else if (keycode == RIGHT)
@@ -84,8 +103,5 @@ int	key_press(int keycode, t_game *game)
 		game->key.up = 1;
 	else if (keycode == DOWN)
 		game->key.down = 1;
-	else
-		return (0);
-	input_handler(game);
 	return (0);
 }

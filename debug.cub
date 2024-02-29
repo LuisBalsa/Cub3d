@@ -2,15 +2,15 @@ C 135,206,250
 
 F 92,92,92
 
-NO north_wall.xpm
-SO south_wall.xpm
+NO textures/north_wall.xpm
+SO textures/south_wall.xpm
 
 
-WE        west_wall.xpm
-EA east_wall.xpm
+WE        textures/west_wall.xpm
+EA textures/east_wall.xpm
 
 1111111
 1100001
-13W0001
+130W001
 1100001
 1111111

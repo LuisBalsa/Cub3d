@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 17:03:05 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:03:08 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
 	mlx_hook(game.win, 17, 1L << 0, &free_game, &game);
+	mlx_loop_hook(game.mlx, &raycasting, &game);
 	mlx_loop(game.mlx);
 	free_game(&game);
 	return (0);

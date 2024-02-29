@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/02/29 20:06:39 by luide-so         ###   ########.fr        #
+#    Updated: 2024/02/29 21:04:14 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ NAME = cub3D
 RULE = .all
 RULE_BONUS = .bonus
 
-SRC = main
+SRC = main raycasting check_hit parse lexer parse_map keys input_handler draw \
+	init_mlx_and_textures
 DEPS = cub3d.h
 DEPS_PATH = mandatory/includes/
 
@@ -39,7 +40,7 @@ OBJ_BONUS = $(addprefix $(OBJ_PATH), $(SRC_BONUS:=.o))
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -Wall -Wextra -Werror -O3 -g
 LIBFLAGS = -L $(LIBFT)_obj -lft -L $(MLX) -lmlx -lXext -lX11 -lm -lbsd
 
 all: $(NAME)

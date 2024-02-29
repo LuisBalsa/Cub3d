@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_handler.c                                    :+:      :+:    :+:   */
+/*   input_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:51:14 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 17:03:49 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:28:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	linear_movement(t_player *pl, int direction)
 
 	new_pos.x = pl->pos.x + pl->dir.x * MV_SPD * direction;
 	new_pos.y = pl->pos.y + pl->dir.y * MV_SPD * direction;
+	if (new_pos.y < 0 || new_pos.y >= pl->g->map_height)
+		new_pos.y = pl->pos.y;
+	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
+		new_pos.x = pl->pos.x;
 	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
 	if (cell == '0' || cell == '3')
 		pl->pos.y = new_pos.y;
@@ -34,6 +38,10 @@ static void	strafe_movement(t_player *pl, int direction)
 
 	new_pos.x = pl->pos.x + pl->plane.x * MV_SPD * direction;
 	new_pos.y = pl->pos.y + pl->plane.y * MV_SPD * direction;
+	if (new_pos.y < 0 || new_pos.y >= pl->g->map_height)
+		new_pos.y = pl->pos.y;
+	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
+		new_pos.x = pl->pos.x;
 	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
 	if (cell == '0' || cell == '3')
 		pl->pos.y = new_pos.y;
@@ -84,5 +92,4 @@ void	input_handler(t_game *game)
 		pitch(&game->pl, 1);
 	if (game->key.down)
 		pitch(&game->pl, -1);
-	raycasting(game);
 }

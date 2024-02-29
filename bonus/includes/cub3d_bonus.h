@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 17:11:46 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:35:02 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@
 # define DOOR '2'
 # define FOV 0.66
 # define PITCH 200
-# define PITCH_SPD 15
+# define PITCH_SPD 5
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
-# define MV_SPD 0.1
-# define COS 0.99500416527
-# define SIN 0.09983341664
+# define MV_SPD 0.01
+# define COS 0.99995000041
+# define SIN 0.00999983333
 
 # define DOOR_IMAGE "textures/door.xpm"
 # define DOOR_FRAME "textures/door_frame.xpm"
@@ -73,6 +73,7 @@ typedef enum e_key
 	A = 97,
 	S = 115,
 	D = 100,
+	E = 101,
 	P = 112,
 	ESC = 65307,
 	UP = 65362,
@@ -149,6 +150,7 @@ typedef struct s_game
 	t_img		screen;
 	int			color[2];
 	char		**map;
+	int			map_height;
 	t_key_state	key;
 	t_player	pl;
 }	t_game;
@@ -160,7 +162,7 @@ int		parse_file(t_game *game, char *file);
 int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
 void	init_mlx_and_textures(t_game *game);
-void	raycasting(t_game *game);
+int		raycasting(t_game *game);
 void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
 int		key_press(int keycode, t_game *game);

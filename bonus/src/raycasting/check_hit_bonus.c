@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:52:37 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/28 12:43:41 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/02/29 21:16:06 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step)
 		hit_door_closed(pl, side);
 	if (pl->map[check.y][check.x] == '3')
 		hit_door_open(pl, side);
-	if (pl->map[check.y][check.x] == '1' && \
-		((pl->map[check.y][check.x - step.x] == '3' && \
+	if (((pl->map[check.y][check.x - step.x] == '3' && \
 		pl->map[check.y][check.x - 2 * step.x] == '1' && *side == 1) ||
 		(pl->map[check.y - step.y][check.x] == '3' && \
-		pl->map[check.y - 2 * step.y][check.x] == '1' && *side == 3)))
+		pl->map[check.y - 2 * step.y][check.x] == '1' && *side == 3)) \
+		&& pl->map[check.y][check.x] == '1')
 		pl->img_index = INDEX_DOOR_IMAGE + 1;
 }
