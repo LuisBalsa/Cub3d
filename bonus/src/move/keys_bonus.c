@@ -6,11 +6,31 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 07:04:22 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/02 22:18:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+static void	print_sprites(t_game *game) //testes
+{
+	int	i;
+
+	i = -1;
+	while (++i < game->num_sprites)
+	{
+		printf("\nSprite %d pos x: %f\n", i, game->sprite[i].pos.x);
+		printf("Sprite %d pos y: %f\n", i, game->sprite[i].pos.y);
+		printf("Sprite %d img index: %d\n", i, game->sprite[i].img_index);
+		printf("Sprite %d dist: %f\n", i, game->sprite[i].dist);
+		printf("Sprite %d transform y: %f\n", i, game->sprite[i].transform.y);
+		printf("Sprite %d screen x: %d\n", i, game->sprite[i].screen_x);
+		printf("Sprite %d height: %d\n", i, game->sprite[i].height);
+		printf("Sprite %d draw start x: %d\n", i, game->sprite[i].draw_start.x);
+		printf("Wall dist x: %f\n", game->wall_dist[game->sprite[i].draw_start.x]);
+		printf("Sprite %d draw start y: %d\n", i, game->sprite[i].draw_start.y);
+	}
+}
 
 static void	print_debug(t_game *game) //testes
 {
@@ -41,6 +61,7 @@ static void	print_debug(t_game *game) //testes
 	printf("Player mouse prev pos x: %d\n", game->mouse.prev_pos.x);
 	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
 	printf("Player key esc: %d\n", game->key.esc);
+	print_sprites(game);
 }
 
 static void	door(t_game *game)
@@ -60,7 +81,6 @@ static void	door(t_game *game)
 		pl->map[y][x] = '3';
 	else if (cell == '3')
 		pl->map[y][x] = '2';
-
 }
 
 int	key_release(int keycode, t_game *game)

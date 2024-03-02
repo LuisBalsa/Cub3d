@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 07:08:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/02 22:51:37 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,24 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
-# define NBR_TEXTURES 6
-# define VALID_CHARS " 0123NSEW\n"
+# define NBR_TEXTURES 10
+# define NBR_SPRITES 20
+
+# define VALID_CHARS " 0123NSEWecbt\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "023NSEW"
+# define INSIDE_CHARS "023NSEWecbt"
+
+# define SPRITE_CHARS "ecbt"
+# define ENEMY_IMAGE "textures/enemy.xpm"
+# define CAGE_IMAGE "textures/cage.xpm"
+# define BARREL_IMAGE "textures/barrel.xpm"
+# define TABLE_IMAGE "textures/table.xpm"
+# define INDEX_SPRITE_IMAGE 6
+
+# define DOOR_IMAGE "textures/door.xpm"
+# define DOOR_FRAME "textures/door_frame.xpm"
+# define INDEX_DOOR_IMAGE 4
+
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
@@ -41,10 +55,6 @@
 # define R_SPD 0.001
 # define COS 0.99995000041
 # define SIN 0.00999983333
-
-# define DOOR_IMAGE "textures/door.xpm"
-# define DOOR_FRAME "textures/door_frame.xpm"
-# define INDEX_DOOR_IMAGE 4
 
 typedef struct s_game	t_game;
 
@@ -127,6 +137,20 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_sprite
+{
+	double	dist;
+	t_vf2d	pos;
+	t_vf2d	transform;
+	int		screen_x;
+	int		height;
+	int		width;
+	t_vi2d	draw_start;
+	t_vi2d	draw_end;
+	t_vi2d	tex;
+	int		img_index;
+}	t_sprite;
+
 typedef struct s_player
 {
 	t_game		*g;
@@ -154,7 +178,10 @@ typedef struct s_game
 	char		*file_line;
 	char		*texture[NBR_TEXTURES];
 	t_img		img[NBR_TEXTURES];
+	t_sprite	sprite[NBR_SPRITES];
+	int			num_sprites;
 	t_img		screen;
+	double		wall_dist[SCREEN_WIDTH];
 	int			color[2];
 	char		**map;
 	int			map_height;
@@ -169,10 +196,13 @@ int		free_game(t_game *game);
 int		parse_file(t_game *game, char *file);
 int		lexer(t_game *game, char **tokens);
 void	parse_map(t_game *game, int fd);
+void	parse_sprites(t_game *game, int x, int y);
 void	init_mlx_and_textures(t_game *game);
 int		raycasting(t_game *game);
+void	sprites(t_game *game);
 void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+void	draw_sprites(t_game *game, t_sprite sprite, int pitch);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void	input_handler(t_game *game);

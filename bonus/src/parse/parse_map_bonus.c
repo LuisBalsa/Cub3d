@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/29 19:10:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/02 22:10:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ static int	validate_map_and_set_spawn(t_game *game, int x, int y)
 					error_exit(game, "Map is not closed");
 			if (ft_strchr(SPAWN_CHARS, game->map[y][x]))
 				set_spawn(game, game->map[y][x], x, y);
-			if (game->map[y][x] == DOOR &&
+			else if (game->map[y][x] == DOOR &&
 				(game->map[y][x - 1] != WALL || game->map[y][x + 1] != WALL) &&
 				(game->map[y - 1][x] != WALL || game->map[y + 1][x] != WALL))
 				error_exit(game, "Map has invalid door");
+			else if (ft_strchr(SPRITE_CHARS, game->map[y][x]))
+				parse_sprites(game, x, y);
 		}
 	}
 	return (y);
