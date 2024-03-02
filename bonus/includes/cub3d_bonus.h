@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/29 21:35:02 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/02 07:08:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define TEXTURE_HEIGHT 64
 
 # define MV_SPD 0.01
+# define R_SPD 0.001
 # define COS 0.99995000041
 # define SIN 0.00999983333
 
@@ -60,12 +61,6 @@ typedef enum e_color
 	clg,
 	flr
 }	t_color;
-
-typedef struct s_vi2d
-{
-	int	x;
-	int	y;
-}	t_vi2d;
 
 typedef enum e_key
 {
@@ -95,11 +90,23 @@ typedef struct s_key_state
 	int	right;
 }	t_key_state;
 
+typedef struct s_vi2d
+{
+	int	x;
+	int	y;
+}	t_vi2d;
+
 typedef struct s_vf2d
 {
 	double	x;
 	double	y;
 }	t_vf2d;
+
+typedef struct s_mouse
+{
+	t_vi2d	pos;
+	t_vi2d	prev_pos;
+}	t_mouse;
 
 typedef struct s_draw
 {
@@ -152,6 +159,7 @@ typedef struct s_game
 	char		**map;
 	int			map_height;
 	t_key_state	key;
+	t_mouse		mouse;
 	t_player	pl;
 }	t_game;
 
@@ -168,5 +176,7 @@ void	draw_walls_and_background(t_game *game, t_player *pl, int x);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 void	input_handler(t_game *game);
+int		mouse_movement_handler(int x, int y, t_game *game);
+int		mouse_click_handler(int button, int x, int y, t_game *game);
 
 #endif

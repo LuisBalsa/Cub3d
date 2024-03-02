@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/29 22:02:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/02 07:04:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ static void	print_debug(t_game *game) //testes
 	printf("Player draw end: %d\n", game->pl.draw.end);
 	printf("Player draw step: %f\n", game->pl.draw.step);
 	printf("Player draw pos: %f\n", game->pl.draw.pos);
+	printf("Player mouse pos x: %d\n", game->mouse.pos.x);
+	printf("Player mouse pos y: %d\n", game->mouse.pos.y);
+	printf("Player mouse prev pos x: %d\n", game->mouse.prev_pos.x);
+	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
+	printf("Player key esc: %d\n", game->key.esc);
 }
 
 static void	door(t_game *game)
