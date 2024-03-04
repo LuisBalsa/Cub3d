@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 22:04:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:20:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	draw_sprites(t_game *game, t_sprite sprite, int pitch)
 						sprite.height) / 256;
 				if (sprite.img_index != -1)
 					my_pixel_put(&game->screen, x, y, \
-							my_pixel_get(&game->img[sprite.img_index], \
-								sprite.tex.x, sprite.tex.y));
+							my_pixel_get(&game->img[sprite.img_index
+							+ sprite.anim * game->anim_index], \
+							sprite.tex.x, sprite.tex.y));
 			}
 		}
 	}

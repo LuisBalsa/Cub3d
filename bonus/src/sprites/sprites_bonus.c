@@ -6,11 +6,22 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 22:34:40 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:18:20 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+static void	set_animation(t_game *game)
+{
+	if (clock() - game->anim_time > ANIM_DELAY)
+	{
+		game->anim_time = clock();
+		game->anim_index++;
+		if (game->anim_index == 3)
+			game->anim_index = 0;
+	}
+}
 
 static void	set_sprites_distances(t_sprite *sprite, t_vf2d pos, int nbr)
 {
@@ -77,6 +88,7 @@ void	sprites(t_game *game)
 {
 	int	i;
 
+	set_animation(game);
 	set_sprites_distances(game->sprite, game->pl.pos, game->num_sprites);
 	sort_sprites_by_distance(game->sprite, game->num_sprites);
 	i = -1;

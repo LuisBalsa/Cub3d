@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 17:49:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:30:41 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	parse_sprites(t_game *game, int x, int y)
 		if (game->map[y][x] == sprites[i])
 			game->sprite[game->num_sprites].img_index = i + INDEX_SPRITE_IMAGE;
 	free(sprites);
+	if (game->map[y][x] == 'f')
+		game->sprite[game->num_sprites].anim = true;
 	game->num_sprites++;
 }

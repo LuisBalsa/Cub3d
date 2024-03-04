@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 13:31:31 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:16:09 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,21 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
-# define NBR_TEXTURES 10
+# define NBR_TEXTURES 13
 # define NBR_SPRITES 20
 
-# define VALID_CHARS " 0123NSEWecbt\n"
+# define VALID_CHARS " 0123NSEWecbtf\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "023NSEWecbt"
+# define INSIDE_CHARS "023NSEWecbtf"
 
-# define SPRITE_CHARS "ecbt"
+# define SPRITE_CHARS "ecbtf"
 # define ENEMY_IMAGE "textures/enemy.xpm"
 # define CAGE_IMAGE "textures/cage.xpm"
 # define BARREL_IMAGE "textures/barrel.xpm"
 # define TABLE_IMAGE "textures/table.xpm"
+# define FIRE_IMAGE "textures/fire.xpm"
+# define FIRE1_IMAGE "textures/fire1.xpm"
+# define FIRE2_IMAGE "textures/fire2.xpm"
 # define INDEX_SPRITE_IMAGE 6
 
 # define DOOR_IMAGE "textures/door.xpm"
@@ -55,6 +58,7 @@
 # define MV_SPD 2.5
 # define R_SPD 1.1
 # define R_SPD_M 0.1
+# define ANIM_DELAY 100000
 
 typedef struct s_game	t_game;
 
@@ -156,6 +160,7 @@ typedef struct s_sprite
 	t_vi2d	draw_end;
 	t_vi2d	tex;
 	int		img_index;
+	bool	anim;
 }	t_sprite;
 
 typedef struct s_player
@@ -196,6 +201,8 @@ typedef struct s_game
 	t_mouse		mouse;
 	t_player	pl;
 	t_time		time;
+	double		anim_time;
+	int			anim_index;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
