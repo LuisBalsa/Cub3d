@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 22:18:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:11:43 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	print_debug(t_game *game) //testes
 	printf("Player mouse prev pos x: %d\n", game->mouse.prev_pos.x);
 	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
 	printf("Player key esc: %d\n", game->key.esc);
+	printf("Frame time: %f\n", game->time.frame);
 	print_sprites(game);
 }
 

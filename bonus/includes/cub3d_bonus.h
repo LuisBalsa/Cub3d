@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 22:51:37 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:31:31 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <time.h>
 # include "../../Libft/libft.h"
 # include "../../minilibx-linux/mlx.h"
 
@@ -44,17 +45,16 @@
 # define WALL '1'
 # define DOOR '2'
 # define FOV 0.66
-# define PITCH 200
-# define PITCH_SPD 5
+# define PITCH 300
+# define PITCH_SPD 500
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
-# define MV_SPD 0.01
-# define R_SPD 0.001
-# define COS 0.99995000041
-# define SIN 0.00999983333
+# define MV_SPD 2.5
+# define R_SPD 1.1
+# define R_SPD_M 0.1
 
 typedef struct s_game	t_game;
 
@@ -117,6 +117,13 @@ typedef struct s_mouse
 	t_vi2d	pos;
 	t_vi2d	prev_pos;
 }	t_mouse;
+
+typedef struct s_time
+{
+	double	old;
+	double	new;
+	double	frame;
+}	t_time;
 
 typedef struct s_draw
 {
@@ -188,6 +195,7 @@ typedef struct s_game
 	t_key_state	key;
 	t_mouse		mouse;
 	t_player	pl;
+	t_time		time;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 22:00:53 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:31:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ int	raycasting(t_game *game)
 {
 	int	x;
 
+	game->time.old = game->time.new;
+	game->time.new = clock();
+	game->time.frame = (game->time.new - game->time.old) / CLOCKS_PER_SEC;
 	input_handler(game);
 	x = -1;
 	while (++x < game->screen.width)
