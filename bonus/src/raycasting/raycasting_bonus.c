@@ -6,71 +6,24 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 12:31:33 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:46:20 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	get_hit_distances(t_player *pl, int side)
+static void	anim_door_timer(t_game *game)
 {
-	double	hit_x;
-
-	if (side == 1)
-		pl->hit_dist = pl->diagonal_dist.x - pl->delta_dist.x;
-	else
-		pl->hit_dist = pl->diagonal_dist.y - pl->delta_dist.y;
-	if (side == 1)
-		hit_x = pl->pos.y + pl->hit_dist * pl->ray_dir.y;
-	else
-		hit_x = pl->pos.x + pl->hit_dist * pl->ray_dir.x;
-	hit_x -= floor(hit_x);
-	pl->hit_x = (int)(hit_x * (double)TEXTURE_WIDTH);
-	if (side == 1 && pl->ray_dir.x < 0)
-		pl->hit_x = TEXTURE_WIDTH - pl->hit_x - 1;
-	if (side == 3 && pl->ray_dir.y > 0)
-		pl->hit_x = TEXTURE_WIDTH - pl->hit_x - 1;
-}
-
-static void	get_draw_data(t_player *pl, t_draw *draw)
-{
-	int		line_height;
-
-	line_height = fabs((double)SCREEN_HEIGHT / pl->hit_dist);
-	draw->start = SCREEN_HEIGHT / 2 - line_height / 2 + pl->pitch;
-	if (draw->start < 0)
-		draw->start = 0;
-	draw->end = SCREEN_HEIGHT / 2 + line_height / 2 + pl->pitch;
-	if (draw->end >= SCREEN_HEIGHT)
-		draw->end = SCREEN_HEIGHT - 1;
-	draw->step = 1.0 * TEXTURE_HEIGHT / line_height;
-	draw->pos = (draw->start - pl->pitch - (double)SCREEN_HEIGHT / 2
-			+ (double)line_height / 2) * draw->step;
-}
-
-static void	perform_dda(t_player *pl)
-{
-	int		side;
-
-	side = 0;
-	while (pl->img_index == -1)
+	if (game->anim_door_i
+		&& clock() - game->anim_door_time > ANIM_DOOR_DELAY)
 	{
-		if (pl->diagonal_dist.x < pl->diagonal_dist.y)
-		{
-			side = 1;
-			pl->diagonal_dist.x += pl->delta_dist.x;
-			pl->map_check.x += pl->step.x;
-		}
-		else
-		{
-			side = 3;
-			pl->diagonal_dist.y += pl->delta_dist.y;
-			pl->map_check.y += pl->step.y;
-		}
-		check_hit(pl, &side, pl->map_check, pl->step);
+		game->anim_door_time = clock();
+		game->anim_door_i += game->anim_door_dir;
+		game->anim_door_i &= TEXTURE_WIDTH - 1;
+		if (!game->anim_door_i)
+			game->map[game->anim_door.y][game->anim_door.x] = DOOR
+				+ (game->anim_door_dir == 1);
 	}
-	get_hit_distances(pl, side);
-	get_draw_data(pl, &pl->draw);
 }
 
 static void	init_raycaster(t_player *pl, int x)
@@ -94,6 +47,16 @@ static void	init_raycaster(t_player *pl, int x)
 			- (pl->ray_dir.y > 0)) * pl->delta_dist.y;
 }
 
+static void	raycasting_sliding_door(t_game *game, t_player *pl, int x)
+{
+	init_raycaster(pl, x);
+	perform_dda_sliding_door(pl);
+	if (pl->img_index == INDEX_DOOR_IMAGE)
+		draw_walls_and_background(game, pl, x);
+	if (pl->hit_x < TEXTURE_WIDTH)
+		game->wall_dist[x] = pl->hit_dist;
+}
+
 int	raycasting(t_game *game)
 {
 	int	x;
@@ -109,7 +72,10 @@ int	raycasting(t_game *game)
 		perform_dda(&game->pl);
 		draw_walls_and_background(game, &game->pl, x);
 		game->wall_dist[x] = game->pl.hit_dist;
+		if (game->anim_door_i)
+			raycasting_sliding_door(game, &game->pl, x);
 	}
+	anim_door_timer(game);
 	sprites(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	return (0);

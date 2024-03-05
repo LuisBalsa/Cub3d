@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 15:16:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:40:47 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,22 @@
 # define FLOOR '0'
 # define WALL '1'
 # define DOOR '2'
+# define OPEN_DOOR '3'
+# define OPENING_DOOR '4'
+# define CLOSING_DOOR '5'
 # define FOV 0.66
 # define PITCH 300
-# define PITCH_SPD 500
-# define SCREEN_WIDTH 1024
-# define SCREEN_HEIGHT 768
+# define PITCH_SPD 1000
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 960
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
-# define MV_SPD 2.5
-# define R_SPD 1.1
+# define MV_SPD 3.5
+# define R_SPD 2.1
 # define R_SPD_M 0.1
 # define ANIM_DELAY 100000
+# define ANIM_DOOR_DELAY 10000
 
 typedef struct s_game	t_game;
 
@@ -203,6 +207,10 @@ typedef struct s_game
 	t_time		time;
 	double		anim_time;
 	int			anim_index;
+	double		anim_door_time;
+	int			anim_door_i;
+	int			anim_door_dir;
+	t_vi2d		anim_door;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
@@ -214,9 +222,12 @@ void	parse_map(t_game *game, int fd);
 void	parse_sprites(t_game *game, int x, int y);
 void	init_mlx_and_textures(t_game *game);
 int		raycasting(t_game *game);
-void	sprites(t_game *game);
-void	check_hit(t_player *pl, int *side, t_vi2d check, t_vi2d step);
+void	perform_dda(t_player *pl);
+void	perform_dda_sliding_door(t_player *pl);
+void	check_hit(t_player *pl, int *side, t_vi2d check);
+void	check_hit_sliding_door(t_player *pl, int *side, t_vi2d check);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+void	sprites(t_game *game);
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);

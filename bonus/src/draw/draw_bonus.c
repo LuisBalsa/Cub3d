@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 15:20:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:21:53 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_walls_and_background(t_game *game, t_player *pl, int x)
 	y = -1;
 	while (++y < pl->draw.start)
 		my_pixel_put(&game->screen, x, y, game->color[clg]);
-	while (y < pl->draw.end)
+	while (y < pl->draw.end && pl->hit_x < TEXTURE_WIDTH)
 	{
 		tex_y = (int)pl->draw.pos & (TEXTURE_HEIGHT - 1);
 		pl->draw.pos += pl->draw.step;
@@ -73,6 +73,7 @@ void	draw_walls_and_background(t_game *game, t_player *pl, int x)
 		my_pixel_put(&game->screen, x, y, color);
 		y++;
 	}
+	y = pl->draw.end - 1;
 	while (y < game->screen.height)
 		my_pixel_put(&game->screen, x, y++, game->color[flr]);
 }

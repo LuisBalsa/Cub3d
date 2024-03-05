@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 13:11:43 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:29:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	print_sprites(t_game *game) //testes
 		printf("Sprite %d screen x: %d\n", i, game->sprite[i].screen_x);
 		printf("Sprite %d height: %d\n", i, game->sprite[i].height);
 		printf("Sprite %d draw start x: %d\n", i, game->sprite[i].draw_start.x);
-		printf("Wall dist x: %f\n", game->wall_dist[game->sprite[i].draw_start.x]);
+		if (game->sprite[i].draw_start.x < game->screen.width)
+			printf("Wall dist x: %f\n", game->wall_dist[game->sprite[i].draw_start.x]);
 		printf("Sprite %d draw start y: %d\n", i, game->sprite[i].draw_start.y);
 	}
 }
@@ -62,6 +63,11 @@ static void	print_debug(t_game *game) //testes
 	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
 	printf("Player key esc: %d\n", game->key.esc);
 	printf("Frame time: %f\n", game->time.frame);
+	printf("Game anim door i: %d\n", game->anim_door_i);
+	printf("Game anim door dir: %d\n", game->anim_door_dir);
+	printf("Game anim door x: %d\n", game->anim_door.x);
+	printf("Game anim door y: %d\n", game->anim_door.y);
+	printf("Game anim door: %c\n", game->pl.map[game->anim_door.y][game->anim_door.x]);
 	print_sprites(game);
 }
 
@@ -69,19 +75,29 @@ static void	door(t_game *game)
 {
 	int			x;
 	int			y;
-	char		cell;
 	t_player	*pl;
 
 	pl = &game->pl;
 	x = (int)(pl->pos.x + pl->dir.x / 2);
 	y = (int)(pl->pos.y + pl->dir.y / 2);
-	cell = pl->map[y][x];
 	if (x == (int)pl->pos.x && y == (int)pl->pos.y)
 		return ;
-	if (cell == '2')
-		pl->map[y][x] = '3';
-	else if (cell == '3')
-		pl->map[y][x] = '2';
+	if (pl->map[y][x] == DOOR && !game->anim_door_i)
+	{
+		pl->map[y][x] = OPENING_DOOR;
+		game->anim_door_i = 1;
+		game->anim_door_dir = 1;
+		game->anim_door = (t_vi2d){x, y};
+		game->anim_door_time = clock();
+	}
+	else if (pl->map[y][x] == OPEN_DOOR && !game->anim_door_i)
+	{
+		pl->map[y][x] = CLOSING_DOOR;
+		game->anim_door_i = TEXTURE_WIDTH;
+		game->anim_door_dir = -1;
+		game->anim_door = (t_vi2d){x, y};
+		game->anim_door_time = clock();
+	}
 }
 
 int	key_release(int keycode, t_game *game)
