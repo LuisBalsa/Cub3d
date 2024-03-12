@@ -6,15 +6,42 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 14:53:51 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:37:58 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-/* static void	draw_player(t_game *game, t_minimap *minimap)
+static int	lighten_and_redden_color(int color)
 {
-} */
+	int	r;
+	int	g;
+	int	b;
+
+	r = (color >> 16) + 150;
+	g = (color >> 8 & 0xFF) + 100;
+	b = (color & 0xFF) + 100;
+	r = (r > 255) * 255 + (r <= 255) * r;
+	g = (g > 255) * 255 + (g <= 255) * g;
+	b = (b > 255) * 255 + (b <= 255) * b;
+	return (r << 16 | g << 8 | b);
+}
+
+static void	lighten_hited_tile(t_minimap *minimap, t_vi2d map_pos)
+{
+	int	i;
+
+	i = -1;
+	while (++i < MINIMAP_HITS)
+	{
+		if (minimap->hited_tile[i].x == map_pos.x
+			&& minimap->hited_tile[i].y == map_pos.y)
+		{
+			minimap->tile_color = lighten_and_redden_color(minimap->tile_color);
+			break ;
+		}
+	}
+}
 
 static void	get_tile_color(t_game *game, t_minimap *minimap)
 {
@@ -25,7 +52,7 @@ static void	get_tile_color(t_game *game, t_minimap *minimap)
 	if (map_pos.y < 0 || map_pos.y >= game->map_height
 		|| map_pos.x < 0 || map_pos.x >= (int)ft_strlen(game->map[map_pos.y])
 		|| game->map[map_pos.y][map_pos.x] == ' ')
-		minimap->tile_color = -1;
+		return (minimap->tile_color = -1, (void)0);
 	else if (map_pos.y == (int)game->pl.pos.y
 		&& map_pos.x == (int)game->pl.pos.x)
 		minimap->tile_color = 0x00FF0000;
@@ -39,6 +66,7 @@ static void	get_tile_color(t_game *game, t_minimap *minimap)
 		minimap->tile_color = 0x000000FF;
 	else
 		minimap->tile_color = 0x00FFFF00;
+	lighten_hited_tile(minimap, map_pos);
 }
 
 static void	draw_map(t_game *game, t_minimap *minimap)
@@ -63,6 +91,6 @@ void	minimap(t_game *game)
 		return ;
 	game->minimap.map_pos_initial = (t_vi2d){game->pl.pos.x - MINIMAP_W / 2,
 		game->pl.pos.y - MINIMAP_H / 2};
+	minimap_raycaster(game);
 	draw_map(game, &game->minimap);
-//	draw_player(game, &game->minimap);
 }

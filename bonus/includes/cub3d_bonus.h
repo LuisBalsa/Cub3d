@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 14:53:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:44:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 # define MINIMAP_W 21
 # define MINIMAP_H 15
 # define MINIMAP_OFFSET 1
+# define MINIMAP_HITS 300
 
 typedef struct s_game	t_game;
 
@@ -162,6 +163,7 @@ typedef struct s_minimap
 	t_vi2d		map_pos_initial;
 	t_vi2d		map_pos_index;
 	int			tile_color;
+	t_vi2d		hited_tile[MINIMAP_HITS];
 }	t_minimap;
 
 typedef struct s_sprite
@@ -248,6 +250,7 @@ void	input_handler(t_game *game);
 int		mouse_movement_handler(int x, int y, t_game *game);
 int		mouse_click_handler(int button, int x, int y, t_game *game);
 void	minimap(t_game *game);
+void	minimap_raycaster(t_game *game);
 void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color);
 
 #endif
