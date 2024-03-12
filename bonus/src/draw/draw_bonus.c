@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 22:21:53 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:03:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ static void	my_pixel_put(t_img *mlx, int x, int y, int color)
 		return ;
 	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color)
+{
+	t_vi2d	pos;
+	int		i;
+	int		j;
+
+	if (color == -1)
+		return ;
+	pos = (t_vi2d){pos_index.x * MINIMAP_TILE_SIZE,
+		pos_index.y * MINIMAP_TILE_SIZE};
+	i = -1;
+	while (++i < MINIMAP_TILE_SIZE)
+	{
+		j = -1;
+		while (++j < MINIMAP_TILE_SIZE)
+			my_pixel_put(&game->screen, pos.x + j, pos.y + i, color);
+	}
 }
 
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch)

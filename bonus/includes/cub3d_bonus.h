@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/05 15:40:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:55:05 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@
 # define R_SPD_M 0.1
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 10000
+
+# define MINIMAP_TILE_SIZE 10
+# define MINIMAP_WIDTH 11
+# define MINIMAP_HEIGHT 7
 
 typedef struct s_game	t_game;
 
@@ -152,6 +156,13 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_minimap
+{
+	t_vi2d		map_pos_initial;
+	t_vi2d		map_pos_index;
+	int			tile_color;
+}	t_minimap;
+
 typedef struct s_sprite
 {
 	double	dist;
@@ -211,6 +222,7 @@ typedef struct s_game
 	int			anim_door_i;
 	int			anim_door_dir;
 	t_vi2d		anim_door;
+	t_minimap	minimap;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
@@ -234,5 +246,7 @@ int		key_release(int keycode, t_game *game);
 void	input_handler(t_game *game);
 int		mouse_movement_handler(int x, int y, t_game *game);
 int		mouse_click_handler(int button, int x, int y, t_game *game);
+void	minimap(t_game *game);
+void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color);
 
 #endif
