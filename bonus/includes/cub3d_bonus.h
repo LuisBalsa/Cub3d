@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 12:55:05 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:53:54 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 10000
 
-# define MINIMAP_TILE_SIZE 10
-# define MINIMAP_WIDTH 11
-# define MINIMAP_HEIGHT 7
+# define MINIMAP_TILE_S 10
+# define MINIMAP_W 21
+# define MINIMAP_H 15
+# define MINIMAP_OFFSET 1
 
 typedef struct s_game	t_game;
 

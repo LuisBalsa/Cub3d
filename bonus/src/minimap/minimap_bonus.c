@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 13:02:24 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:53:51 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ static void	get_tile_color(t_game *game, t_minimap *minimap)
 static void	draw_map(t_game *game, t_minimap *minimap)
 {
 	minimap->map_pos_index.y = -1;
-	while (++minimap->map_pos_index.y < MINIMAP_HEIGHT)
+	while (++minimap->map_pos_index.y < MINIMAP_H)
 	{
 		minimap->map_pos_index.x = -1;
-		while (++minimap->map_pos_index.x < MINIMAP_WIDTH)
+		while (++minimap->map_pos_index.x < MINIMAP_W)
 		{
 			get_tile_color(game, minimap);
 			draw_minimap_tile(game, minimap->map_pos_index,
@@ -58,11 +58,11 @@ static void	draw_map(t_game *game, t_minimap *minimap)
 
 void	minimap(t_game *game)
 {
-	if (game->screen.width < MINIMAP_WIDTH * MINIMAP_TILE_SIZE
-		|| game->screen.height < MINIMAP_HEIGHT * MINIMAP_TILE_SIZE)
+	if (game->screen.width < (MINIMAP_W + MINIMAP_OFFSET) * MINIMAP_TILE_S
+		|| game->screen.height < (MINIMAP_H + MINIMAP_OFFSET) * MINIMAP_TILE_S)
 		return ;
-	game->minimap.map_pos_initial = (t_vi2d){game->pl.pos.x - MINIMAP_WIDTH / 2,
-		game->pl.pos.y - MINIMAP_HEIGHT / 2};
+	game->minimap.map_pos_initial = (t_vi2d){game->pl.pos.x - MINIMAP_W / 2,
+		game->pl.pos.y - MINIMAP_H / 2};
 	draw_map(game, &game->minimap);
 //	draw_player(game, &game->minimap);
 }

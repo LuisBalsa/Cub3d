@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 13:03:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:52:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color)
 
 	if (color == -1)
 		return ;
-	pos = (t_vi2d){pos_index.x * MINIMAP_TILE_SIZE,
-		pos_index.y * MINIMAP_TILE_SIZE};
+	pos = (t_vi2d){(pos_index.x + MINIMAP_OFFSET) * MINIMAP_TILE_S,
+		(pos_index.y + MINIMAP_OFFSET) * MINIMAP_TILE_S};
 	i = -1;
-	while (++i < MINIMAP_TILE_SIZE)
+	while (++i < MINIMAP_TILE_S)
 	{
 		j = -1;
-		while (++j < MINIMAP_TILE_SIZE)
+		while (++j < MINIMAP_TILE_S)
 			my_pixel_put(&game->screen, pos.x + j, pos.y + i, color);
 	}
 }
