@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 02:52:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:21:41 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	parse_map(t_game *game, int fd)
 	tmp_map = load_map_and_check_content(game, fd);
 	game->map = ft_split(tmp_map, '\n');
 	game->minimap.map = ft_split(tmp_map, '\n');
-	init_map(game->minimap.map);
 	game->minimap.map_hit = ft_split(tmp_map, '\n');
 	free(tmp_map);
 	if (!game->map)
@@ -121,4 +120,8 @@ void	parse_map(t_game *game, int fd)
 	game->map_height = validate_map_and_set_spawn(game, -1, -1);
 	if (game->pl.g == NULL)
 		error_exit(game, "Map has no spawn point");
+	game->minimap.map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
+	sprites_collectable_count(game->minimap.map,
+		&game->nbr_collectibles, game->pl.pos.x, game->pl.pos.y);
+	init_map(game->minimap.map);
 }

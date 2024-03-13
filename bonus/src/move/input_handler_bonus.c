@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:51:14 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 13:08:25 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:26:20 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static void	linear_movement(t_player *pl, double time, int direction)
 	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
 		new_pos.x = pl->pos.x;
 	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
-	if (cell == '0' || cell == '3')
+	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
 	cell = pl->map[(int)pl->pos.y][(int)new_pos.x];
-	if (cell == '0' || cell == '3')
+	if (ft_strchr(WALKABLE, cell))
 		pl->pos.x = new_pos.x;
 }
 
@@ -43,10 +43,10 @@ static void	strafe_movement(t_player *pl, double time, int direction)
 	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
 		new_pos.x = pl->pos.x;
 	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
-	if (cell == '0' || cell == '3')
+	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
 	cell = pl->map[(int)pl->pos.y][(int)new_pos.x];
-	if (cell == '0' || cell == '3')
+	if (ft_strchr(WALKABLE, cell))
 		pl->pos.x = new_pos.x;
 }
 

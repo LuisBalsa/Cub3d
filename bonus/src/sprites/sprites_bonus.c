@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 15:18:20 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 20:51:05 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	sprites(t_game *game)
 	set_sprites_distances(game->sprite, game->pl.pos, game->num_sprites);
 	sort_sprites_by_distance(game->sprite, game->num_sprites);
 	i = -1;
-	while (++i <= game->num_sprites)
+	while (++i < game->num_sprites)
 	{
 		calculate_sprites(&game->sprite[i], game->pl);
 		draw_sprites(game, game->sprite[i], game->pl.pitch);

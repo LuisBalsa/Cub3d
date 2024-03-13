@@ -6,11 +6,28 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 00:01:24 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:34:14 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
+
+void	sprites_collectable_count(char **map, int *c, int x, int y)
+{
+	if (ft_strchr(TRANSPOSABLE, map[y][x]) == 0)
+		return ;
+	if (map[y][x] == 'k')
+		(*c)++;
+	map[y][x] = 'x';
+	if (y > 0)
+		sprites_collectable_count(map, c, x, y - 1);
+	if (map[y + 1])
+		sprites_collectable_count(map, c, x, y + 1);
+	if (x > 0)
+		sprites_collectable_count(map, c, x - 1, y);
+	if (x < (int)ft_strlen(map[y]))
+		sprites_collectable_count(map, c, x + 1, y);
+}
 
 void	parse_sprites(t_game *game, int x, int y)
 {
@@ -28,7 +45,6 @@ void	parse_sprites(t_game *game, int x, int y)
 		if (game->map[y][x] == sprites[i])
 			game->sprite[game->num_sprites].img_index = i + INDEX_SPRITE_IMAGE;
 	free(sprites);
-	if (game->map[y][x] == 'f')
-		game->sprite[game->num_sprites].anim = true;
+	game->sprite[game->num_sprites].anim = (game->map[y][x] == 'f');
 	game->num_sprites++;
 }

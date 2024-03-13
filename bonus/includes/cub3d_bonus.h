@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 15:11:25 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 21:28:34 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
 # define NBR_TEXTURES 14
-# define NBR_SPRITES 30
+# define NBR_SPRITES 40
 
 # define VALID_CHARS " 0123NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
@@ -35,10 +35,10 @@
 # define CAGE_IMAGE "textures/cage.xpm"
 # define BARREL_IMAGE "textures/barrel.xpm"
 # define TABLE_IMAGE "textures/table.xpm"
+# define KEY_IMAGE "textures/key.xpm"
 # define FIRE_IMAGE "textures/fire.xpm"
 # define FIRE1_IMAGE "textures/fire1.xpm"
 # define FIRE2_IMAGE "textures/fire2.xpm"
-# define KEY_IMAGE "textures/key.xpm"
 # define INDEX_SPRITE_IMAGE 6
 
 # define DOOR_IMAGE "textures/door.xpm"
@@ -51,6 +51,8 @@
 # define OPEN_DOOR '3'
 # define OPENING_DOOR '4'
 # define CLOSING_DOOR '5'
+# define WALKABLE "03k"
+# define TRANSPOSABLE "023k"
 # define FOV 0.66
 # define PITCH 300
 # define PITCH_SPD 1000
@@ -228,6 +230,7 @@ typedef struct s_game
 	int			anim_door_dir;
 	t_vi2d		anim_door;
 	t_minimap	minimap;
+	int			nbr_collectibles;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
@@ -255,5 +258,7 @@ void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
 void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color);
+void	check_collectables(t_game *game);
+void	sprites_collectable_count(char **map, int *count, int x, int y);
 
 #endif
