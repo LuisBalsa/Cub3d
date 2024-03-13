@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 04:42:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:29:40 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,18 @@ void	minimap(t_game *game)
 	if (game->screen.width < (MINIMAP_W + MINIMAP_OFFSET) * MINIMAP_TILE_S
 		|| game->screen.height < (MINIMAP_H + MINIMAP_OFFSET) * MINIMAP_TILE_S)
 		return ;
-	game->minimap.map_pos_initial = (t_vi2d){game->pl.pos.x - MINIMAP_W / 2,
-		game->pl.pos.y - MINIMAP_H / 2};
+	if (game->pl.pos.x > game->minimap.map_pos_initial.x + MINIMAP_W - 5)
+		game->minimap.map_pos_initial.x++;
+	else if (game->pl.pos.x < game->minimap.map_pos_initial.x + 5)
+		game->minimap.map_pos_initial.x--;
+	if (game->pl.pos.y > game->minimap.map_pos_initial.y + MINIMAP_H - 5)
+		game->minimap.map_pos_initial.y++;
+	else if (game->pl.pos.y < game->minimap.map_pos_initial.y + 5)
+		game->minimap.map_pos_initial.y--;
+	if (game->minimap.map_pos_initial.x < 0)
+		game->minimap.map_pos_initial.x = 0;
+	if (game->minimap.map_pos_initial.y < 0)
+		game->minimap.map_pos_initial.y = 0;
 	minimap_raycaster(game);
 	draw_map(game, &game->minimap);
 }

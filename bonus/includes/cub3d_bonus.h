@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 03:08:27 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 11:02:11 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
 # define NBR_TEXTURES 13
-# define NBR_SPRITES 20
+# define NBR_SPRITES 30
 
 # define VALID_CHARS " 0123NSEWecbtf\n"
 # define SPAWN_CHARS "NSEW"
