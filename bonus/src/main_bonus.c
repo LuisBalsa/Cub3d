@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/02 19:42:42 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:44:31 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	free_game(t_game *game)
 			free(game->texture[i]);
 	if (game->map)
 		ft_free_array(game->map);
+	if (game->minimap.map)
+		ft_free_array(game->minimap.map);
 	exit(0);
 }
 
