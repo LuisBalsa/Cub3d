@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 11:02:11 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:11:25 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
-# define NBR_TEXTURES 13
+# define NBR_TEXTURES 14
 # define NBR_SPRITES 30
 
-# define VALID_CHARS " 0123NSEWecbtf\n"
+# define VALID_CHARS " 0123NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "023NSEWecbtf"
+# define INSIDE_CHARS "023NSEWecbtkf"
 
-# define SPRITE_CHARS "ecbtf"
+# define SPRITE_CHARS "ecbtkf"
 # define ENEMY_IMAGE "textures/enemy.xpm"
 # define CAGE_IMAGE "textures/cage.xpm"
 # define BARREL_IMAGE "textures/barrel.xpm"
@@ -38,6 +38,7 @@
 # define FIRE_IMAGE "textures/fire.xpm"
 # define FIRE1_IMAGE "textures/fire1.xpm"
 # define FIRE2_IMAGE "textures/fire2.xpm"
+# define KEY_IMAGE "textures/key.xpm"
 # define INDEX_SPRITE_IMAGE 6
 
 # define DOOR_IMAGE "textures/door.xpm"

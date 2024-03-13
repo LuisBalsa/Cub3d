@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/04 14:48:22 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:11:57 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static void	load_textures(t_game *game)
 	game->texture[INDEX_SPRITE_IMAGE + 1] = ft_strdup(CAGE_IMAGE);
 	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strdup(BARREL_IMAGE);
 	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strdup(TABLE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strdup(FIRE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strdup(FIRE1_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strdup(FIRE2_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strdup(KEY_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strdup(FIRE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strdup(FIRE1_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strdup(FIRE2_IMAGE);
 	i = -1;
 	while (++i < NBR_TEXTURES)
 	{
