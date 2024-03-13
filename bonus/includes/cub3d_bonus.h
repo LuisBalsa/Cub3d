@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 00:06:29 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 02:03:09 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 # define R_SPD 2.1
 # define R_SPD_M 0.1
 # define ANIM_DELAY 100000
-# define ANIM_DOOR_DELAY 10000
+# define ANIM_DOOR_DELAY 1000
 
 # define MINIMAP_TILE_S 10
 # define MINIMAP_W 21
