@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:52:37 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/05 07:51:43 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 04:37:08 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void	check_hit(t_player *pl, int *side, t_vi2d check)
 		|| pl->map[check.y][check.x] == OPENING_DOOR
 		|| pl->map[check.y][check.x] == CLOSING_DOOR)
 		hit_door_open(pl, side);
-	if (((pl->map[check.y][check.x - step.x] == '3' && \
-		pl->map[check.y][check.x - 2 * step.x] == '1' && *side == 1) ||
-		(pl->map[check.y - step.y][check.x] == '3' && \
-		pl->map[check.y - 2 * step.y][check.x] == '1' && *side == 3)) \
-		&& pl->map[check.y][check.x] == '1')
+	if (((pl->map[check.y][check.x - step.x] == OPEN_DOOR && \
+		pl->map[check.y][check.x - 2 * step.x] == WALL && *side == 1) ||
+		(pl->map[check.y - step.y][check.x] == OPEN_DOOR && \
+		pl->map[check.y - 2 * step.y][check.x] == WALL && *side == 3)) \
+		&& pl->map[check.y][check.x] == WALL)
 		pl->img_index = INDEX_DOOR_IMAGE + 1;
 }

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 02:03:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 03:08:27 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
 
-# define MINIMAP_TILE_S 10
-# define MINIMAP_W 21
-# define MINIMAP_H 15
+# define MINIMAP_TILE_S 5
+# define MINIMAP_W 43
+# define MINIMAP_H 31
 # define MINIMAP_OFFSET 1
 # define MINIMAP_HITS 600
 
@@ -164,6 +164,7 @@ typedef struct s_minimap
 	t_vi2d		map_pos_index;
 	int			tile_color;
 	char		**map;
+	char		**map_hit;
 }	t_minimap;
 
 typedef struct s_sprite
@@ -251,6 +252,7 @@ int		mouse_movement_handler(int x, int y, t_game *game);
 int		mouse_click_handler(int button, int x, int y, t_game *game);
 void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
+void	init_map(char **map);
 void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color);
 
 #endif

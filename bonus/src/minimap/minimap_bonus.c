@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 01:33:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 04:42:09 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,22 @@ static void	get_tile_color(t_game *game, t_minimap *minimap)
 		minimap->map_pos_index.y + minimap->map_pos_initial.y};
 	if (map_pos.y < 0 || map_pos.y >= game->map_height
 		|| map_pos.x < 0 || map_pos.x >= (int)ft_strlen(game->map[map_pos.y])
-		|| game->map[map_pos.y][map_pos.x] == ' ')
+		|| minimap->map[map_pos.y][map_pos.x] == ' ')
 		return (minimap->tile_color = -1, (void)0);
 	else if (map_pos.y == (int)game->pl.pos.y
 		&& map_pos.x == (int)game->pl.pos.x)
 		minimap->tile_color = 0x00FF0000;
-	else if (game->map[map_pos.y][map_pos.x] == '0')
-		minimap->tile_color = 0xE6E6E6;
-	else if (game->map[map_pos.y][map_pos.x] == '1')
+	else if (minimap->map[map_pos.y][map_pos.x] == FLOOR)
+		minimap->tile_color = 0x969696;
+	else if (minimap->map[map_pos.y][map_pos.x] == WALL)
 		minimap->tile_color = 0x00000000;
-	else if (game->map[map_pos.y][map_pos.x] == '3')
+	else if (minimap->map[map_pos.y][map_pos.x] == OPEN_DOOR)
 		minimap->tile_color = 0x0000FF00;
-	else if (ft_strchr("245", game->map[map_pos.y][map_pos.x]))
+	else if (ft_strchr("245", minimap->map[map_pos.y][map_pos.x]))
 		minimap->tile_color = 0x000000FF;
 	else
 		minimap->tile_color = 0x00FFFF00;
-	if (ft_strchr("01", minimap->map[map_pos.y][map_pos.x]))
+	if (ft_strchr("01", minimap->map_hit[map_pos.y][map_pos.x]))
 		minimap->tile_color = lighten_and_redden_color(minimap->tile_color);
 }
 

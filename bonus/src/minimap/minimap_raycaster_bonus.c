@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:26:09 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 01:29:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 04:23:10 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 static int	hit_minimap(t_player *pl, t_minimap *minimap)
 {
+	if (pl->map_check.y < 0 || pl->map_check.y >= pl->g->map_height
+		|| pl->map_check.x < 0 || pl->map_check.x >= \
+		(int)ft_strlen(pl->g->map[pl->map_check.y]))
+		return (1);
+	minimap->map[pl->map_check.y][pl->map_check.x] = \
+		pl->g->map[pl->map_check.y][pl->map_check.x];
 	if (!ft_strchr("012", pl->g->map[pl->map_check.y][pl->map_check.x]))
 		return (0);
 	if (pl->diagonal_dist.x > 1
 		&& pl->diagonal_dist.y > 1)
-		minimap->map[pl->map_check.y][pl->map_check.x] = \
+		minimap->map_hit[pl->map_check.y][pl->map_check.x] = \
 			pl->g->map[pl->map_check.y][pl->map_check.x];
 	if (ft_strchr("12", pl->g->map[pl->map_check.y][pl->map_check.x]))
 		return (1);
@@ -62,7 +68,7 @@ static void	init_raycaster(t_player *pl, int x)
 			- (pl->ray_dir.y > 0)) * pl->delta_dist.y;
 }
 
-static void	init_map(char **map)
+void	init_map(char **map)
 {
 	int	i;
 	int	j;
@@ -72,7 +78,7 @@ static void	init_map(char **map)
 	{
 		j = -1;
 		while (map[i][++j])
-			map[i][j] = 'X';
+			map[i][j] = ' ';
 	}
 }
 
@@ -80,7 +86,7 @@ void	minimap_raycaster(t_game *game)
 {
 	int	x;
 
-	init_map(game->minimap.map);
+	init_map(game->minimap.map_hit);
 	x = -1;
 	while (++x < game->screen.width)
 	{
