@@ -6,25 +6,28 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:26:09 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 18:20:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/13 01:29:54 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static int	hit_minimap(t_player *pl, int x)
+static int	hit_minimap(t_player *pl, t_minimap *minimap)
 {
+	if (!ft_strchr("012", pl->g->map[pl->map_check.y][pl->map_check.x]))
+		return (0);
+	if (pl->diagonal_dist.x > 1
+		&& pl->diagonal_dist.y > 1)
+		minimap->map[pl->map_check.y][pl->map_check.x] = \
+			pl->g->map[pl->map_check.y][pl->map_check.x];
 	if (ft_strchr("12", pl->g->map[pl->map_check.y][pl->map_check.x]))
-	{
-		pl->g->minimap.hited_tile[x] = pl->map_check;
 		return (1);
-	}
 	return (0);
 }
 
-static void	perform_dda_minimap(t_player *pl, int x)
+static void	perform_dda_minimap(t_player *pl)
 {
-	while (!hit_minimap(pl, x))
+	while (!hit_minimap(pl, &pl->g->minimap))
 	{
 		if (pl->diagonal_dist.x < pl->diagonal_dist.y)
 		{
@@ -36,13 +39,6 @@ static void	perform_dda_minimap(t_player *pl, int x)
 			pl->diagonal_dist.y += pl->delta_dist.y;
 			pl->map_check.y += pl->step.y;
 		}
-		if (pl->map_check.y < 0 || pl->map_check.y >= pl->g->map_height
-			|| pl->map_check.x < 0
-			|| pl->map_check.x >= (int)ft_strlen(pl->g->map[pl->map_check.y]))
-		{
-			printf("Error\n");
-			break ;
-		}
 	}
 }
 
@@ -50,7 +46,7 @@ static void	init_raycaster(t_player *pl, int x)
 {
 	double	camera_x;
 
-	camera_x = 2 * x / (double)MINIMAP_HITS - 1;
+	camera_x = 2 * x / (double)pl->g->screen.width - 1;
 	pl->ray_dir.x = pl->dir.x + pl->plane.x * camera_x;
 	pl->ray_dir.y = pl->dir.y + pl->plane.y * camera_x;
 	pl->map_check = (t_vi2d){(int)pl->pos.x, (int)pl->pos.y};
@@ -66,24 +62,29 @@ static void	init_raycaster(t_player *pl, int x)
 			- (pl->ray_dir.y > 0)) * pl->delta_dist.y;
 }
 
-static void	init_hited_tile(t_game *game)
+static void	init_map(char **map)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	while (++i < MINIMAP_HITS)
-		game->pl.g->minimap.hited_tile[i] = (t_vi2d){-1, -1};
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+			map[i][j] = 'X';
+	}
 }
 
 void	minimap_raycaster(t_game *game)
 {
 	int	x;
 
-	init_hited_tile(game);
+	init_map(game->minimap.map);
 	x = -1;
-	while (++x < MINIMAP_HITS)
+	while (++x < game->screen.width)
 	{
 		init_raycaster(&game->pl, x);
-		perform_dda_minimap(&game->pl, x);
+		perform_dda_minimap(&game->pl);
 	}
 }
