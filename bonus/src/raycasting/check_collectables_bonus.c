@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:02:51 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 20:54:25 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:20:42 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	check_collectables(t_game *game)
 {
 	char	*collectibles;
 
+	if (!game->collectibles_found)
+		return ;
 	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
 	{
 		game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
@@ -48,8 +50,8 @@ void	check_collectables(t_game *game)
 	else
 	{
 		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
-			"Collect the remaining keys:");
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 400, 50, 0x000000,
+			"Collect the remaining possible keys:");
+		mlx_string_put(game->mlx, game->win, MINIMAP_W + 450, 50, 0x000000,
 			collectibles = ft_itoa(game->nbr_collectibles));
 		free(collectibles);
 	}

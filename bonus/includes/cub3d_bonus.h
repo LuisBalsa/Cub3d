@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 21:28:34 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:18:20 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 6
 # define NBR_TEXTURES 14
-# define NBR_SPRITES 40
+# define NBR_SPRITES 55
 
 # define VALID_CHARS " 0123NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
@@ -62,7 +62,7 @@
 # define TEXTURE_HEIGHT 64
 
 # define MV_SPD 3.5
-# define R_SPD 2.1
+# define R_SPD 3.1
 # define R_SPD_M 0.1
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
@@ -231,6 +231,7 @@ typedef struct s_game
 	t_vi2d		anim_door;
 	t_minimap	minimap;
 	int			nbr_collectibles;
+	bool		collectibles_found;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 21:21:41 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:19:03 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ void	parse_map(t_game *game, int fd)
 	game->minimap.map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
 	sprites_collectable_count(game->minimap.map,
 		&game->nbr_collectibles, game->pl.pos.x, game->pl.pos.y);
+	game->collectibles_found = game->nbr_collectibles != 0;
 	init_map(game->minimap.map);
 }
