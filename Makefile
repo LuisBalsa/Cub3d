@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/03/13 16:03:43 by luide-so         ###   ########.fr        #
+#    Updated: 2024/03/14 12:42:48 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC_BONUS = parse_map_bonus lexer_bonus parse_bonus parse_sprites_bonus main_bon
 	init_mlx_and_textures_bonus raycasting_bonus draw_bonus check_hit_bonus \
 	keys_bonus input_handler_bonus mouse_handler_bonus sprites_bonus \
 	perform_dda_bonus check_hit_sliding_door_bonus minimap_bonus \
-	minimap_raycaster_bonus check_collectables_bonus
+	minimap_raycaster_bonus
 DEPS_BONUS = cub3d_bonus.h
 DEPS_PATH_BONUS = bonus/includes/
 
@@ -104,6 +104,6 @@ download:
 	@echo "Mlx downloaded\n"
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 1.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) debug.cub
 
 .PHONY: all clean fclean re bonus makemlx

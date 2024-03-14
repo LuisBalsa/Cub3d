@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 16:03:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:39:06 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,33 @@ static void	raycasting_sliding_door(t_game *game, t_player *pl, int x)
 		draw_walls_and_background(game, pl, x);
 	if (pl->hit_x < TEXTURE_WIDTH)
 		game->wall_dist[x] = pl->hit_dist;
+}
+
+static void	check_collectables(t_game *game)
+{
+	char	*collectibles;
+
+	if (!game->collectibles_found)
+		return ;
+	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
+	{
+		game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
+		game->nbr_collectibles--;
+		game->num_sprites--;
+	}
+	if (game->nbr_collectibles == 0)
+	{
+		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
+			"Congratulations! You collected all possible keys!");
+	}
+	else
+	{
+		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
+			"Collect the remaining possible keys:");
+		mlx_string_put(game->mlx, game->win, MINIMAP_W + 450, 50, 0x000000,
+			collectibles = ft_itoa(game->nbr_collectibles));
+		free(collectibles);
+	}
 }
 
 int	raycasting(t_game *game)
