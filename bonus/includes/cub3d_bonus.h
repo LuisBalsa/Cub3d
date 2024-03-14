@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/14 12:39:26 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:25:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@
 # define FOV 0.66
 # define PITCH 300
 # define PITCH_SPD 1000
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 960
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 
@@ -66,6 +66,7 @@
 # define R_SPD_M 0.1
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
+# define DOOR_SPD 200
 
 # define MINIMAP_TILE_S 5
 # define MINIMAP_W 43
@@ -226,7 +227,7 @@ typedef struct s_game
 	double		anim_time;
 	int			anim_index;
 	double		anim_door_time;
-	int			anim_door_i;
+	double		anim_door_i;
 	int			anim_door_dir;
 	t_vi2d		anim_door;
 	t_minimap	minimap;

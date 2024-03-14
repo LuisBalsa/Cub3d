@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/14 12:39:06 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:00:13 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	anim_door_timer(t_game *game)
 		&& clock() - game->anim_door_time > ANIM_DOOR_DELAY)
 	{
 		game->anim_door_time = clock();
-		game->anim_door_i += game->anim_door_dir * game->time.frame * 200;
+		game->anim_door_i += game->anim_door_dir * game->time.frame * DOOR_SPD;
 		if (game->anim_door_i <= 0 || game->anim_door_i >= TEXTURE_WIDTH)
 		{
 			game->anim_door_i = 0;
