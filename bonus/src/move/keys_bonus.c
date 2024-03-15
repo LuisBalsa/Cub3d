@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/14 14:44:02 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/15 09:50:19 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	door(t_game *game)
 		game->anim_door_i = 1;
 		game->anim_door_dir = 1;
 		game->anim_door = (t_vi2d){x, y};
-		game->anim_door_time = clock();
 	}
 	else if (pl->map[y][x] == OPEN_DOOR && !game->anim_door_i)
 	{
@@ -96,7 +95,6 @@ static void	door(t_game *game)
 		game->anim_door_i = TEXTURE_WIDTH;
 		game->anim_door_dir = -1;
 		game->anim_door = (t_vi2d){x, y};
-		game->anim_door_time = clock();
 	}
 }
 

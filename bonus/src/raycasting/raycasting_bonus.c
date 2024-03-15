@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/14 15:00:13 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/15 09:54:47 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,14 @@
 
 static void	anim_door_timer(t_game *game)
 {
-	if (game->anim_door_i
-		&& clock() - game->anim_door_time > ANIM_DOOR_DELAY)
+	if (!game->anim_door_i)
+		return ;
+	game->anim_door_i += game->anim_door_dir * game->time.frame * DOOR_SPD;
+	if (game->anim_door_i <= 0 || game->anim_door_i >= TEXTURE_WIDTH)
 	{
-		game->anim_door_time = clock();
-		game->anim_door_i += game->anim_door_dir * game->time.frame * DOOR_SPD;
-		if (game->anim_door_i <= 0 || game->anim_door_i >= TEXTURE_WIDTH)
-		{
-			game->anim_door_i = 0;
-			game->map[game->anim_door.y][game->anim_door.x] = DOOR
-				+ (game->anim_door_dir == 1);
-		}
+		game->anim_door_i = 0;
+		game->map[game->anim_door.y][game->anim_door.x] = DOOR
+			+ (game->anim_door_dir == 1);
 	}
 }
 
