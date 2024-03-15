@@ -6,22 +6,25 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/15 09:54:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:07:24 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	anim_door_timer(t_game *game)
+static void	anim_door_timer(t_game *g)
 {
-	if (!game->anim_door_i)
+	if (g->map[g->anim_door.y][g->anim_door.x] == OPEN_DOOR
+		&& g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR)
+		g->map[g->anim_door.y][g->anim_door.x] = DOOR;
+	if (!g->anim_door_i)
 		return ;
-	game->anim_door_i += game->anim_door_dir * game->time.frame * DOOR_SPD;
-	if (game->anim_door_i <= 0 || game->anim_door_i >= TEXTURE_WIDTH)
+	g->anim_door_i += g->anim_door_dir * g->time.frame * DOOR_SPD;
+	if (g->anim_door_i <= 0 || g->anim_door_i >= TEXTURE_WIDTH)
 	{
-		game->anim_door_i = 0;
-		game->map[game->anim_door.y][game->anim_door.x] = DOOR
-			+ (game->anim_door_dir == 1);
+		g->anim_door_i = 0;
+		g->map[g->anim_door.y][g->anim_door.x] = DOOR
+			+ (g->anim_door_dir == 1);
 	}
 }
 
@@ -101,9 +104,9 @@ int	raycasting(t_game *game)
 		if (game->anim_door_i)
 			raycasting_sliding_door(game, &game->pl, x);
 	}
-	anim_door_timer(game);
 	sprites(game);
 	minimap(game);
+	anim_door_timer(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	check_collectables(game);
 	return (0);
