@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/15 09:43:29 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:39:09 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,33 @@
 # include "../../minilibx-linux/mlx.h"
 
 # define GAME_NAME "Cub3D"
-# define NBR_PARAMS 6
-# define NBR_TEXTURES 14
+# define NBR_PARAMS 7
+# define NBR_TEXTURES 18
 # define NBR_SPRITES 55
 
-# define VALID_CHARS " 0123NSEWecbtkf\n"
+# define VALID_CHARS " 01236789NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
 # define INSIDE_CHARS "023NSEWecbtkf"
-
 # define SPRITE_CHARS "ecbtkf"
-# define ENEMY_IMAGE "textures/enemy.xpm"
-# define CAGE_IMAGE "textures/cage.xpm"
-# define BARREL_IMAGE "textures/barrel.xpm"
-# define TABLE_IMAGE "textures/table.xpm"
-# define KEY_IMAGE "textures/key.xpm"
-# define FIRE_IMAGE "textures/fire.xpm"
-# define FIRE1_IMAGE "textures/fire1.xpm"
-# define FIRE2_IMAGE "textures/fire2.xpm"
-# define INDEX_SPRITE_IMAGE 6
 
-# define DOOR_IMAGE "textures/door.xpm"
-# define DOOR_FRAME "textures/door_frame.xpm"
+# define DOOR_IMAGE "door.xpm"
+# define DOOR_FRAME "door_frame.xpm"
+# define ENEMY_IMAGE "enemy.xpm"
+# define CAGE_IMAGE "cage.xpm"
+# define BARREL_IMAGE "barrel.xpm"
+# define TABLE_IMAGE "table.xpm"
+# define KEY_IMAGE "key.xpm"
+# define FIRE_IMAGE "fire.xpm"
+# define FIRE1_IMAGE "fire1.xpm"
+# define FIRE2_IMAGE "fire2.xpm"
+# define WALL1_IMAGE "wall1.xpm"
+# define WALL2_IMAGE "wall2.xpm"
+# define WALL3_IMAGE "wall3.xpm"
+# define WALL4_IMAGE "wall4.xpm"
 # define INDEX_DOOR_IMAGE 4
+# define INDEX_SPRITE_IMAGE 6
+# define INDEX_WALL_IMAGE 14
+# define I_W_ASCII_DIFF 40
 
 # define FLOOR '0'
 # define WALL '1'
@@ -212,6 +217,7 @@ typedef struct s_game
 	void		*win;
 	char		*file_line;
 	char		*texture[NBR_TEXTURES];
+	char		*theme_directory;
 	t_img		img[NBR_TEXTURES];
 	t_sprite	sprite[NBR_SPRITES];
 	int			num_sprites;

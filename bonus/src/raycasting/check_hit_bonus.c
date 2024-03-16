@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:52:37 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 04:37:08 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:44:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,19 @@ void	check_hit(t_player *pl, int *side, t_vi2d check)
 	t_vi2d	step;
 
 	step = pl->step;
-	if (pl->map[check.y][check.x] == WALL)
-		pl->img_index = *side - (*side == 1 && step.x < 0)
-			- (*side == 3 && step.y < 0);
-	if (pl->map[check.y][check.x] == DOOR)
-		hit_door_closed(pl, side);
-	if (pl->map[check.y][check.x] == OPEN_DOOR
-		|| pl->map[check.y][check.x] == OPENING_DOOR
-		|| pl->map[check.y][check.x] == CLOSING_DOOR)
-		hit_door_open(pl, side);
 	if (((pl->map[check.y][check.x - step.x] == OPEN_DOOR && \
 		pl->map[check.y][check.x - 2 * step.x] == WALL && *side == 1) ||
 		(pl->map[check.y - step.y][check.x] == OPEN_DOOR && \
 		pl->map[check.y - 2 * step.y][check.x] == WALL && *side == 3)) \
 		&& pl->map[check.y][check.x] == WALL)
 		pl->img_index = INDEX_DOOR_IMAGE + 1;
+	else if (pl->map[check.y][check.x] == WALL)
+		pl->img_index = *side - (*side == 1 && step.x < 0)
+			- (*side == 3 && step.y < 0);
+	else if (pl->map[check.y][check.x] == DOOR)
+		hit_door_closed(pl, side);
+	else if (ft_strchr("345", pl->map[check.y][check.x]))
+		hit_door_open(pl, side);
+	else if (ft_strchr("6789", pl->map[check.y][check.x]))
+		pl->img_index = (int)(pl->map[check.y][check.x] - I_W_ASCII_DIFF);
 }

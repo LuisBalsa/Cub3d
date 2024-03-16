@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 10:45:45 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:23:30 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	anim_door_timer(t_game *g)
+static void	anim_door(t_game *g)
 {
 	if (g->map[g->anim_door.y][g->anim_door.x] == OPEN_DOOR
 		&& (g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR
@@ -112,7 +112,7 @@ int	raycasting(t_game *game)
 	}
 	sprites(game);
 	minimap(game);
-	anim_door_timer(game);
+	anim_door(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	check_collectables(game);
 	return (0);

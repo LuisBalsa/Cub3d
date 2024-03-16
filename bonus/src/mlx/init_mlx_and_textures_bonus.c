@@ -6,26 +6,35 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 15:11:57 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 17:48:13 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
+static void	load_theme_textures(t_game *game, char *theme_d)
+{
+	game->texture[INDEX_DOOR_IMAGE] = ft_strjoin(theme_d, DOOR_IMAGE);
+	game->texture[INDEX_DOOR_IMAGE + 1] = ft_strjoin(theme_d, DOOR_FRAME);
+	game->texture[INDEX_SPRITE_IMAGE] = ft_strjoin(theme_d, ENEMY_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 1] = ft_strjoin(theme_d, CAGE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strjoin(theme_d, BARREL_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strjoin(theme_d, TABLE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strjoin(theme_d, KEY_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strjoin(theme_d, FIRE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strjoin(theme_d, FIRE1_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strjoin(theme_d, FIRE2_IMAGE);
+	game->texture[INDEX_WALL_IMAGE] = ft_strjoin(theme_d, WALL1_IMAGE);
+	game->texture[INDEX_WALL_IMAGE + 1] = ft_strjoin(theme_d, WALL2_IMAGE);
+	game->texture[INDEX_WALL_IMAGE + 2] = ft_strjoin(theme_d, WALL3_IMAGE);
+	game->texture[INDEX_WALL_IMAGE + 3] = ft_strjoin(theme_d, WALL4_IMAGE);
+}
+
 static void	load_textures(t_game *game)
 {
 	int		i;
 
-	game->texture[INDEX_DOOR_IMAGE] = ft_strdup(DOOR_IMAGE);
-	game->texture[INDEX_DOOR_IMAGE + 1] = ft_strdup(DOOR_FRAME);
-	game->texture[INDEX_SPRITE_IMAGE] = ft_strdup(ENEMY_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 1] = ft_strdup(CAGE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strdup(BARREL_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strdup(TABLE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strdup(KEY_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strdup(FIRE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strdup(FIRE1_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strdup(FIRE2_IMAGE);
+	load_theme_textures(game, game->theme_directory);
 	i = -1;
 	while (++i < NBR_TEXTURES)
 	{

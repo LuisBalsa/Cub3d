@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:52:37 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/05 10:08:56 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:11:47 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ static void	hit_door_sliding(t_player *pl, int *side)
 
 void	check_hit_sliding_door(t_player *pl, int *side, t_vi2d check)
 {
-	if (pl->map[check.y][check.x] == WALL)
-		pl->img_index = false;
-	if (pl->map[check.y][check.x] == DOOR)
+	if (ft_strchr("126789", pl->map[check.y][check.x]))
 		pl->img_index = false;
 	if (pl->map[check.y][check.x] == OPENING_DOOR
 		|| pl->map[check.y][check.x] == CLOSING_DOOR)

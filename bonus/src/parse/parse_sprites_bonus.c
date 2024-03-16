@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 21:34:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:10:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parse_sprites(t_game *game, int x, int y)
 	char	*sprites;
 	int		i;
 
-	if (game->num_sprites == NBR_SPRITES)
+	if (game->num_sprites == NBR_SPRITES - 1)
 		error_exit(game, "Too many sprites");
 	game->sprite[game->num_sprites].pos = (t_vf2d){x + 0.5, y + 0.5};
 	sprites = ft_strdup(SPRITE_CHARS);

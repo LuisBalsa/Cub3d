@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:43:08 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/27 02:44:51 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:39:08 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static int	check_open(t_game *game, char *file, char *extension)
 	if (fd < 0)
 		return (error_exit(game, "Failed to open texture"));
 	return (fd);
+}
+
+static int	assign_theme_directory(t_game *game, char **tokens)
+{
+	if (game->theme_directory)
+		return (error_exit(game, "Theme directory duplicated"));
+	if (!tokens[1] || tokens[2])
+		return (error_exit(game, "Invalid theme directory"));
+//	close(check_open(game, tokens[1], ".xpm"));
+	game->theme_directory = ft_strdup(tokens[1]);
+	if (!game->theme_directory)
+		return (error_exit(game, "Failed to assign theme directory"));
+	return (true);
 }
 
 static int	assign_texture(t_game *game, t_texture texture, char **tokens)
@@ -78,6 +91,8 @@ int	lexer(t_game *game, char **tokens)
 		return (assign_texture(game, we, tokens));
 	if (!ft_strncmp(tokens[0], "EA", 3))
 		return (assign_texture(game, ea, tokens));
+	if (!ft_strncmp(tokens[0], "TD", 3))
+		return (assign_theme_directory(game, tokens));
 	if (!ft_strncmp(tokens[0], "C", 2))
 		return (assign_color(game, clg, tokens));
 	if (!ft_strncmp(tokens[0], "F", 2))

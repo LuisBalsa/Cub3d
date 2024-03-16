@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 02:49:28 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 11:47:12 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	free_game(t_game *game)
 	while (++i < NBR_TEXTURES)
 		if (game->texture[i])
 			free(game->texture[i]);
+	if (game->theme_directory)
+		free(game->theme_directory);
 	if (game->map)
 		ft_free_array(game->map);
 	if (game->minimap.map)

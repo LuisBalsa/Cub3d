@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/15 09:50:19 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:59:37 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	print_sprites(t_game *game) //testes
+/* static void	print_sprites(t_game *game) //testes
 {
 	int	i;
 
@@ -31,7 +31,7 @@ static void	print_sprites(t_game *game) //testes
 			printf("Wall dist x: %f\n", game->wall_dist[game->sprite[i].draw_start.x]);
 		printf("Sprite %d draw start y: %d\n", i, game->sprite[i].draw_start.y);
 	}
-}
+} */
 
 static void	print_debug(t_game *game) //testes
 {
@@ -63,12 +63,13 @@ static void	print_debug(t_game *game) //testes
 	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
 	printf("Player key esc: %d\n", game->key.esc);
 	printf("Frame time: %f\n", game->time.frame);
+	printf("Game sprites: %d\n", game->num_sprites);
 	printf("Game anim door i: %f\n", game->anim_door_i);
 	printf("Game anim door dir: %d\n", game->anim_door_dir);
 	printf("Game anim door x: %d\n", game->anim_door.x);
 	printf("Game anim door y: %d\n", game->anim_door.y);
 	printf("Game anim door: %c\n", game->pl.map[game->anim_door.y][game->anim_door.x]);
-	print_sprites(game);
+//	print_sprites(game);
 }
 
 static void	door(t_game *game)

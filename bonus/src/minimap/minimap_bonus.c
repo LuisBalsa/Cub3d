@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 14:29:40 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 18:17:17 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static void	get_tile_color(t_game *game, t_minimap *minimap)
 		minimap->tile_color = 0x00FF0000;
 	else if (minimap->map[map_pos.y][map_pos.x] == FLOOR)
 		minimap->tile_color = 0x969696;
-	else if (minimap->map[map_pos.y][map_pos.x] == WALL)
-		minimap->tile_color = 0x00000000;
 	else if (minimap->map[map_pos.y][map_pos.x] == OPEN_DOOR)
 		minimap->tile_color = 0x0000FF00;
+	else if (ft_strchr("16789", minimap->map[map_pos.y][map_pos.x]))
+		minimap->tile_color = 0x00000000;
 	else if (ft_strchr("245", minimap->map[map_pos.y][map_pos.x]))
 		minimap->tile_color = 0x000000FF;
 	else
 		minimap->tile_color = 0x00FFFF00;
-	if (ft_strchr("01", minimap->map_hit[map_pos.y][map_pos.x]))
+	if (ft_strchr("016789", minimap->map_hit[map_pos.y][map_pos.x]))
 		minimap->tile_color = lighten_and_redden_color(minimap->tile_color);
 }
 

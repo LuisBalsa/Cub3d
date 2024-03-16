@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:26:09 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/15 11:11:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 21:24:02 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	hit_minimap(t_player *pl, t_minimap *minimap)
 		pl->g->map[pl->map_check.y][pl->map_check.x];
 	minimap->map_hit[pl->map_check.y][pl->map_check.x] = \
 		pl->g->map[pl->map_check.y][pl->map_check.x];
-	if (!ft_strchr("012", pl->g->map[pl->map_check.y][pl->map_check.x]))
+	if (!ft_strchr("0126789", pl->g->map[pl->map_check.y][pl->map_check.x]))
 		return (0);
-	if (ft_strchr("12", pl->g->map[pl->map_check.y][pl->map_check.x]))
+	if (ft_strchr("126789", pl->g->map[pl->map_check.y][pl->map_check.x]))
 		return (1);
 	return (0);
 }
