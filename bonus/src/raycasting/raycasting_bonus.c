@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/15 11:07:24 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 10:45:45 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 static void	anim_door_timer(t_game *g)
 {
 	if (g->map[g->anim_door.y][g->anim_door.x] == OPEN_DOOR
-		&& g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR)
-		g->map[g->anim_door.y][g->anim_door.x] = DOOR;
+		&& (g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR
+		|| (fabs(g->anim_door.x - g->pl.pos.x) > 2
+		|| fabs(g->anim_door.y - g->pl.pos.y) > 2)))
+	{
+		g->map[g->anim_door.y][g->anim_door.x] = CLOSING_DOOR;
+		g->anim_door_i = TEXTURE_WIDTH;
+		g->anim_door_dir = -1;
+	}
 	if (!g->anim_door_i)
 		return ;
 	g->anim_door_i += g->anim_door_dir * g->time.frame * DOOR_SPD;
