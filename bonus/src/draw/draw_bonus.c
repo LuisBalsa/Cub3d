@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/12 14:52:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:58:31 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	my_pixel_get(t_img *mlx, int x, int y)
 		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
 }
 
-static void	my_pixel_put(t_img *mlx, int x, int y, int color)
+void	my_pixel_put(t_img *mlx, int x, int y, int color)
 {
 	char	*dst;
 
@@ -28,23 +28,19 @@ static void	my_pixel_put(t_img *mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color)
+static int	darken_color(int color, double factor)
 {
-	t_vi2d	pos;
-	int		i;
-	int		j;
+	int	r;
+	int	g;
+	int	b;
 
-	if (color == -1)
-		return ;
-	pos = (t_vi2d){(pos_index.x + MINIMAP_OFFSET) * MINIMAP_TILE_S,
-		(pos_index.y + MINIMAP_OFFSET) * MINIMAP_TILE_S};
-	i = -1;
-	while (++i < MINIMAP_TILE_S)
-	{
-		j = -1;
-		while (++j < MINIMAP_TILE_S)
-			my_pixel_put(&game->screen, pos.x + j, pos.y + i, color);
-	}
+	factor /= 5;
+	if (factor < 1)
+		return (color);
+	r = (color >> 16) / factor;
+	g = (color >> 8 & 0xFF) / factor;
+	b = (color & 0xFF) / factor;
+	return (r << 16 | g << 8 | b);
 }
 
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch)
@@ -89,6 +85,7 @@ void	draw_walls_and_background(t_game *game, t_player *pl, int x)
 		tex_y = (int)pl->draw.pos & (TEXTURE_HEIGHT - 1);
 		pl->draw.pos += pl->draw.step;
 		color = my_pixel_get(&game->img[pl->img_index], pl->hit_x, tex_y);
+		color = darken_color(color, pl->hit_dist);
 		my_pixel_put(&game->screen, x, y, color);
 		y++;
 	}

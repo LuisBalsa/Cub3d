@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 10:56:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 18:17:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:57:05 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ static int	lighten_and_redden_color(int color)
 	g = (g > 255) * 255 + (g <= 255) * g;
 	b = (b > 255) * 255 + (b <= 255) * b;
 	return (r << 16 | g << 8 | b);
+}
+
+static void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color)
+{
+	t_vi2d	pos;
+	int		i;
+	int		j;
+
+	if (color == -1)
+		return ;
+	pos = (t_vi2d){(pos_index.x + MINIMAP_OFFSET) * MINIMAP_TILE_S,
+		(pos_index.y + MINIMAP_OFFSET) * MINIMAP_TILE_S};
+	i = -1;
+	while (++i < MINIMAP_TILE_S)
+	{
+		j = -1;
+		while (++j < MINIMAP_TILE_S)
+			my_pixel_put(&game->screen, pos.x + j, pos.y + i, color);
+	}
 }
 
 static void	get_tile_color(t_game *game, t_minimap *minimap)

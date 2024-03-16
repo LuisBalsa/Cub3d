@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 17:39:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 22:58:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ void	perform_dda_sliding_door(t_player *pl);
 void	check_hit(t_player *pl, int *side, t_vi2d check);
 void	check_hit_sliding_door(t_player *pl, int *side, t_vi2d check);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+void	my_pixel_put(t_img *mlx, int x, int y, int color);
 void	sprites(t_game *game);
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch);
 int		key_press(int keycode, t_game *game);
@@ -264,7 +265,6 @@ int		mouse_click_handler(int button, int x, int y, t_game *game);
 void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
-void	draw_minimap_tile(t_game *game, t_vi2d	pos_index, int color);
 void	sprites_collectable_count(char **map, int *count, int x, int y);
 
 #endif

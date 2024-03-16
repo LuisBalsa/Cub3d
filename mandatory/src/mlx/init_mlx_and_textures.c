@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/02/29 20:55:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/16 23:03:08 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	load_textures(t_game *game)
 {
 	int		i;
 
-	game->texture[INDEX_DOOR_IMAGE] = ft_strdup(DOOR_IMAGE);
-	game->texture[INDEX_DOOR_IMAGE + 1] = ft_strdup(DOOR_FRAME);
 	i = -1;
 	while (++i < NBR_TEXTURES)
 	{
