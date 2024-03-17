@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 21:47:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:50:11 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
 # define DOOR_SPD 200
+# define HIT_BLUR_SPD 1
 
 # define MINIMAP_TILE_S 5
 # define MINIMAP_W 43
@@ -242,6 +243,7 @@ typedef struct s_player
 	t_draw		draw;
 	t_key_state	key;
 	int			hits_taken;
+	double		hited;
 }	t_player;
 
 typedef struct s_game
@@ -287,6 +289,7 @@ void	perform_dda_sliding_door(t_player *pl);
 void	check_hit(t_player *pl, int *side, t_vi2d check);
 void	check_hit_sliding_door(t_player *pl, int *side, t_vi2d check);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+int		my_pixel_get(t_img *mlx, int x, int y);
 void	my_pixel_put(t_img *mlx, int x, int y, int color);
 void	sprites(t_game *game);
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch);
@@ -303,5 +306,7 @@ void	sprites_collectable_count(char **map, int *count, int x, int y);
 void	check_shot(t_game *game);
 void	set_enemy_as_animated(void *sprite);
 void	animate_enemy(t_game *game, t_sprite *sprite);
+
+void	draw_hit_blur(t_img *img, t_img *screen);
 
 #endif

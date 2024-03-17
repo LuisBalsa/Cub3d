@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 21:35:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:35:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static int	my_pixel_get(t_img *mlx, int x, int y)
+int	my_pixel_get(t_img *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
 		(y * mlx->line_len) + (x * (mlx->bpp / 8))));

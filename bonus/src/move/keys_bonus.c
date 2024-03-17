@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 14:56:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:47:42 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 	}
 } */
 
-static void	print_debug(t_game *game) //testes
+/* static void	print_debug(t_game *game) //testes
 {
 	printf("Player pos x: %f\n", game->pl.pos.x);
 	printf("Player pos y: %f\n", game->pl.pos.y);
@@ -69,7 +69,7 @@ static void	print_debug(t_game *game) //testes
 	printf("Game anim door y: %d\n", game->anim_door.y);
 	printf("Game anim door: %c\n", game->pl.map[game->anim_door.y][game->anim_door.x]);
 //	print_sprites(game);
-}
+} */
 
 static void	door(t_game *game)
 {
@@ -117,7 +117,7 @@ int	key_release(int keycode, t_game *game)
 	else if (keycode == DOWN)
 		game->key.down = 0;
 	else if (keycode == P) //testes
-		print_debug(game);
+		game->pl.hited = 1;
 	else if (keycode == ESC)
 		game->key.esc += 1;
 	return (0);

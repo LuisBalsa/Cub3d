@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 13:28:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:49:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	anim_door(t_game *g)
+static void	anim_door_hit_blur(t_game *g)
 {
 	if (g->map[g->anim_door.y][g->anim_door.x] == OPEN_DOOR
 		&& (g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR
@@ -22,6 +22,12 @@ static void	anim_door(t_game *g)
 		g->map[g->anim_door.y][g->anim_door.x] = CLOSING_DOOR;
 		g->anim_door_i = TEXTURE_WIDTH;
 		g->anim_door_dir = -1;
+	}
+	if (g->pl.hited)
+	{
+		g->pl.hited += g->time.frame * HIT_BLUR_SPD;
+		if (g->pl.hited >= 2)
+			g->pl.hited = 0;
 	}
 	if (!g->anim_door_i)
 		return ;
@@ -114,7 +120,9 @@ int	raycasting(t_game *game)
 	}
 	sprites(game);
 	minimap(game);
-	anim_door(game);
+	anim_door_hit_blur(game);
+	if (game->pl.hited)
+		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	check_collectables(game);
 	return (0);
