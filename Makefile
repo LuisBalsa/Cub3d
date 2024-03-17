@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/03/16 18:05:26 by luide-so         ###   ########.fr        #
+#    Updated: 2024/03/17 13:02:38 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,6 @@ download:
 	@echo "Mlx downloaded\n"
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) 2.cub
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) maps/1.cub
 
 .PHONY: all clean fclean re bonus makemlx

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 20:51:05 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:23:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,40 @@ static void	set_animation(t_game *game)
 	}
 }
 
-static void	set_sprites_distances(t_sprite *sprite, t_vf2d pos, int nbr)
+static void	set_sprites_distances(t_list *sprites, t_vf2d pos)
 {
-	int	i;
+	t_sprite	*sprite;
+	t_list		*tmp;
 
-	i = -1;
-	while (++i <= nbr)
+	tmp = sprites;
+	while (tmp)
 	{
-		sprite->dist = (pos.x - sprite->pos.x) * \
-			(pos.x - sprite->pos.x) + \
-			(pos.y - sprite->pos.y) * \
-			(pos.y - sprite->pos.y);
-		sprite++;
+		sprite = tmp->content;
+		sprite->dist = (pos.x - sprite->pos.x) * (pos.x - sprite->pos.x) + \
+			(pos.y - sprite->pos.y) * (pos.y - sprite->pos.y);
+		tmp = tmp->next;
 	}
 }
 
-static void	sort_sprites_by_distance(t_sprite *sprite, int nbr)
+static void	sort_sprites_by_distance(t_list **sprites)
 {
-	int			i;
-	t_sprite	tmp;
+	t_list		*tmp;
+	t_sprite	*sprite;
+	t_sprite	*sprite2;
 
-	i = -1;
-	while (++i < nbr - 1)
+	tmp = *sprites;
+	while (tmp->next)
 	{
-		if (sprite[i].dist < sprite[i + 1].dist)
+		sprite = tmp->content;
+		sprite2 = tmp->next->content;
+		if (sprite->dist < sprite2->dist)
 		{
-			tmp = sprite[i];
-			sprite[i] = sprite[i + 1];
-			sprite[i + 1] = tmp;
-			i = -1;
+			tmp->content = sprite2;
+			tmp->next->content = sprite;
+			tmp = *sprites;
 		}
+		else
+			tmp = tmp->next;
 	}
 }
 
@@ -86,15 +90,17 @@ static void	calculate_sprites(t_sprite *sprite, t_player pl)
 
 void	sprites(t_game *game)
 {
-	int	i;
+	t_list	*tmp;
 
 	set_animation(game);
-	set_sprites_distances(game->sprite, game->pl.pos, game->num_sprites);
-	sort_sprites_by_distance(game->sprite, game->num_sprites);
-	i = -1;
-	while (++i < game->num_sprites)
+	set_sprites_distances(game->sprites, game->pl.pos);
+	sort_sprites_by_distance(&game->sprites);
+	tmp = game->sprites;
+	while (tmp)
 	{
-		calculate_sprites(&game->sprite[i], game->pl);
-		draw_sprites(game, game->sprite[i], game->pl.pitch);
+		calculate_sprites(tmp->content, game->pl);
+		if (((t_sprite *)tmp->content)->visible)
+			draw_sprites(game, *(t_sprite *)tmp->content, game->pl.pitch);
+		tmp = tmp->next;
 	}
 }

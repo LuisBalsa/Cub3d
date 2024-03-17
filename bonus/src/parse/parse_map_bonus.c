@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 20:05:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:38:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	parse_map(t_game *game, int fd)
 	game->minimap.map = ft_split(tmp_map, '\n');
 	game->minimap.map_hit = ft_split(tmp_map, '\n');
 	free(tmp_map);
-	if (!game->map)
+	if (!game->map || !game->minimap.map || !game->minimap.map_hit)
 		error_exit(game, "Failed to allocate memory");
 	game->map_height = validate_map_and_set_spawn(game, -1, -1);
 	if (game->pl.g == NULL)

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 22:58:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:39:02 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
 # define NBR_TEXTURES 18
-# define NBR_SPRITES 55
 
 # define VALID_CHARS " 01236789NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
@@ -176,6 +175,11 @@ typedef struct s_minimap
 	char		**map_hit;
 }	t_minimap;
 
+typedef struct s_enemy
+{
+	char		**pos;
+}	t_enemy;
+
 typedef struct s_sprite
 {
 	double	dist;
@@ -189,6 +193,7 @@ typedef struct s_sprite
 	t_vi2d	tex;
 	int		img_index;
 	bool	anim;
+	bool	visible;
 }	t_sprite;
 
 typedef struct s_player
@@ -219,8 +224,7 @@ typedef struct s_game
 	char		*texture[NBR_TEXTURES];
 	char		*theme_directory;
 	t_img		img[NBR_TEXTURES];
-	t_sprite	sprite[NBR_SPRITES];
-	int			num_sprites;
+	t_list		*sprites;
 	t_img		screen;
 	double		wall_dist[SCREEN_WIDTH];
 	int			color[2];
@@ -238,6 +242,7 @@ typedef struct s_game
 	t_minimap	minimap;
 	int			nbr_collectibles;
 	bool		collectibles_found;
+//	t_enemy		enemy;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
