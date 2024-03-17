@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 13:00:44 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:56:17 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int	key_press(int keycode, t_game *game)
 		game->key.d = 1;
 	else if (keycode == E)
 		door(game);
+	else if (keycode == SPACEBAR)
+		check_shot(game);
 	else if (keycode == LEFT)
 		game->key.left = 1;
 	else if (keycode == RIGHT)

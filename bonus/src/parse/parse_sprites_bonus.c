@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 14:37:53 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:08:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	parse_sprites(t_game *game, int x, int y)
 	free(sprites);
 	sprite->anim = (game->map[y][x] == 'f');
 	sprite->visible = true;
+	sprite->g = game;
 	new = ft_lstnew(sprite);
 	if (!new)
 		error_exit(game, "Malloc failed");

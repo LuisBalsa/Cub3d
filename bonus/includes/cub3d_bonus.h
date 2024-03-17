@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 14:39:02 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:48:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef enum e_key
 	S = 115,
 	D = 100,
 	E = 101,
+	SPACEBAR = 32,
 	P = 112,
 	ESC = 65307,
 	UP = 65362,
@@ -177,7 +178,7 @@ typedef struct s_minimap
 
 typedef struct s_enemy
 {
-	char		**pos;
+	t_vf2d		hited;
 }	t_enemy;
 
 typedef struct s_sprite
@@ -194,6 +195,7 @@ typedef struct s_sprite
 	int		img_index;
 	bool	anim;
 	bool	visible;
+	t_game	*g;
 }	t_sprite;
 
 typedef struct s_player
@@ -242,7 +244,7 @@ typedef struct s_game
 	t_minimap	minimap;
 	int			nbr_collectibles;
 	bool		collectibles_found;
-//	t_enemy		enemy;
+	t_enemy		enemy;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
@@ -271,5 +273,6 @@ void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
 void	sprites_collectable_count(char **map, int *count, int x, int y);
+void	check_shot(t_game *game);
 
 #endif
