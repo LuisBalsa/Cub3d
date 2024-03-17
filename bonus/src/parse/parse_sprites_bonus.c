@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 15:08:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:33:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_sprites(t_game *game, int x, int y)
 	sprites = ft_strdup(SPRITE_CHARS);
 	if (!sprites)
 		error_exit(game, "Malloc failed");
-	sprite = malloc(sizeof(t_sprite));
+	sprite = ft_calloc(1, sizeof(t_sprite));
 	if (!sprite)
 		error_exit(game, "Malloc failed");
 	sprite->pos = (t_vf2d){x + 0.5, y + 0.5};
@@ -48,7 +48,6 @@ void	parse_sprites(t_game *game, int x, int y)
 		if (game->map[y][x] == sprites[i])
 			sprite->img_index = i + INDEX_SPRITE_IMAGE;
 	free(sprites);
-	sprite->anim = (game->map[y][x] == 'f');
 	sprite->visible = true;
 	sprite->g = game;
 	new = ft_lstnew(sprite);

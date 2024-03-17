@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 13:23:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:37:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	set_animation(t_game *game)
 	}
 }
 
-static void	set_sprites_distances(t_list *sprites, t_vf2d pos)
+static void	set_sprites_distances_and_anim(t_list *sprites, t_vf2d pos)
 {
 	t_sprite	*sprite;
 	t_list		*tmp;
@@ -34,6 +34,8 @@ static void	set_sprites_distances(t_list *sprites, t_vf2d pos)
 		sprite = tmp->content;
 		sprite->dist = (pos.x - sprite->pos.x) * (pos.x - sprite->pos.x) + \
 			(pos.y - sprite->pos.y) * (pos.y - sprite->pos.y);
+		if (sprite->img_index == INDEX_FIRE_IMAGE)
+			sprite->anim_index = sprite->g->anim_index;
 		tmp = tmp->next;
 	}
 }
@@ -93,7 +95,7 @@ void	sprites(t_game *game)
 	t_list	*tmp;
 
 	set_animation(game);
-	set_sprites_distances(game->sprites, game->pl.pos);
+	set_sprites_distances_and_anim(game->sprites, game->pl.pos);
 	sort_sprites_by_distance(&game->sprites);
 	tmp = game->sprites;
 	while (tmp)

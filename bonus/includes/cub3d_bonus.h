@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 15:48:22 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:37:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define WALL4_IMAGE "wall4.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
+# define INDEX_FIRE_IMAGE 11
 # define INDEX_WALL_IMAGE 14
 # define I_W_ASCII_DIFF 40
 
@@ -193,7 +194,7 @@ typedef struct s_sprite
 	t_vi2d	draw_end;
 	t_vi2d	tex;
 	int		img_index;
-	bool	anim;
+	int		anim_index;
 	bool	visible;
 	t_game	*g;
 }	t_sprite;
