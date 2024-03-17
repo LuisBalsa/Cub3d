@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:57:24 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 17:20:32 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 20:45:56 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static void	set_enemy_as_hited(void *sprite)
 	if ((int)enemy->pos.x == (int)enemy->g->enemy.hited.x && \
 		(int)enemy->pos.y == (int)enemy->g->enemy.hited.y)
 	{
-		enemy->visible = false;
-		enemy->g->map[(int)enemy->pos.y][(int)enemy->pos.x] = '0';
+		enemy->anim_index = 0;
+		enemy->mode = ENEMY_DYING;
+		enemy->img_index = INDEX_ENEMY_IMAGE + ENEMY_DYING;
 	}
 }
 

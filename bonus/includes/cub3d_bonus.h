@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 18:56:39 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:47:14 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 22
+# define NBR_TEXTURES 33
 
 # define VALID_CHARS " 01236789NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
@@ -37,6 +37,16 @@
 # define ENEMY2_IMAGE "enemy2.xpm"
 # define ENEMY3_IMAGE "enemy3.xpm"
 # define ENEMY4_IMAGE "enemy4.xpm"
+# define ENEMY5_IMAGE "enemy5.xpm"
+# define ENEMY6_IMAGE "enemy6.xpm"
+# define ENEMY7_IMAGE "enemy7.xpm"
+# define ENEMY8_IMAGE "enemy8.xpm"
+# define ENEMY9_IMAGE "enemy9.xpm"
+# define ENEMY10_IMAGE "enemy10.xpm"
+# define ENEMY11_IMAGE "enemy11.xpm"
+# define ENEMY12_IMAGE "enemy12.xpm"
+# define ENEMY13_IMAGE "enemy13.xpm"
+# define ENEMY14_IMAGE "enemy14.xpm"
 # define CAGE_IMAGE "cage.xpm"
 # define BARREL_IMAGE "barrel.xpm"
 # define TABLE_IMAGE "table.xpm"
@@ -48,12 +58,14 @@
 # define WALL2_IMAGE "wall2.xpm"
 # define WALL3_IMAGE "wall3.xpm"
 # define WALL4_IMAGE "wall4.xpm"
+# define HIT_IMAGE "hit.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
 # define INDEX_FIRE_IMAGE 10
 # define INDEX_WALL_IMAGE 13
 # define INDEX_ENEMY_IMAGE 17
-# define I_W_ASCII_DIFF 40
+# define INDEX_HIT_IMAGE 32
+# define I_W_ASCII_DIFF 41
 
 # define FLOOR '0'
 # define WALL '1'
@@ -62,7 +74,7 @@
 # define OPENING_DOOR '4'
 # define CLOSING_DOOR '5'
 # define WALKABLE "03k"
-# define TRANSPOSABLE "023k"
+# define TRANSPOSABLE "023ek"
 # define FOV 0.66
 # define PITCH 300
 # define PITCH_SPD 1000
@@ -229,6 +241,7 @@ typedef struct s_player
 	int			hit_x;
 	t_draw		draw;
 	t_key_state	key;
+	int			hits_taken;
 }	t_player;
 
 typedef struct s_game

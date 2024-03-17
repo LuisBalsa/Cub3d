@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 17:56:30 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 21:47:35 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static void	load_enemy_textures(t_game *game, char *theme_d)
 	game->texture[INDEX_ENEMY_IMAGE + 2] = ft_strjoin(theme_d, ENEMY2_IMAGE);
 	game->texture[INDEX_ENEMY_IMAGE + 3] = ft_strjoin(theme_d, ENEMY3_IMAGE);
 	game->texture[INDEX_ENEMY_IMAGE + 4] = ft_strjoin(theme_d, ENEMY4_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 5] = ft_strjoin(theme_d, ENEMY5_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 6] = ft_strjoin(theme_d, ENEMY6_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 7] = ft_strjoin(theme_d, ENEMY7_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 8] = ft_strjoin(theme_d, ENEMY8_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 9] = ft_strjoin(theme_d, ENEMY9_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 10] = ft_strjoin(theme_d, ENEMY10_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 11] = ft_strjoin(theme_d, ENEMY11_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 12] = ft_strjoin(theme_d, ENEMY12_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 13] = ft_strjoin(theme_d, ENEMY13_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 14] = ft_strjoin(theme_d, ENEMY14_IMAGE);
 }
 
 static void	load_theme_textures(t_game *game, char *theme_d)
@@ -36,6 +46,7 @@ static void	load_theme_textures(t_game *game, char *theme_d)
 	game->texture[INDEX_WALL_IMAGE + 1] = ft_strjoin(theme_d, WALL2_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 2] = ft_strjoin(theme_d, WALL3_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 3] = ft_strjoin(theme_d, WALL4_IMAGE);
+	game->texture[INDEX_HIT_IMAGE] = ft_strjoin(theme_d, HIT_IMAGE);
 }
 
 static void	load_textures(t_game *game)
