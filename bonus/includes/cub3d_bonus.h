@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 22:50:11 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 23:25:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@
 # define MV_SPD 3.5
 # define R_SPD 3.1
 # define R_SPD_M 0.1
+# define TOLERANCE 0.2
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
 # define DOOR_SPD 200
