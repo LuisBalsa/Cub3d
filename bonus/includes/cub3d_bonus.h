@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 18:04:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:56:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@
 # define MINIMAP_H 31
 # define MINIMAP_OFFSET 1
 # define MINIMAP_HITS 600
+
+# define ENEMY_SHOOTING 0
+# define ENEMY_WALKING 5
+# define ENEMY_DYING 10
 
 typedef struct s_game	t_game;
 
@@ -200,8 +204,9 @@ typedef struct s_sprite
 	t_vi2d	tex;
 	int		img_index;
 	int		anim_index;
+	double	anim_time;
 	bool	visible;
-	bool	animated;
+	bool	enemy_animated;
 	int		mode;
 	t_game	*g;
 }	t_sprite;
@@ -284,5 +289,6 @@ void	sprites_collectable_count(char **map, int *count, int x, int y);
 
 void	check_shot(t_game *game);
 void	set_enemy_as_animated(void *sprite);
+void	animate_enemy(t_game *game, t_sprite *sprite);
 
 #endif

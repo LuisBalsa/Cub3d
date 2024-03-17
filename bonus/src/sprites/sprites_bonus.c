@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 18:18:49 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:25:29 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	sprites(t_game *game)
 	{
 		if (((t_sprite *)tmp->content)->visible)
 		{
+			animate_enemy(game, tmp->content);
 			calculate_sprites(tmp->content, game->pl);
 			draw_sprites(game, *(t_sprite *)tmp->content, game->pl.pitch);
 		}
