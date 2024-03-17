@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 16:37:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 18:04:17 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,20 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 18
+# define NBR_TEXTURES 22
 
 # define VALID_CHARS " 01236789NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
 # define INSIDE_CHARS "023NSEWecbtkf"
-# define SPRITE_CHARS "ecbtkf"
+# define SPRITE_CHARS "cbtkfe"
 
 # define DOOR_IMAGE "door.xpm"
 # define DOOR_FRAME "door_frame.xpm"
 # define ENEMY_IMAGE "enemy.xpm"
+# define ENEMY1_IMAGE "enemy1.xpm"
+# define ENEMY2_IMAGE "enemy2.xpm"
+# define ENEMY3_IMAGE "enemy3.xpm"
+# define ENEMY4_IMAGE "enemy4.xpm"
 # define CAGE_IMAGE "cage.xpm"
 # define BARREL_IMAGE "barrel.xpm"
 # define TABLE_IMAGE "table.xpm"
@@ -46,8 +50,9 @@
 # define WALL4_IMAGE "wall4.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
-# define INDEX_FIRE_IMAGE 11
-# define INDEX_WALL_IMAGE 14
+# define INDEX_FIRE_IMAGE 10
+# define INDEX_WALL_IMAGE 13
+# define INDEX_ENEMY_IMAGE 17
 # define I_W_ASCII_DIFF 40
 
 # define FLOOR '0'
@@ -196,6 +201,8 @@ typedef struct s_sprite
 	int		img_index;
 	int		anim_index;
 	bool	visible;
+	bool	animated;
+	int		mode;
 	t_game	*g;
 }	t_sprite;
 
@@ -274,6 +281,8 @@ void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
 void	sprites_collectable_count(char **map, int *count, int x, int y);
+
 void	check_shot(t_game *game);
+void	set_enemy_as_animated(void *sprite);
 
 #endif
