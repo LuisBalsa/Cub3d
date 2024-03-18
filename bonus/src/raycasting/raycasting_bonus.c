@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 03:05:28 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:01:39 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,11 @@ static void	raycasting_sliding_door(t_game *game, t_player *pl, int x)
 static void	check_collectables(t_game *game)
 {
 	char		*collectibles;
-	t_list		*tmp;
 
 	if (!game->collectibles_found)
 		return ;
 	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
-	{
-		game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
-		game->collected++;
-		tmp = ft_lstlast(game->sprites);
-		((t_sprite *)tmp->content)->visible = false;
-	}
+		ft_lstiter(game->sprites, &collect_collectibles);
 	if (game->nbr_collectibles == game->collected)
 	{
 		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,

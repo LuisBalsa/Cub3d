@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 13:45:40 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:02:09 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	enemy_dying(t_game *game, t_sprite *enemy)
 		{
 			enemy->enemy_animated = false;
 			enemy->anim_index = 4;
-			enemy->pos = (t_vf2d){(int)enemy->pos.x + 0.5,
-				(int)enemy->pos.y + 0.5};
 		}
 	}
 }

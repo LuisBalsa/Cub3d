@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 04:05:04 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:01:00 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,6 +313,7 @@ void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
 void	sprites_collectable_count(char **map, int *count, int x, int y);
+void	collect_collectibles(void *sprite);
 
 void	check_shot(t_game *game);
 void	set_enemy_as_animated(void *sprite);
