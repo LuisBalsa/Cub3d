@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 01:04:08 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 04:05:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@
 # define ENERGY_BAR_H 30
 # define ENERGY_BAR_OFFSET 50
 # define ENERGY_BAR_SP 5
+
+# define KEYS_SIZE 150
+# define KEYS_OFFSET 130
+# define KEYS_DIST 30
 
 # define ENEMY_SHOOTING 0
 # define ENEMY_WALKING 5
@@ -277,6 +281,7 @@ typedef struct s_game
 	t_vi2d		anim_door;
 	t_minimap	minimap;
 	int			nbr_collectibles;
+	int			collected;
 	bool		collectibles_found;
 	t_enemy		enemy;
 }	t_game;
@@ -314,6 +319,6 @@ void	set_enemy_as_animated(void *sprite);
 void	animate_enemy(t_game *game, t_sprite *sprite);
 
 void	draw_hit_blur(t_img *img, t_img *screen);
-void	draw_energy(t_game *game);
+void	draw_energy_and_keys(t_game *game);
 
 #endif

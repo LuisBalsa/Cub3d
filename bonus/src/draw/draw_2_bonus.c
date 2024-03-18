@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_blur_and_energy_bonus.c                       :+:      :+:    :+:   */
+/*   draw_2_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 00:20:42 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 04:11:03 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,45 @@ static void	draw_energy_bar(t_game *game, int index, int color, t_vi2d i_pos)
 	}
 }
 
-void	draw_energy(t_game *game)
+static void	draw_key(t_game *game, t_img *img, int index, bool gray)
+{
+	t_vi2d	scr;
+	t_vi2d	texture;
+	t_vi2d	initial_pos;
+	int		color;
+
+	initial_pos = (t_vi2d){game->screen.width - KEYS_OFFSET,
+		- KEYS_OFFSET + KEYS_DIST};
+	scr.y = -1;
+	while (++scr.y < KEYS_SIZE)
+	{
+		scr.x = -1;
+		while (++scr.x < KEYS_SIZE)
+		{
+			texture.x = scr.x * img->width / KEYS_SIZE;
+			texture.y = scr.y * img->height / KEYS_SIZE;
+			color = my_pixel_get(img, texture.x, texture.y);
+			if (color != 0x980088 && gray)
+				color = 0x969696;
+			my_pixel_put(&game->screen, initial_pos.x + scr.x,
+				initial_pos.y + scr.y + index * KEYS_DIST, color);
+		}
+	}
+}
+
+static void	draw_keys(t_game *game)
+{
+	int		key_index;
+
+	key_index = -1;
+	while (++key_index < game->collected)
+		draw_key(game, &game->img[INDEX_SPRITE_IMAGE + 3], key_index, false);
+	key_index -= 1;
+	while (++key_index < game->nbr_collectibles)
+		draw_key(game, &game->img[INDEX_SPRITE_IMAGE + 3], key_index, true);
+}
+
+void	draw_energy_and_keys(t_game *game)
 {
 	int		bar_index;
 	t_vi2d	initial_pos;
@@ -42,6 +80,8 @@ void	draw_energy(t_game *game)
 	bar_index -= 1;
 	while (++bar_index < 6)
 		draw_energy_bar(game, bar_index, 0xFF0000, initial_pos);
+	if (game->collectibles_found)
+		draw_keys(game);
 }
 
 void	draw_hit_blur(t_img *img, t_img *screen)

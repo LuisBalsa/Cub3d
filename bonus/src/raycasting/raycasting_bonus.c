@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 00:22:06 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 03:05:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ static void	check_collectables(t_game *game)
 	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
 	{
 		game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
-		game->nbr_collectibles--;
+		game->collected++;
 		tmp = ft_lstlast(game->sprites);
 		((t_sprite *)tmp->content)->visible = false;
 	}
-	if (game->nbr_collectibles == 0)
+	if (game->nbr_collectibles == game->collected)
 	{
 		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
 			"Congratulations! You collected all possible keys!");
@@ -95,7 +95,7 @@ static void	check_collectables(t_game *game)
 		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
 			"Collect the remaining possible keys:");
 		mlx_string_put(game->mlx, game->win, MINIMAP_W + 450, 50, 0x000000,
-			collectibles = ft_itoa(game->nbr_collectibles));
+			collectibles = ft_itoa(game->nbr_collectibles - game->collected));
 		free(collectibles);
 	}
 }
@@ -121,7 +121,7 @@ int	raycasting(t_game *game)
 	sprites(game);
 	minimap(game);
 	anim_door_hit_blur(game);
-	draw_energy(game);
+	draw_energy_and_keys(game);
 	if (game->pl.hited)
 		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
