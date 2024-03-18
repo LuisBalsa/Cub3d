@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 01:17:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:12:58 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	enemy_dying(t_game *game, t_sprite *enemy)
 {
+	enemy->img_index = INDEX_ENEMY_IMAGE + ENEMY_DYING;
 	if (clock() - enemy->anim_time > ANIM_DELAY)
 	{
 		enemy->anim_time = clock();
@@ -24,20 +25,40 @@ static void	enemy_dying(t_game *game, t_sprite *enemy)
 	}
 }
 
-/* static void	check_hit_player(t_game *game, t_sprite *enemy)
-{
-} */
-
-static void	enemy_shooting(t_game *game, t_sprite *enemy)
+static void	enemy_walking(t_game *game, t_sprite *enemy)
 {
 	(void)game;
+	enemy->img_index = INDEX_ENEMY_IMAGE + ENEMY_WALKING;
+	if (clock() - enemy->anim_time > ANIM_DELAY)
+	{
+		enemy->anim_time = clock();
+		enemy->anim_index++;
+		enemy->anim_index %= 5;
+		if (enemy->anim_index == 0
+			&& rand() % (int)ceil(enemy->dist / 3) == 0)
+			enemy->mode = ENEMY_SHOOTING;
+	}
+}
+
+static void	enemy_shooting(t_game *g, t_sprite *enemy)
+{
+	enemy->img_index = INDEX_ENEMY_IMAGE;
 	if (clock() - enemy->anim_time > ANIM_DELAY)
 	{
 		enemy->anim_time = clock();
 		enemy->anim_index += rand() % 2;
 		enemy->anim_index %= 5;
-/* 		if (enemy->anim_index == 2)
-			check_hit_player(game, enemy); */
+		if (enemy->anim_index == 2 && rand() % (int)ceil(enemy->dist / 3) == 0)
+		{
+			g->pl.hited = true;
+			g->pl.hits_taken++;
+		}
+		else if (enemy->anim_index == 4
+			&& g->minimap.map_hit[(int)enemy->pos.y][(int)enemy->pos.x] != 'E')
+			enemy->enemy_animated = false;
+		else if (enemy->anim_index == 0
+			&& rand() % (int)ceil(enemy->dist) == 0)
+			enemy->mode = ENEMY_WALKING;
 	}
 }
 
@@ -47,8 +68,8 @@ void	animate_enemy(t_game *game, t_sprite *sprite)
 		return ;
 	if (sprite->mode == ENEMY_SHOOTING)
 		enemy_shooting(game, sprite);
-/* 	else if (sprite->mode == ENEMY_WALKING)
-		enemy_walking(game, sprite); */
+	else if (sprite->mode == ENEMY_WALKING)
+		enemy_walking(game, sprite);
 	else
 		enemy_dying(game, sprite);
 }
