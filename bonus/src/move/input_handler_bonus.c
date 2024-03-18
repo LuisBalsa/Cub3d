@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:51:14 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 23:38:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:48:23 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void	linear_movement(t_player *pl, double time, int direction)
 	tolerance.y = TOLERANCE * pl->dir.y * direction;
 	test = (t_vf2d){new_pos.x + tolerance.x, new_pos.y + tolerance.y};
 	if (test.y < 0 || test.y >= pl->g->map_height)
-		test.y = pl->pos.y;
+		return ;
 	if (test.x < 0 || test.x >= (int)ft_strlen(pl->map[(int)test.y]))
-		test.x = pl->pos.x;
+		return ;
 	cell = pl->map[(int)(test.y)][(int)pl->pos.x];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
@@ -49,9 +49,9 @@ static void	strafe_movement(t_player *pl, double time, int direction)
 	tolerance.y = TOLERANCE * pl->plane.y * direction;
 	test = (t_vf2d){new_pos.x + tolerance.x, new_pos.y + tolerance.y};
 	if (test.y < 0 || test.y >= pl->g->map_height)
-		test.y = pl->pos.y;
+		return ;
 	if (test.x < 0 || test.x >= (int)ft_strlen(pl->map[(int)test.y]))
-		test.x = pl->pos.x;
+		return ;
 	cell = pl->map[(int)test.y][(int)pl->pos.x];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
