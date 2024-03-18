@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 17:53:21 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 20:00:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,3 @@ void	draw_hud_and_more(t_game *game)
 	if (game->pl.hited && rand() % 2)
 		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
 }
-
