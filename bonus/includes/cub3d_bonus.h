@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 17:05:55 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:43:44 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 36
+# define NBR_TEXTURES 37
 
-# define VALID_CHARS " 01236789NSEWecbtkf\n"
+# define VALID_CHARS " 01236789NSEWecbtkhf\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "023NSEWecbtkf"
-# define SPRITE_CHARS "cbtkfe"
+# define INSIDE_CHARS "023NSEWecbtkhf"
+# define SPRITE_CHARS "cbtkhfe"
 
 # define DOOR_IMAGE "door.xpm"
 # define DOOR_FRAME "door_frame.xpm"
@@ -51,6 +51,7 @@
 # define BARREL_IMAGE "barrel.xpm"
 # define TABLE_IMAGE "table.xpm"
 # define KEY_IMAGE "key.xpm"
+# define HEALTH_IMAGE "health.xpm"
 # define FIRE_IMAGE "fire.xpm"
 # define FIRE1_IMAGE "fire1.xpm"
 # define FIRE2_IMAGE "fire2.xpm"
@@ -64,12 +65,12 @@
 # define HANDS2_IMAGE "hands2.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
-# define INDEX_FIRE_IMAGE 10
-# define INDEX_WALL_IMAGE 13
-# define INDEX_ENEMY_IMAGE 17
-# define INDEX_HIT_IMAGE 32
-# define INDEX_HANDS_IMAGE 33
-# define I_W_ASCII_DIFF 41
+# define INDEX_FIRE_IMAGE 11
+# define INDEX_WALL_IMAGE 14
+# define INDEX_ENEMY_IMAGE 18
+# define INDEX_HIT_IMAGE 33
+# define INDEX_HANDS_IMAGE 34
+# define I_W_ASCII_DIFF 40
 
 # define FLOOR '0'
 # define WALL '1'
@@ -77,8 +78,8 @@
 # define OPEN_DOOR '3'
 # define OPENING_DOOR '4'
 # define CLOSING_DOOR '5'
-# define WALKABLE "03k"
-# define TRANSPOSABLE "023ek"
+# define WALKABLE "03kh"
+# define TRANSPOSABLE "023ekh"
 # define FOV 0.66
 # define PITCH 300
 # define PITCH_SPD 1000
@@ -88,7 +89,7 @@
 # define TEXTURE_HEIGHT 64
 
 # define MV_SPD 3.5
-# define R_SPD 3.1
+# define R_SPD 2.5
 # define R_SPD_M 0.1
 # define TOLERANCE 0.5
 # define ANIM_DELAY 100000
@@ -106,6 +107,7 @@
 # define ENERGY_BAR_H 30
 # define ENERGY_BAR_OFFSET 50
 # define ENERGY_BAR_SP 5
+# define ENERGY 10
 
 # define KEYS_SIZE 150
 # define KEYS_OFFSET 130

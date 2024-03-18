@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 15:31:10 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:53:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ void	draw_hud_and_more(t_game *game)
 	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, game->screen.height
 		- ENERGY_BAR_H - ENERGY_BAR_OFFSET};
 	bar_index = -1;
-	while (++bar_index < 6 - game->pl.hits_taken)
+	while (++bar_index < ENERGY - game->pl.hits_taken)
 		draw_energy_bar(game, bar_index, 0x00FF00, initial_pos);
 	bar_index -= 1;
-	while (++bar_index < 6)
+	while (++bar_index < ENERGY)
 		draw_energy_bar(game, bar_index, 0xFF0000, initial_pos);
 	if (game->collectibles_found)
 		draw_keys(game);

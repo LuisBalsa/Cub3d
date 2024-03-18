@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 15:23:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:36:59 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	check_collectables(t_game *game)
 
 	if (!game->collectibles_found)
 		return ;
-	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
+	if (ft_strchr("kh", game->map[(int)game->pl.pos.y][(int)game->pl.pos.x]))
 		ft_lstiter(game->sprites, &collect_collectibles);
 	if (game->nbr_collectibles == game->collected)
 	{

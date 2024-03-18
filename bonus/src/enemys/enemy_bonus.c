@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 14:02:09 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 18:06:14 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	enemy_walking(t_game *game, t_sprite *enemy)
 		enemy->anim_index %= 5;
 		i = -1;
 		game->map[(int)enemy->pos.y][(int)enemy->pos.x] = '0';
-		while (++i < 2 * enemy->dist)
+		while (++i < 3 * enemy->dist)
 			move_enemy(game, enemy);
 		game->map[(int)enemy->pos.y][(int)enemy->pos.x] = 'e';
 		if (enemy->anim_index == 0 && rand() % 2)
@@ -85,7 +85,7 @@ static void	enemy_shooting(t_game *g, t_sprite *enemy)
 		enemy->anim_time = clock();
 		enemy->anim_index += rand() % 2;
 		enemy->anim_index %= 5;
-		if (enemy->anim_index == 2 && rand() % (int)ceil(enemy->dist / 3) == 0)
+		if (enemy->anim_index == 2 && rand() % (int)(enemy->dist / 5 + 1) == 0)
 		{
 			g->pl.hited = true;
 			g->pl.hits_taken++;
