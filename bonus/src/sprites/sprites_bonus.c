@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 18:25:29 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:58:21 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	sprites(t_game *game)
 	tmp = game->sprites;
 	while (tmp)
 	{
-		if (((t_sprite *)tmp->content)->visible)
+		if (((t_sprite *)tmp->content)->visible
+			&& ((t_sprite *)tmp->content)->dist > 0.5)
 		{
 			animate_enemy(game, tmp->content);
 			calculate_sprites(tmp->content, game->pl);
