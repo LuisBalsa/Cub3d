@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 20:31:47 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 01:17:16 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ static void	enemy_dying(t_game *game, t_sprite *enemy)
 	{
 		enemy->anim_time = clock();
 		enemy->anim_index++;
+		game->map[(int)enemy->pos.y][(int)enemy->pos.x] = '0';
 		if (enemy->anim_index == 4)
-		{
 			enemy->enemy_animated = false;
-			game->map[(int)enemy->pos.y][(int)enemy->pos.x] = '0';
-		}
 	}
 }
 
@@ -36,10 +34,7 @@ static void	enemy_shooting(t_game *game, t_sprite *enemy)
 	if (clock() - enemy->anim_time > ANIM_DELAY)
 	{
 		enemy->anim_time = clock();
-		enemy->anim_index++;
-		enemy->anim_index -= (enemy->anim_index == 1) * rand() % 2;
-		enemy->anim_index -= (enemy->anim_index == 2) * rand() % 2;
-		enemy->anim_index -= (enemy->anim_index == 4) * rand() % 2;
+		enemy->anim_index += rand() % 2;
 		enemy->anim_index %= 5;
 /* 		if (enemy->anim_index == 2)
 			check_hit_player(game, enemy); */

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 00:24:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 01:06:38 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static void	door(t_game *game)
 	t_player	*pl;
 
 	pl = &game->pl;
-	x = (int)(pl->pos.x + pl->dir.x / 2);
-	y = (int)(pl->pos.y + pl->dir.y / 2);
+	x = (int)(pl->pos.x + pl->dir.x);
+	y = (int)(pl->pos.y + pl->dir.y);
 	if (x == (int)pl->pos.x && y == (int)pl->pos.y)
 		return ;
 	if (pl->map[y][x] == DOOR && !game->anim_door_i)
