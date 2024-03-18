@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 23:25:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:23:35 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@
 # define MINIMAP_H 31
 # define MINIMAP_OFFSET 1
 # define MINIMAP_HITS 600
+
+# define ENERGY_BAR_W 10
+# define ENERGY_BAR_H 30
+# define ENERGY_BAR_OFFSET 50
+# define ENERGY_BAR_SP 5
 
 # define ENEMY_SHOOTING 0
 # define ENEMY_WALKING 5
@@ -309,5 +314,6 @@ void	set_enemy_as_animated(void *sprite);
 void	animate_enemy(t_game *game, t_sprite *sprite);
 
 void	draw_hit_blur(t_img *img, t_img *screen);
+void	draw_energy(t_game *game);
 
 #endif

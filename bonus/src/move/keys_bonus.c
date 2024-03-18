@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/17 22:47:42 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:24:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,10 @@ int	key_release(int keycode, t_game *game)
 	else if (keycode == DOWN)
 		game->key.down = 0;
 	else if (keycode == P) //testes
+	{
 		game->pl.hited = 1;
+		game->pl.hits_taken += 1;
+	}
 	else if (keycode == ESC)
 		game->key.esc += 1;
 	return (0);
