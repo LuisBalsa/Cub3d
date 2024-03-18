@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:57:24 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 13:50:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:56:05 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	check_shot(t_game *game)
 {
 	if (enemy_hited(game))
 		ft_lstiter(game->sprites, set_enemy_as_hited);
+	game->pl.fire = true;
+	game->anim_index = 0;
 }
 
 void	set_enemy_as_animated(void *sprite)

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 14:01:39 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:23:15 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,7 @@ int	raycasting(t_game *game)
 	sprites(game);
 	minimap(game);
 	anim_door_hit_blur(game);
-	draw_energy_and_keys(game);
-	if (game->pl.hited)
-		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
+	draw_hud_and_more(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	check_collectables(game);
 	return (0);

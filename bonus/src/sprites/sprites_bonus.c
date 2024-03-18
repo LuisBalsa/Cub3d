@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 01:03:50 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:58:36 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void	set_animation(t_game *game)
 		game->anim_time = clock();
 		game->anim_index++;
 		if (game->anim_index == 3)
+		{
 			game->anim_index = 0;
+			game->pl.fire = false;
+		}
 	}
 }
 

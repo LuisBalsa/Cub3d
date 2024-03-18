@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_2_bonus.c                                     :+:      :+:    :+:   */
+/*   draw_hud_and_more_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 04:11:03 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:31:10 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,31 +67,12 @@ static void	draw_keys(t_game *game)
 		draw_key(game, &game->img[INDEX_SPRITE_IMAGE + 3], key_index, true);
 }
 
-void	draw_energy_and_keys(t_game *game)
-{
-	int		bar_index;
-	t_vi2d	initial_pos;
-
-	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, game->screen.height
-		- ENERGY_BAR_H - ENERGY_BAR_OFFSET};
-	bar_index = -1;
-	while (++bar_index < 6 - game->pl.hits_taken)
-		draw_energy_bar(game, bar_index, 0x00FF00, initial_pos);
-	bar_index -= 1;
-	while (++bar_index < 6)
-		draw_energy_bar(game, bar_index, 0xFF0000, initial_pos);
-	if (game->collectibles_found)
-		draw_keys(game);
-}
-
-void	draw_hit_blur(t_img *img, t_img *screen)
+static void	draw_hit_blur(t_img *img, t_img *screen)
 {
 	t_vi2d	scr;
 	t_vi2d	texture;
 	int		color;
 
-	if (rand() % 2)
-		return ;
 	scr.y = -1;
 	while (++scr.y < screen->height)
 	{
@@ -105,5 +86,25 @@ void	draw_hit_blur(t_img *img, t_img *screen)
 				my_pixel_put(screen, scr.x, scr.y, color);
 		}
 	}
+}
+
+void	draw_hud_and_more(t_game *game)
+{
+	int		bar_index;
+	t_vi2d	initial_pos;
+
+	draw_hands(game);
+	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, game->screen.height
+		- ENERGY_BAR_H - ENERGY_BAR_OFFSET};
+	bar_index = -1;
+	while (++bar_index < 6 - game->pl.hits_taken)
+		draw_energy_bar(game, bar_index, 0x00FF00, initial_pos);
+	bar_index -= 1;
+	while (++bar_index < 6)
+		draw_energy_bar(game, bar_index, 0xFF0000, initial_pos);
+	if (game->collectibles_found)
+		draw_keys(game);
+	if (game->pl.hited && rand() % 2)
+		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
 }
 

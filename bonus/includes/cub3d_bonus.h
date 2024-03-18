@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 14:01:00 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 17:05:55 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 33
+# define NBR_TEXTURES 36
 
 # define VALID_CHARS " 01236789NSEWecbtkf\n"
 # define SPAWN_CHARS "NSEW"
@@ -59,12 +59,16 @@
 # define WALL3_IMAGE "wall3.xpm"
 # define WALL4_IMAGE "wall4.xpm"
 # define HIT_IMAGE "hit.xpm"
+# define HANDS_IMAGE "hands.xpm"
+# define HANDS1_IMAGE "hands1.xpm"
+# define HANDS2_IMAGE "hands2.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
 # define INDEX_FIRE_IMAGE 10
 # define INDEX_WALL_IMAGE 13
 # define INDEX_ENEMY_IMAGE 17
 # define INDEX_HIT_IMAGE 32
+# define INDEX_HANDS_IMAGE 33
 # define I_W_ASCII_DIFF 41
 
 # define FLOOR '0'
@@ -254,6 +258,7 @@ typedef struct s_player
 	t_key_state	key;
 	int			hits_taken;
 	double		hited;
+	bool		fire;
 }	t_player;
 
 typedef struct s_game
@@ -319,7 +324,7 @@ void	check_shot(t_game *game);
 void	set_enemy_as_animated(void *sprite);
 void	animate_enemy(t_game *game, t_sprite *sprite);
 
-void	draw_hit_blur(t_img *img, t_img *screen);
-void	draw_energy_and_keys(t_game *game);
+void	draw_hud_and_more(t_game *game);
+void	draw_hands(t_game *game);
 
 #endif
