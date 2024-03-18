@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 02:12:58 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:29:53 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static void	enemy_walking(t_game *game, t_sprite *enemy)
 		enemy->anim_time = clock();
 		enemy->anim_index++;
 		enemy->anim_index %= 5;
-		if (enemy->anim_index == 0
-			&& rand() % (int)ceil(enemy->dist / 3) == 0)
+		if (enemy->anim_index == 0 && rand() % 2)
 			enemy->mode = ENEMY_SHOOTING;
 	}
 }
@@ -53,11 +52,11 @@ static void	enemy_shooting(t_game *g, t_sprite *enemy)
 			g->pl.hited = true;
 			g->pl.hits_taken++;
 		}
-		else if (enemy->anim_index == 4
-			&& g->minimap.map_hit[(int)enemy->pos.y][(int)enemy->pos.x] != 'E')
+		else if (enemy->anim_index == 0
+			&& g->minimap.map_hit[(int)enemy->pos.y][(int)enemy->pos.x] != 'e')
 			enemy->enemy_animated = false;
 		else if (enemy->anim_index == 0
-			&& rand() % (int)ceil(enemy->dist) == 0)
+			&& (rand() % 20 == 0 || enemy->dist > 30))
 			enemy->mode = ENEMY_WALKING;
 	}
 }
@@ -82,6 +81,8 @@ void	set_enemy_as_animated(void *sprite)
 	if ((int)enemy->pos.x == (int)enemy->g->enemy.hited.x && \
 		(int)enemy->pos.y == (int)enemy->g->enemy.hited.y)
 	{
+		if (enemy->enemy_animated)
+			return ;
 		enemy->enemy_animated = true;
 		enemy->anim_index = rand() % 5;
 	}

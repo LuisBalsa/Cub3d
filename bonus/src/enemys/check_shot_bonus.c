@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:57:24 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 01:56:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 02:17:27 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	enemy_hited(t_game *game)
 		map_pos = (t_vi2d){(int)game->enemy.hited.x, (int)game->enemy.hited.y};
 		if (ft_strchr("12456789", game->map[map_pos.y][map_pos.x]))
 			break ;
-		if (game->map[map_pos.y][map_pos.x] == 'E')
+		if (game->map[map_pos.y][map_pos.x] == 'e')
 			return (1);
 	}
 	return (0);
