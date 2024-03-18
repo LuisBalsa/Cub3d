@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 15:58:36 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:54:57 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	sprites(t_game *game)
 {
 	t_list	*tmp;
 
+	if (!game->sprites)
+		return ;
 	set_animation(game);
 	set_sprites_distances_and_anim(game->sprites, game->pl.pos);
 	sort_sprites_by_distance(&game->sprites);

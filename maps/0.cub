@@ -1,0 +1,17 @@
+C 173, 216, 230
+
+F 100, 100, 100
+
+NO textures/wall1.xpm
+SO textures/wall1.xpm
+
+TD textures/theme1/
+WE        textures/wall1.xpm
+EA textures/wall1.xpm
+
+
+1111111111111111
+10000000000000101
+100000000000002W1
+10000000000000101
+1111111111111111
