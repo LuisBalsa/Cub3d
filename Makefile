@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/03/18 19:51:40 by luide-so         ###   ########.fr        #
+#    Updated: 2024/03/19 00:51:16 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC_BONUS = parse_map_bonus lexer_bonus parse_bonus parse_sprites_bonus main_bon
 	keys_bonus input_handler_bonus mouse_handler_bonus sprites_bonus \
 	perform_dda_bonus check_hit_sliding_door_bonus minimap_bonus \
 	minimap_raycaster_bonus check_shot_bonus enemy_bonus draw_hud_and_more_bonus \
-	collect_collectibles_bonus draw_hands_bonus
+	collect_collectibles_bonus draw_hands_bonus draw_game_status_bonus
 DEPS_BONUS = cub3d_bonus.h
 DEPS_PATH_BONUS = bonus/includes/
 

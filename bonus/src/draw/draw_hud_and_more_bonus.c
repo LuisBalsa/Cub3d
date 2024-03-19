@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 20:00:15 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 01:29:49 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ static void	draw_energy_bar(t_game *game, int index, int color, t_vi2d i_pos)
 	t_vi2d	pos;
 	int		i;
 	int		j;
+	int		last_limit;
 
 	pos = (t_vi2d){i_pos.x + index * (ENERGY_BAR_W + ENERGY_BAR_SP),
 		i_pos.y};
-	i = -1;
-	while (++i < ENERGY_BAR_H)
+	last_limit = ENERGY_BAR_H / 3 * (index == ENERGY - 1);
+	i = -1 + last_limit;
+	while (++i < ENERGY_BAR_H - last_limit)
 	{
 		j = -1;
 		while (++j < ENERGY_BAR_W)
@@ -88,22 +90,25 @@ static void	draw_hit_blur(t_img *img, t_img *screen)
 	}
 }
 
-void	draw_hud_and_more(t_game *game)
+void	draw_hud_and_more(t_game *g)
 {
 	int		bar_index;
 	t_vi2d	initial_pos;
 
-	draw_hands(game);
-	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, game->screen.height
+	draw_hands(g);
+	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, g->screen.height
 		- ENERGY_BAR_H - ENERGY_BAR_OFFSET};
 	bar_index = -1;
-	while (++bar_index < ENERGY - game->pl.hits_taken)
-		draw_energy_bar(game, bar_index, 0x00FF00, initial_pos);
+	while (++bar_index < ENERGY - g->pl.hits_taken)
+		draw_energy_bar(g, bar_index, 0x00FF00, initial_pos);
 	bar_index -= 1;
 	while (++bar_index < ENERGY)
-		draw_energy_bar(game, bar_index, 0xFF0000, initial_pos);
-	if (game->collectibles_found)
-		draw_keys(game);
-	if (game->pl.hited && rand() % 2)
-		draw_hit_blur(&game->img[INDEX_HIT_IMAGE], &game->screen);
+		draw_energy_bar(g, bar_index, 0xFF0000, initial_pos);
+	if (g->collectibles_found)
+		draw_keys(g);
+	if (g->pl.hited && rand() % 2)
+		draw_hit_blur(&g->img[INDEX_HIT_IMAGE], &g->screen);
+	if (g->pl.died
+		|| (g->nbr_collectibles == g->collected && g->collectibles_found))
+		draw_game_status(g);
 }

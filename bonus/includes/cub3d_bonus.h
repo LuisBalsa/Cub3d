@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 18:43:44 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:56:06 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 37
+# define NBR_TEXTURES 39
 
 # define VALID_CHARS " 01236789NSEWecbtkhf\n"
 # define SPAWN_CHARS "NSEW"
@@ -63,6 +63,8 @@
 # define HANDS_IMAGE "hands.xpm"
 # define HANDS1_IMAGE "hands1.xpm"
 # define HANDS2_IMAGE "hands2.xpm"
+# define GAME_OVER_IMAGE "game_over.xpm"
+# define YOU_WIN_IMAGE "you_win.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
 # define INDEX_FIRE_IMAGE 11
@@ -70,6 +72,8 @@
 # define INDEX_ENEMY_IMAGE 18
 # define INDEX_HIT_IMAGE 33
 # define INDEX_HANDS_IMAGE 34
+# define INDEX_GAME_OVER_IMAGE 37
+# define INDEX_YOU_WIN_IMAGE 38
 # define I_W_ASCII_DIFF 40
 
 # define FLOOR '0'
@@ -104,7 +108,7 @@
 # define MINIMAP_HITS 600
 
 # define ENERGY_BAR_W 10
-# define ENERGY_BAR_H 30
+# define ENERGY_BAR_H 50
 # define ENERGY_BAR_OFFSET 50
 # define ENERGY_BAR_SP 5
 # define ENERGY 10
@@ -260,6 +264,7 @@ typedef struct s_player
 	t_key_state	key;
 	int			hits_taken;
 	double		hited;
+	bool		died;
 	bool		fire;
 }	t_player;
 
@@ -328,5 +333,6 @@ void	animate_enemy(t_game *game, t_sprite *sprite);
 
 void	draw_hud_and_more(t_game *game);
 void	draw_hands(t_game *game);
+void	draw_game_status(t_game *game);
 
 #endif

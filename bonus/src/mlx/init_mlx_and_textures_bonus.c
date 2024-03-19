@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 18:34:45 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 00:56:26 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	load_theme_textures(t_game *game, char *theme_d)
 	game->texture[INDEX_HANDS_IMAGE] = ft_strjoin(theme_d, HANDS_IMAGE);
 	game->texture[INDEX_HANDS_IMAGE + 1] = ft_strjoin(theme_d, HANDS1_IMAGE);
 	game->texture[INDEX_HANDS_IMAGE + 2] = ft_strjoin(theme_d, HANDS1_IMAGE);
+	game->texture[INDEX_GAME_OVER_IMAGE] = ft_strjoin(theme_d, GAME_OVER_IMAGE);
+	game->texture[INDEX_YOU_WIN_IMAGE] = ft_strjoin(theme_d, YOU_WIN_IMAGE);
 }
 
 static void	load_textures(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 18:06:14 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 01:31:13 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ static void	enemy_shooting(t_game *g, t_sprite *enemy)
 		{
 			g->pl.hited = true;
 			g->pl.hits_taken++;
+			if (g->pl.hits_taken >= ENERGY)
+				g->pl.died = true;
 		}
 		else if (enemy->anim_index == 0
 			&& g->minimap.map_hit[(int)enemy->pos.y][(int)enemy->pos.x] != 'e')
