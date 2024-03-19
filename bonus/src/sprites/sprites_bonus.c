@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 19:54:57 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:15:51 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	sprites(t_game *game)
 
 	if (!game->sprites)
 		return ;
+	if (ft_strchr("kh", game->map[(int)game->pl.pos.y][(int)game->pl.pos.x]))
+		ft_lstiter(game->sprites, &collect_collectibles);
 	set_animation(game);
 	set_sprites_distances_and_anim(game->sprites, game->pl.pos);
 	sort_sprites_by_distance(&game->sprites);

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 18:36:59 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:16:19 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,6 @@ static void	raycasting_sliding_door(t_game *game, t_player *pl, int x)
 		game->wall_dist[x] = pl->hit_dist;
 }
 
-static void	check_collectables(t_game *game)
-{
-	char		*collectibles;
-
-	if (!game->collectibles_found)
-		return ;
-	if (ft_strchr("kh", game->map[(int)game->pl.pos.y][(int)game->pl.pos.x]))
-		ft_lstiter(game->sprites, &collect_collectibles);
-	if (game->nbr_collectibles == game->collected)
-	{
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
-			"Congratulations! You collected all possible keys!");
-	}
-	else
-	{
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
-			"Collect the remaining possible keys:");
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 450, 50, 0x000000,
-			collectibles = ft_itoa(game->nbr_collectibles - game->collected));
-		free(collectibles);
-	}
-}
-
 int	raycasting(t_game *game)
 {
 	int	x;
@@ -117,6 +94,5 @@ int	raycasting(t_game *game)
 	anim_door_hit_blur(game);
 	draw_hud_and_more(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
-	check_collectables(game);
 	return (0);
 }
