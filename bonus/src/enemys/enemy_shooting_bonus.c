@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 10:52:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/20 14:57:17 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 22:38:52 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	enemy_shooting(t_game *g, t_sprite *enemy)
 			if (g->pl.hits_taken >= ENERGY)
 				g->pl.died = true;
 		}
-		else if (enemy->anim_index == 0 && (rand() % 30 < enemy->dist))
+		else if (enemy->anim_index == 0 && (rand() % 50 < enemy->dist))
 			enemy->mode = ENEMY_WALKING;
 	}
 }
