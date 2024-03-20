@@ -6,70 +6,35 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:40:49 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 01:06:38 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:27:57 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-/* static void	print_sprites(t_game *game) //testes
+static void	check_hited_tile(t_game *game)
 {
-	int	i;
+	t_vf2d	map_pos;
 
-	i = -1;
-	while (++i < game->num_sprites)
+	map_pos = game->pl.pos;
+	while (!ft_strchr("e 126789", game->map[(int)map_pos.y][(int)map_pos.x])
+			|| !game->map[(int)map_pos.y][(int)map_pos.x])
 	{
-		printf("\nSprite %d pos x: %f\n", i, game->sprite[i].pos.x);
-		printf("Sprite %d pos y: %f\n", i, game->sprite[i].pos.y);
-		printf("Sprite %d img index: %d\n", i, game->sprite[i].img_index);
-		printf("Sprite %d dist: %f\n", i, game->sprite[i].dist);
-		printf("Sprite %d transform y: %f\n", i, game->sprite[i].transform.y);
-		printf("Sprite %d screen x: %d\n", i, game->sprite[i].screen_x);
-		printf("Sprite %d height: %d\n", i, game->sprite[i].height);
-		printf("Sprite %d draw start x: %d\n", i, game->sprite[i].draw_start.x);
-		if (game->sprite[i].draw_start.x < game->screen.width)
-			printf("Wall dist x: %f\n", game->wall_dist[game->sprite[i].draw_start.x]);
-		printf("Sprite %d draw start y: %d\n", i, game->sprite[i].draw_start.y);
+		map_pos.x += game->pl.dir.x;
+		map_pos.y += game->pl.dir.y;
 	}
-} */
+	game->enemy.hited = (t_vi2d){(int)map_pos.x, (int)map_pos.y};
+}
 
-/* static void	print_debug(t_game *game) //testes
+static void	shot(t_game *game)
 {
-	printf("Player pos x: %f\n", game->pl.pos.x);
-	printf("Player pos y: %f\n", game->pl.pos.y);
-	printf("Player dir x: %f\n", game->pl.dir.x);
-	printf("Player dir y: %f\n", game->pl.dir.y);
-	printf("Player plane x: %f\n", game->pl.plane.x);
-	printf("Player plane y: %f\n", game->pl.plane.y);
-	printf("Player pitch: %d\n", game->pl.pitch);
-	printf("Player img index: %d\n", game->pl.img_index);
-	printf("Player diagonal dist x: %f\n", game->pl.diagonal_dist.x);
-	printf("Player diagonal dist y: %f\n", game->pl.diagonal_dist.y);
-	printf("Player delta dist x: %f\n", game->pl.delta_dist.x);
-	printf("Player delta dist y: %f\n", game->pl.delta_dist.y);
-	printf("Player map check x: %d\n", game->pl.map_check.x);
-	printf("Player map check y: %d\n", game->pl.map_check.y);
-	printf("Player step x: %d\n", game->pl.step.x);
-	printf("Player step y: %d\n", game->pl.step.y);
-	printf("Player hit dist: %f\n", game->pl.hit_dist);
-	printf("Player hit x: %d\n", game->pl.hit_x);
-	printf("Player draw start: %d\n", game->pl.draw.start);
-	printf("Player draw end: %d\n", game->pl.draw.end);
-	printf("Player draw step: %f\n", game->pl.draw.step);
-	printf("Player draw pos: %f\n", game->pl.draw.pos);
-	printf("Player mouse pos x: %d\n", game->mouse.pos.x);
-	printf("Player mouse pos y: %d\n", game->mouse.pos.y);
-	printf("Player mouse prev pos x: %d\n", game->mouse.prev_pos.x);
-	printf("Player mouse prev pos y: %d\n", game->mouse.prev_pos.y);
-	printf("Player key esc: %d\n", game->key.esc);
-	printf("Frame time: %f\n", game->time.frame);
-	printf("Game anim door i: %f\n", game->anim_door_i);
-	printf("Game anim door dir: %d\n", game->anim_door_dir);
-	printf("Game anim door x: %d\n", game->anim_door.x);
-	printf("Game anim door y: %d\n", game->anim_door.y);
-	printf("Game anim door: %c\n", game->pl.map[game->anim_door.y][game->anim_door.x]);
-//	print_sprites(game);
-} */
+	if (game->pl.shots_fired >= BULLET_QTY)
+		return ;
+	game->pl.fire = true;
+	game->anim_index = 0;
+	game->pl.shots_fired++;
+	check_hited_tile(game);
+}
 
 static void	door(t_game *game)
 {
@@ -116,11 +81,6 @@ int	key_release(int keycode, t_game *game)
 		game->key.up = 0;
 	else if (keycode == DOWN)
 		game->key.down = 0;
-	else if (keycode == P) //testes
-	{
-		game->pl.hited = 1;
-		game->pl.hits_taken += 1;
-	}
 	else if (keycode == ESC)
 		game->key.esc += 1;
 	return (0);
@@ -139,7 +99,7 @@ int	key_press(int keycode, t_game *game)
 	else if (keycode == E)
 		door(game);
 	else if (keycode == SPACEBAR)
-		check_shot(game);
+		shot(game);
 	else if (keycode == LEFT)
 		game->key.left = 1;
 	else if (keycode == RIGHT)

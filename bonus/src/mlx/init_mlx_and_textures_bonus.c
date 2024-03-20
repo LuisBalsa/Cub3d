@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/19 00:56:26 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:07:41 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ static void	load_theme_textures(t_game *game, char *theme_d)
 	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strjoin(theme_d, TABLE_IMAGE);
 	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strjoin(theme_d, KEY_IMAGE);
 	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strjoin(theme_d, HEALTH_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strjoin(theme_d, FIRE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strjoin(theme_d, FIRE1_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strjoin(theme_d, FIRE2_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strjoin(theme_d, BULLET_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strjoin(theme_d, FIRE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strjoin(theme_d, FIRE1_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 8] = ft_strjoin(theme_d, FIRE2_IMAGE);
 	game->texture[INDEX_WALL_IMAGE] = ft_strjoin(theme_d, WALL1_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 1] = ft_strjoin(theme_d, WALL2_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 2] = ft_strjoin(theme_d, WALL3_IMAGE);
@@ -53,6 +54,7 @@ static void	load_theme_textures(t_game *game, char *theme_d)
 	game->texture[INDEX_HANDS_IMAGE + 2] = ft_strjoin(theme_d, HANDS1_IMAGE);
 	game->texture[INDEX_GAME_OVER_IMAGE] = ft_strjoin(theme_d, GAME_OVER_IMAGE);
 	game->texture[INDEX_YOU_WIN_IMAGE] = ft_strjoin(theme_d, YOU_WIN_IMAGE);
+	game->texture[INDEX_BULLET1_IMAGE] = ft_strjoin(theme_d, BULLET1_IMAGE);
 }
 
 static void	load_textures(t_game *game)

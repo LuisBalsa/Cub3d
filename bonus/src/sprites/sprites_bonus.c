@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/19 14:15:51 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:33:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	sort_sprites_by_distance(t_list **sprites)
 	}
 }
 
-static void	calculate_sprites(t_sprite *sprite, t_player pl)
+static void	sprite_raycasting(t_sprite *sprite, t_player pl)
 {
 	t_vf2d	sp;
 	double	inv_det;
@@ -99,8 +99,7 @@ void	sprites(t_game *game)
 
 	if (!game->sprites)
 		return ;
-	if (ft_strchr("kh", game->map[(int)game->pl.pos.y][(int)game->pl.pos.x]))
-		ft_lstiter(game->sprites, &collect_collectibles);
+	ft_lstiter(game->sprites, &check_sprite_status);
 	set_animation(game);
 	set_sprites_distances_and_anim(game->sprites, game->pl.pos);
 	sort_sprites_by_distance(&game->sprites);
@@ -108,11 +107,11 @@ void	sprites(t_game *game)
 	while (tmp)
 	{
 		if (((t_sprite *)tmp->content)->visible
-			&& ((t_sprite *)tmp->content)->dist > 0.5)
+			&& ((t_sprite *)tmp->content)->dist > 0.3)
 		{
-			animate_enemy(game, tmp->content);
-			calculate_sprites(tmp->content, game->pl);
+			sprite_raycasting(tmp->content, game->pl);
 			draw_sprites(game, *(t_sprite *)tmp->content, game->pl.pitch);
+			animate_enemy(game, tmp->content);
 		}
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 16:26:09 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/18 02:16:54 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:52:10 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ static int	hit_minimap(t_player *pl, t_minimap *minimap)
 		pl->g->map[pl->map_check.y][pl->map_check.x];
 	minimap->map_hit[pl->map_check.y][pl->map_check.x] = \
 		pl->g->map[pl->map_check.y][pl->map_check.x];
-	if (pl->g->map[pl->map_check.y][pl->map_check.x] == 'e')
-	{
-		pl->g->enemy.hited = (t_vf2d){pl->map_check.x, pl->map_check.y};
-		ft_lstiter(pl->g->sprites, set_enemy_as_animated);
-	}
 	if (!ft_strchr("0126789", pl->g->map[pl->map_check.y][pl->map_check.x]))
 		return (0);
 	if (ft_strchr("126789", pl->g->map[pl->map_check.y][pl->map_check.x]))

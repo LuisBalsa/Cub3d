@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 22:32:12 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/19 01:29:49 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:33:06 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	draw_hud_and_more(t_game *g)
 	t_vi2d	initial_pos;
 
 	draw_hands(g);
+	draw_bullets(g);
 	initial_pos = (t_vi2d){ENERGY_BAR_OFFSET, g->screen.height
 		- ENERGY_BAR_H - ENERGY_BAR_OFFSET};
 	bar_index = -1;
