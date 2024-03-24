@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 10:52:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/20 22:38:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/24 10:55:27 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	valid_shot(t_game *g, t_sprite *enemy)
 
 void	enemy_shooting(t_game *g, t_sprite *enemy)
 {
+	enemy->img_index = INDEX_ENEMY_IMAGE + ENEMY_SHOOTING;
 	if (clock() - enemy->anim_time > ANIM_DELAY)
 	{
 		enemy->anim_time = clock();
@@ -51,7 +52,7 @@ void	enemy_shooting(t_game *g, t_sprite *enemy)
 			if (g->pl.hits_taken >= ENERGY)
 				g->pl.died = true;
 		}
-		else if (enemy->anim_index == 0 && (rand() % 50 < enemy->dist))
+		else if (enemy->anim_index == 0 && (rand() % 250 < enemy->dist))
 			enemy->mode = ENEMY_WALKING;
 	}
 }
