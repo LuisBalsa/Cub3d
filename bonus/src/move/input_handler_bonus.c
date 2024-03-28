@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:51:14 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 15:26:20 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 00:48:23 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 static void	linear_movement(t_player *pl, double time, int direction)
 {
 	t_vf2d	new_pos;
+	t_vf2d	test;
+	t_vf2d	tolerance;
 	char	cell;
 
 	new_pos.x = pl->pos.x + pl->dir.x * time * MV_SPD * direction;
+	tolerance.x = TOLERANCE * pl->dir.x * direction;
 	new_pos.y = pl->pos.y + pl->dir.y * time * MV_SPD * direction;
-	if (new_pos.y < 0 || new_pos.y >= pl->g->map_height)
-		new_pos.y = pl->pos.y;
-	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
-		new_pos.x = pl->pos.x;
-	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
+	tolerance.y = TOLERANCE * pl->dir.y * direction;
+	test = (t_vf2d){new_pos.x + tolerance.x, new_pos.y + tolerance.y};
+	if (test.y < 0 || test.y >= pl->g->map_height)
+		return ;
+	if (test.x < 0 || test.x >= (int)ft_strlen(pl->map[(int)test.y]))
+		return ;
+	cell = pl->map[(int)(test.y)][(int)pl->pos.x];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
-	cell = pl->map[(int)pl->pos.y][(int)new_pos.x];
+	cell = pl->map[(int)pl->pos.y][(int)(test.x)];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.x = new_pos.x;
 }
@@ -34,18 +39,23 @@ static void	linear_movement(t_player *pl, double time, int direction)
 static void	strafe_movement(t_player *pl, double time, int direction)
 {
 	t_vf2d	new_pos;
+	t_vf2d	test;
+	t_vf2d	tolerance;
 	char	cell;
 
 	new_pos.x = pl->pos.x + pl->plane.x * time * MV_SPD * direction;
+	tolerance.x = TOLERANCE * pl->plane.x * direction;
 	new_pos.y = pl->pos.y + pl->plane.y * time * MV_SPD * direction;
-	if (new_pos.y < 0 || new_pos.y >= pl->g->map_height)
-		new_pos.y = pl->pos.y;
-	if (new_pos.x < 0 || new_pos.x >= (int)ft_strlen(pl->map[(int)new_pos.y]))
-		new_pos.x = pl->pos.x;
-	cell = pl->map[(int)new_pos.y][(int)pl->pos.x];
+	tolerance.y = TOLERANCE * pl->plane.y * direction;
+	test = (t_vf2d){new_pos.x + tolerance.x, new_pos.y + tolerance.y};
+	if (test.y < 0 || test.y >= pl->g->map_height)
+		return ;
+	if (test.x < 0 || test.x >= (int)ft_strlen(pl->map[(int)test.y]))
+		return ;
+	cell = pl->map[(int)test.y][(int)pl->pos.x];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.y = new_pos.y;
-	cell = pl->map[(int)pl->pos.y][(int)new_pos.x];
+	cell = pl->map[(int)pl->pos.y][(int)test.x];
 	if (ft_strchr(WALKABLE, cell))
 		pl->pos.x = new_pos.x;
 }

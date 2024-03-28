@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:43:08 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 11:39:08 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:59:04 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	assign_theme_directory(t_game *game, char **tokens)
 		return (error_exit(game, "Theme directory duplicated"));
 	if (!tokens[1] || tokens[2])
 		return (error_exit(game, "Invalid theme directory"));
-//	close(check_open(game, tokens[1], ".xpm"));
 	game->theme_directory = ft_strdup(tokens[1]);
 	if (!game->theme_directory)
 		return (error_exit(game, "Failed to assign theme directory"));

@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 15:26:53 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 11:47:12 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 19:12:24 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	free_game(t_game *game)
 			free(game->texture[i]);
 	if (game->theme_directory)
 		free(game->theme_directory);
+	if (game->sprites)
+		ft_lstclear(&game->sprites, &free);
 	if (game->map)
 		ft_free_array(game->map);
 	if (game->minimap.map)
@@ -70,6 +72,7 @@ int	main(int argc, char **argv)
 	errno = 1;
 	if (argc != 2)
 		return (error_exit(NULL, "Invalid number of arguments"));
+	srand(time(NULL));
 	parse_file(&game, argv[1]);
 	init_mlx_and_textures(&game);
 	raycasting(&game);

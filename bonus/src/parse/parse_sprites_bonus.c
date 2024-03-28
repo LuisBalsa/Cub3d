@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:19:07 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 21:10:33 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:35:44 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,29 @@ void	sprites_collectable_count(char **map, int *c, int x, int y)
 
 void	parse_sprites(t_game *game, int x, int y)
 {
-	char	*sprites;
-	int		i;
+	t_list		*new;
+	t_sprite	*sprite;
+	char		*sprites;
+	int			i;
 
-	if (game->num_sprites == NBR_SPRITES - 1)
-		error_exit(game, "Too many sprites");
-	game->sprite[game->num_sprites].pos = (t_vf2d){x + 0.5, y + 0.5};
 	sprites = ft_strdup(SPRITE_CHARS);
 	if (!sprites)
 		error_exit(game, "Malloc failed");
+	sprite = ft_calloc(1, sizeof(t_sprite));
+	if (!sprite)
+		error_exit(game, "Malloc failed");
+	sprite->pos = (t_vf2d){x + 0.5, y + 0.5};
 	i = -1;
 	while (sprites[++i])
 		if (game->map[y][x] == sprites[i])
-			game->sprite[game->num_sprites].img_index = i + INDEX_SPRITE_IMAGE;
+			sprite->img_index = i + INDEX_SPRITE_IMAGE;
 	free(sprites);
-	game->sprite[game->num_sprites].anim = (game->map[y][x] == 'f');
-	game->num_sprites++;
+	if (game->map[y][x] == 'e')
+		sprite->img_index = INDEX_ENEMY_IMAGE;
+	sprite->visible = true;
+	sprite->g = game;
+	new = ft_lstnew(sprite);
+	if (!new)
+		error_exit(game, "Malloc failed");
+	ft_lstadd_back(&game->sprites, new);
 }

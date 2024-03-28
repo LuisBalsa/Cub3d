@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 20:05:16 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/18 19:58:23 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ static int	validate_map_and_set_spawn(t_game *game, int x, int y)
 					|| x >= (int)ft_strlen(game->map[y + 1])
 					|| game->map[y][x - 1] == ' ' || game->map[y][x + 1] == ' '
 					|| game->map[y - 1][x] == ' ' || game->map[y + 1][x] == ' ')
-					{
-						printf("x: %d, y: %d\n", x, y);
-						error_exit(game, "Map is not closed");
-					}
+					error_exit(game, "Map is not closed");
 			if (ft_strchr(SPAWN_CHARS, game->map[y][x]))
 				set_spawn(game, game->map[y][x], x, y);
 			else if (game->map[y][x] == DOOR &&
@@ -118,7 +115,7 @@ void	parse_map(t_game *game, int fd)
 	game->minimap.map = ft_split(tmp_map, '\n');
 	game->minimap.map_hit = ft_split(tmp_map, '\n');
 	free(tmp_map);
-	if (!game->map)
+	if (!game->map || !game->minimap.map || !game->minimap.map_hit)
 		error_exit(game, "Failed to allocate memory");
 	game->map_height = validate_map_and_set_spawn(game, -1, -1);
 	if (game->pl.g == NULL)

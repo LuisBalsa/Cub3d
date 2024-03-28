@@ -6,28 +6,55 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:34:06 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 17:48:13 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 11:07:41 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
+static void	load_enemy_textures(t_game *game, char *theme_d)
+{
+	game->texture[INDEX_ENEMY_IMAGE] = ft_strjoin(theme_d, ENEMY_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 1] = ft_strjoin(theme_d, ENEMY1_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 2] = ft_strjoin(theme_d, ENEMY2_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 3] = ft_strjoin(theme_d, ENEMY3_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 4] = ft_strjoin(theme_d, ENEMY4_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 5] = ft_strjoin(theme_d, ENEMY5_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 6] = ft_strjoin(theme_d, ENEMY6_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 7] = ft_strjoin(theme_d, ENEMY7_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 8] = ft_strjoin(theme_d, ENEMY8_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 9] = ft_strjoin(theme_d, ENEMY9_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 10] = ft_strjoin(theme_d, ENEMY10_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 11] = ft_strjoin(theme_d, ENEMY11_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 12] = ft_strjoin(theme_d, ENEMY12_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 13] = ft_strjoin(theme_d, ENEMY13_IMAGE);
+	game->texture[INDEX_ENEMY_IMAGE + 14] = ft_strjoin(theme_d, ENEMY14_IMAGE);
+}
+
 static void	load_theme_textures(t_game *game, char *theme_d)
 {
 	game->texture[INDEX_DOOR_IMAGE] = ft_strjoin(theme_d, DOOR_IMAGE);
 	game->texture[INDEX_DOOR_IMAGE + 1] = ft_strjoin(theme_d, DOOR_FRAME);
-	game->texture[INDEX_SPRITE_IMAGE] = ft_strjoin(theme_d, ENEMY_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 1] = ft_strjoin(theme_d, CAGE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strjoin(theme_d, BARREL_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strjoin(theme_d, TABLE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strjoin(theme_d, KEY_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strjoin(theme_d, FIRE_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strjoin(theme_d, FIRE1_IMAGE);
-	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strjoin(theme_d, FIRE2_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE] = ft_strjoin(theme_d, CAGE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 1] = ft_strjoin(theme_d, BARREL_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 2] = ft_strjoin(theme_d, TABLE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 3] = ft_strjoin(theme_d, KEY_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 4] = ft_strjoin(theme_d, HEALTH_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 5] = ft_strjoin(theme_d, BULLET_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 6] = ft_strjoin(theme_d, FIRE_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 7] = ft_strjoin(theme_d, FIRE1_IMAGE);
+	game->texture[INDEX_SPRITE_IMAGE + 8] = ft_strjoin(theme_d, FIRE2_IMAGE);
 	game->texture[INDEX_WALL_IMAGE] = ft_strjoin(theme_d, WALL1_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 1] = ft_strjoin(theme_d, WALL2_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 2] = ft_strjoin(theme_d, WALL3_IMAGE);
 	game->texture[INDEX_WALL_IMAGE + 3] = ft_strjoin(theme_d, WALL4_IMAGE);
+	game->texture[INDEX_HIT_IMAGE] = ft_strjoin(theme_d, HIT_IMAGE);
+	game->texture[INDEX_HANDS_IMAGE] = ft_strjoin(theme_d, HANDS_IMAGE);
+	game->texture[INDEX_HANDS_IMAGE + 1] = ft_strjoin(theme_d, HANDS1_IMAGE);
+	game->texture[INDEX_HANDS_IMAGE + 2] = ft_strjoin(theme_d, HANDS1_IMAGE);
+	game->texture[INDEX_GAME_OVER_IMAGE] = ft_strjoin(theme_d, GAME_OVER_IMAGE);
+	game->texture[INDEX_YOU_WIN_IMAGE] = ft_strjoin(theme_d, YOU_WIN_IMAGE);
+	game->texture[INDEX_BULLET1_IMAGE] = ft_strjoin(theme_d, BULLET1_IMAGE);
 }
 
 static void	load_textures(t_game *game)
@@ -35,6 +62,7 @@ static void	load_textures(t_game *game)
 	int		i;
 
 	load_theme_textures(game, game->theme_directory);
+	load_enemy_textures(game, game->theme_directory);
 	i = -1;
 	while (++i < NBR_TEXTURES)
 	{

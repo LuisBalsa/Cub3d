@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 22:58:52 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:03:11 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,37 @@
 
 # define GAME_NAME "Cub3D"
 # define NBR_PARAMS 7
-# define NBR_TEXTURES 18
-# define NBR_SPRITES 55
+# define NBR_TEXTURES 41
 
-# define VALID_CHARS " 01236789NSEWecbtkf\n"
+# define VALID_CHARS " 01236789NSEWecbtkhyf\n"
 # define SPAWN_CHARS "NSEW"
-# define INSIDE_CHARS "023NSEWecbtkf"
-# define SPRITE_CHARS "ecbtkf"
+# define INSIDE_CHARS "023NSEWecbtkhyf"
+# define SPRITE_CHARS "cbtkhyfe"
 
 # define DOOR_IMAGE "door.xpm"
 # define DOOR_FRAME "door_frame.xpm"
 # define ENEMY_IMAGE "enemy.xpm"
+# define ENEMY1_IMAGE "enemy1.xpm"
+# define ENEMY2_IMAGE "enemy2.xpm"
+# define ENEMY3_IMAGE "enemy3.xpm"
+# define ENEMY4_IMAGE "enemy4.xpm"
+# define ENEMY5_IMAGE "enemy5.xpm"
+# define ENEMY6_IMAGE "enemy6.xpm"
+# define ENEMY7_IMAGE "enemy7.xpm"
+# define ENEMY8_IMAGE "enemy8.xpm"
+# define ENEMY9_IMAGE "enemy9.xpm"
+# define ENEMY10_IMAGE "enemy10.xpm"
+# define ENEMY11_IMAGE "enemy11.xpm"
+# define ENEMY12_IMAGE "enemy12.xpm"
+# define ENEMY13_IMAGE "enemy13.xpm"
+# define ENEMY14_IMAGE "enemy14.xpm"
 # define CAGE_IMAGE "cage.xpm"
 # define BARREL_IMAGE "barrel.xpm"
 # define TABLE_IMAGE "table.xpm"
 # define KEY_IMAGE "key.xpm"
+# define HEALTH_IMAGE "health.xpm"
+# define BULLET_IMAGE "bullet.xpm"
+# define BULLET1_IMAGE "bullet1.xpm"
 # define FIRE_IMAGE "fire.xpm"
 # define FIRE1_IMAGE "fire1.xpm"
 # define FIRE2_IMAGE "fire2.xpm"
@@ -45,10 +61,24 @@
 # define WALL2_IMAGE "wall2.xpm"
 # define WALL3_IMAGE "wall3.xpm"
 # define WALL4_IMAGE "wall4.xpm"
+# define HIT_IMAGE "hit.xpm"
+# define HANDS_IMAGE "hands.xpm"
+# define HANDS1_IMAGE "hands1.xpm"
+# define HANDS2_IMAGE "hands2.xpm"
+# define GAME_OVER_IMAGE "game_over.xpm"
+# define YOU_WIN_IMAGE "you_win.xpm"
 # define INDEX_DOOR_IMAGE 4
 # define INDEX_SPRITE_IMAGE 6
-# define INDEX_WALL_IMAGE 14
-# define I_W_ASCII_DIFF 40
+# define INDEX_BULLET_IMAGE 11
+# define INDEX_FIRE_IMAGE 12
+# define INDEX_WALL_IMAGE 15
+# define INDEX_ENEMY_IMAGE 19
+# define INDEX_HIT_IMAGE 34
+# define INDEX_HANDS_IMAGE 35
+# define INDEX_GAME_OVER_IMAGE 38
+# define INDEX_YOU_WIN_IMAGE 39
+# define INDEX_BULLET1_IMAGE 40
+# define I_W_ASCII_DIFF 39
 
 # define FLOOR '0'
 # define WALL '1'
@@ -56,8 +86,8 @@
 # define OPEN_DOOR '3'
 # define OPENING_DOOR '4'
 # define CLOSING_DOOR '5'
-# define WALKABLE "03k"
-# define TRANSPOSABLE "023k"
+# define WALKABLE "03khy"
+# define TRANSPOSABLE "023ekhy"
 # define FOV 0.66
 # define PITCH 300
 # define PITCH_SPD 1000
@@ -67,17 +97,37 @@
 # define TEXTURE_HEIGHT 64
 
 # define MV_SPD 3.5
-# define R_SPD 3.1
+# define R_SPD 2.5
 # define R_SPD_M 0.1
+# define TOLERANCE 0.5
 # define ANIM_DELAY 100000
 # define ANIM_DOOR_DELAY 1000
 # define DOOR_SPD 200
+# define HIT_BLUR_SPD 1
 
 # define MINIMAP_TILE_S 5
 # define MINIMAP_W 43
 # define MINIMAP_H 31
 # define MINIMAP_OFFSET 1
 # define MINIMAP_HITS 600
+
+# define ENERGY_BAR_W 10
+# define ENERGY_BAR_H 50
+# define ENERGY_BAR_OFFSET 50
+# define ENERGY_BAR_SP 5
+# define ENERGY 10
+
+# define KEYS_SIZE 150
+# define KEYS_OFFSET 130
+# define KEYS_DIST 30
+
+# define BULLET_SCALE 0.2
+# define BULLET_OFFSET 50
+# define BULLET_QTY 20
+
+# define ENEMY_SHOOTING 0
+# define ENEMY_WALKING 5
+# define ENEMY_DYING 10
 
 typedef struct s_game	t_game;
 
@@ -102,6 +152,7 @@ typedef enum e_key
 	S = 115,
 	D = 100,
 	E = 101,
+	SPACEBAR = 32,
 	P = 112,
 	ESC = 65307,
 	UP = 65362,
@@ -176,6 +227,11 @@ typedef struct s_minimap
 	char		**map_hit;
 }	t_minimap;
 
+typedef struct s_enemy
+{
+	t_vi2d		hited;
+}	t_enemy;
+
 typedef struct s_sprite
 {
 	double	dist;
@@ -188,7 +244,12 @@ typedef struct s_sprite
 	t_vi2d	draw_end;
 	t_vi2d	tex;
 	int		img_index;
-	bool	anim;
+	int		anim_index;
+	double	anim_time;
+	bool	visible;
+	bool	enemy_animated;
+	int		mode;
+	t_game	*g;
 }	t_sprite;
 
 typedef struct s_player
@@ -209,6 +270,11 @@ typedef struct s_player
 	int			hit_x;
 	t_draw		draw;
 	t_key_state	key;
+	int			hits_taken;
+	int			shots_fired;
+	double		hited;
+	bool		died;
+	bool		fire;
 }	t_player;
 
 typedef struct s_game
@@ -219,8 +285,7 @@ typedef struct s_game
 	char		*texture[NBR_TEXTURES];
 	char		*theme_directory;
 	t_img		img[NBR_TEXTURES];
-	t_sprite	sprite[NBR_SPRITES];
-	int			num_sprites;
+	t_list		*sprites;
 	t_img		screen;
 	double		wall_dist[SCREEN_WIDTH];
 	int			color[2];
@@ -237,7 +302,9 @@ typedef struct s_game
 	t_vi2d		anim_door;
 	t_minimap	minimap;
 	int			nbr_collectibles;
+	int			collected;
 	bool		collectibles_found;
+	t_enemy		enemy;
 }	t_game;
 
 int		error_exit(t_game *game, char *message);
@@ -254,6 +321,7 @@ void	perform_dda_sliding_door(t_player *pl);
 void	check_hit(t_player *pl, int *side, t_vi2d check);
 void	check_hit_sliding_door(t_player *pl, int *side, t_vi2d check);
 void	draw_walls_and_background(t_game *game, t_player *pl, int x);
+int		my_pixel_get(t_img *mlx, int x, int y);
 void	my_pixel_put(t_img *mlx, int x, int y, int color);
 void	sprites(t_game *game);
 void	draw_sprites(t_game *game, t_sprite sprite, int pitch);
@@ -266,5 +334,15 @@ void	minimap(t_game *game);
 void	minimap_raycaster(t_game *game);
 void	init_map(char **map);
 void	sprites_collectable_count(char **map, int *count, int x, int y);
+
+void	animate_enemy(t_game *game, t_sprite *sprite);
+void	enemy_shooting(t_game *g, t_sprite *enemy);
+
+void	check_sprite_status(void *sp);
+
+void	draw_hud_and_more(t_game *game);
+void	draw_hands(t_game *game);
+void	draw_game_status(t_game *game);
+void	draw_bullets(t_game *game);
 
 #endif

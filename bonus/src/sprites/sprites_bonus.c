@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:14:10 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/13 20:51:05 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 17:33:33 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,53 @@ static void	set_animation(t_game *game)
 		game->anim_time = clock();
 		game->anim_index++;
 		if (game->anim_index == 3)
-			game->anim_index = 0;
-	}
-}
-
-static void	set_sprites_distances(t_sprite *sprite, t_vf2d pos, int nbr)
-{
-	int	i;
-
-	i = -1;
-	while (++i <= nbr)
-	{
-		sprite->dist = (pos.x - sprite->pos.x) * \
-			(pos.x - sprite->pos.x) + \
-			(pos.y - sprite->pos.y) * \
-			(pos.y - sprite->pos.y);
-		sprite++;
-	}
-}
-
-static void	sort_sprites_by_distance(t_sprite *sprite, int nbr)
-{
-	int			i;
-	t_sprite	tmp;
-
-	i = -1;
-	while (++i < nbr - 1)
-	{
-		if (sprite[i].dist < sprite[i + 1].dist)
 		{
-			tmp = sprite[i];
-			sprite[i] = sprite[i + 1];
-			sprite[i + 1] = tmp;
-			i = -1;
+			game->anim_index = 0;
+			game->pl.fire = false;
 		}
 	}
 }
 
-static void	calculate_sprites(t_sprite *sprite, t_player pl)
+static void	set_sprites_distances_and_anim(t_list *sprites, t_vf2d pos)
+{
+	t_sprite	*sprite;
+	t_list		*tmp;
+
+	tmp = sprites;
+	while (tmp)
+	{
+		sprite = tmp->content;
+		sprite->dist = (pos.x - sprite->pos.x) * (pos.x - sprite->pos.x) + \
+			(pos.y - sprite->pos.y) * (pos.y - sprite->pos.y);
+		if (sprite->img_index == INDEX_FIRE_IMAGE)
+			sprite->anim_index = sprite->g->anim_index;
+		tmp = tmp->next;
+	}
+}
+
+static void	sort_sprites_by_distance(t_list **sprites)
+{
+	t_list		*tmp;
+	t_sprite	*sprite;
+	t_sprite	*sprite2;
+
+	tmp = *sprites;
+	while (tmp->next)
+	{
+		sprite = tmp->content;
+		sprite2 = tmp->next->content;
+		if (sprite->dist < sprite2->dist)
+		{
+			tmp->content = sprite2;
+			tmp->next->content = sprite;
+			tmp = *sprites;
+		}
+		else
+			tmp = tmp->next;
+	}
+}
+
+static void	sprite_raycasting(t_sprite *sprite, t_player pl)
 {
 	t_vf2d	sp;
 	double	inv_det;
@@ -86,15 +95,24 @@ static void	calculate_sprites(t_sprite *sprite, t_player pl)
 
 void	sprites(t_game *game)
 {
-	int	i;
+	t_list	*tmp;
 
+	if (!game->sprites)
+		return ;
+	ft_lstiter(game->sprites, &check_sprite_status);
 	set_animation(game);
-	set_sprites_distances(game->sprite, game->pl.pos, game->num_sprites);
-	sort_sprites_by_distance(game->sprite, game->num_sprites);
-	i = -1;
-	while (++i < game->num_sprites)
+	set_sprites_distances_and_anim(game->sprites, game->pl.pos);
+	sort_sprites_by_distance(&game->sprites);
+	tmp = game->sprites;
+	while (tmp)
 	{
-		calculate_sprites(&game->sprite[i], game->pl);
-		draw_sprites(game, game->sprite[i], game->pl.pitch);
+		if (((t_sprite *)tmp->content)->visible
+			&& ((t_sprite *)tmp->content)->dist > 0.3)
+		{
+			sprite_raycasting(tmp->content, game->pl);
+			draw_sprites(game, *(t_sprite *)tmp->content, game->pl.pitch);
+			animate_enemy(game, tmp->content);
+		}
+		tmp = tmp->next;
 	}
 }

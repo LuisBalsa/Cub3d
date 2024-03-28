@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 16:21:40 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 18:23:30 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/19 14:16:19 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static void	anim_door(t_game *g)
+static void	anim_door_hit_blur(t_game *g)
 {
 	if (g->map[g->anim_door.y][g->anim_door.x] == OPEN_DOOR
 		&& (g->minimap.map_hit[g->anim_door.y][g->anim_door.x] != OPEN_DOOR
@@ -22,6 +22,12 @@ static void	anim_door(t_game *g)
 		g->map[g->anim_door.y][g->anim_door.x] = CLOSING_DOOR;
 		g->anim_door_i = TEXTURE_WIDTH;
 		g->anim_door_dir = -1;
+	}
+	if (g->pl.hited)
+	{
+		g->pl.hited += g->time.frame * HIT_BLUR_SPD;
+		if (g->pl.hited >= 2)
+			g->pl.hited = 0;
 	}
 	if (!g->anim_door_i)
 		return ;
@@ -65,33 +71,6 @@ static void	raycasting_sliding_door(t_game *game, t_player *pl, int x)
 		game->wall_dist[x] = pl->hit_dist;
 }
 
-static void	check_collectables(t_game *game)
-{
-	char	*collectibles;
-
-	if (!game->collectibles_found)
-		return ;
-	if (game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] == 'k')
-	{
-		game->map[(int)game->pl.pos.y][(int)game->pl.pos.x] = '0';
-		game->nbr_collectibles--;
-		game->num_sprites--;
-	}
-	if (game->nbr_collectibles == 0)
-	{
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
-			"Congratulations! You collected all possible keys!");
-	}
-	else
-	{
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 200, 50, 0x000000,
-			"Collect the remaining possible keys:");
-		mlx_string_put(game->mlx, game->win, MINIMAP_W + 450, 50, 0x000000,
-			collectibles = ft_itoa(game->nbr_collectibles));
-		free(collectibles);
-	}
-}
-
 int	raycasting(t_game *game)
 {
 	int	x;
@@ -112,8 +91,8 @@ int	raycasting(t_game *game)
 	}
 	sprites(game);
 	minimap(game);
-	anim_door(game);
+	anim_door_hit_blur(game);
+	draw_hud_and_more(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
-	check_collectables(game);
 	return (0);
 }

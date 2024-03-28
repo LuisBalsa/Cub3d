@@ -6,13 +6,13 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 02:04:44 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/16 22:58:31 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/17 22:35:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
 
-static int	my_pixel_get(t_img *mlx, int x, int y)
+int	my_pixel_get(t_img *mlx, int x, int y)
 {
 	return (*(unsigned int *)(mlx->addr + \
 		(y * mlx->line_len) + (x * (mlx->bpp / 8))));
@@ -64,8 +64,7 @@ void	draw_sprites(t_game *game, t_sprite sprite, int pitch)
 				if (sprite.img_index != -1)
 					my_pixel_put(&game->screen, x, y, \
 							my_pixel_get(&game->img[sprite.img_index
-							+ sprite.anim * game->anim_index], \
-							sprite.tex.x, sprite.tex.y));
+							+ sprite.anim_index], sprite.tex.x, sprite.tex.y));
 			}
 		}
 	}
