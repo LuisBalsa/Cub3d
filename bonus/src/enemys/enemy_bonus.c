@@ -6,12 +6,11 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/29 11:14:22 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:48:01 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d_bonus.h"
-
 
 static void	create_bullets(t_game *game, t_vf2d pos)
 {

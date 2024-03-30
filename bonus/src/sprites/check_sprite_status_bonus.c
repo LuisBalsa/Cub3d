@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:53:51 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/30 23:17:01 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:48:27 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	collectable_check(t_game *game, t_sprite *sprite)
 	}
 	game->map[(int)sprite->pos.y][(int)sprite->pos.x] = '0';
 }
-
 
 void	check_sprite_status(void *sp)
 {
