@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:53:51 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/20 14:39:48 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/30 23:17:01 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	enemy_check(t_game *game, t_sprite *sprite)
 {
-	if (game->minimap.map[(int)sprite->pos.y][(int)sprite->pos.x] != 'e')
+	if (sprite->type != 'e' || game->minimap.map_hit[(int)sprite->pos.y]
+		[(int)sprite->pos.x] != 'e')
 		return ;
 	if ((int)sprite->pos.x == game->enemy.hited.x
 		&& (int)sprite->pos.y == game->enemy.hited.y
@@ -22,8 +23,6 @@ static void	enemy_check(t_game *game, t_sprite *sprite)
 	{
 		sprite->anim_index = 0;
 		sprite->mode = ENEMY_DYING;
-		sprite->img_index = INDEX_ENEMY_IMAGE + ENEMY_DYING;
-		game->map[(int)sprite->pos.y][(int)sprite->pos.x] = '0';
 		game->enemy.hited = (t_vi2d){0, 0};
 	}
 	sprite->enemy_animated = true;
@@ -31,10 +30,9 @@ static void	enemy_check(t_game *game, t_sprite *sprite)
 
 static void	collectable_check(t_game *game, t_sprite *sprite)
 {
-	if (!ft_strchr("khy", game->map[(int)game->pl.pos.y][(int)game->pl.pos.x])
+	if (!ft_strchr("khy", sprite->type)
 		|| (int)sprite->pos.x != (int)game->pl.pos.x
-		|| (int)sprite->pos.y != (int)game->pl.pos.y
-		|| sprite->mode == ENEMY_DYING)
+		|| (int)sprite->pos.y != (int)game->pl.pos.y)
 		return ;
 	sprite->visible = false;
 	if (game->map[(int)sprite->pos.y][(int)sprite->pos.x] == 'k')

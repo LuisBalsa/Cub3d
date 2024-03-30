@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 17:09:30 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/20 13:20:58 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:14:22 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	enemy_dying(t_sprite *enemy)
 		{
 			enemy->enemy_animated = false;
 			enemy->anim_index = 4;
+			enemy->g->map[(int)enemy->pos.y][(int)enemy->pos.x] = '0';
+			enemy->type = '0';
 			if (rand() % 3)
 				create_bullets(enemy->g, enemy->pos);
 		}

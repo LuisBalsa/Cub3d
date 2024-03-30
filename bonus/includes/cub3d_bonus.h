@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:15:19 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/20 12:03:11 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/29 11:08:01 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ typedef struct s_enemy
 
 typedef struct s_sprite
 {
+	char	type;
 	double	dist;
 	t_vf2d	pos;
 	t_vf2d	transform;
