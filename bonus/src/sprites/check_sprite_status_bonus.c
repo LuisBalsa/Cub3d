@@ -6,7 +6,7 @@
 /*   By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 13:53:51 by luide-so          #+#    #+#             */
-/*   Updated: 2024/03/30 23:48:27 by luide-so         ###   ########.fr       */
+/*   Updated: 2024/03/31 13:05:28 by luide-so         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	collectable_check(t_game *game, t_sprite *sprite)
 		if (game->pl.hits_taken < 0)
 			game->pl.hits_taken = 0;
 	}
-	else
+	else if (game->map[(int)sprite->pos.y][(int)sprite->pos.x] == 'y')
 	{
 		game->pl.shots_fired -= 5;
 		if (game->pl.shots_fired < 0)
