@@ -6,7 +6,7 @@
 #    By: luide-so <luide-so@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 13:02:10 by luide-so          #+#    #+#              #
-#    Updated: 2024/03/20 11:33:59 by luide-so         ###   ########.fr        #
+#    Updated: 2024/04/08 11:46:01 by luide-so         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ $(NAME): $(OBJ) $(RULE)
 $(OBJ_PATH)%.o: %.c $(DEPS)
 	@find $(MLX) -name "mlx.h" -type f > /dev/null || $(MAKE) -s download
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH) $(LIBFLAGS)
+	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH)
 
 $(RULE):
 	@touch $(RULE)
@@ -80,7 +80,7 @@ $(RULE_BONUS): $(OBJ_BONUS)
 $(OBJ_PATH)%_bonus.o: %_bonus.c $(DEPS_BONUS)
 	@find $(MLX) -name "mlx.h" -type f > /dev/null || $(MAKE) -s download
 	@mkdir -p $(OBJ_PATH)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH_BONUS) $(LIBFLAGS)
+	$(CC) $(FLAGS) -c $< -o $@ -I $(DEPS_PATH_BONUS)
 
 clean:
 	rm -rf $(OBJ_PATH)
