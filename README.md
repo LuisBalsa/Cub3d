@@ -17,6 +17,8 @@ Ray-casting involves simulating the behavior of rays projected from a player's p
 
 The camera vector is multiplied by values ranging from -1 (for the leftmost vertical line of pixels on our screen) to 1 (for the rightmost vertical line of pixels on our screen). By adding the result to the direction vector, we obtain the green vector represented in the GIF below.
 ![Peek 2024-04-16 16-49](https://github.com/LuisBalsa/Cub3d/assets/81270660/7ef589a6-453b-446b-bada-4d3cdbfb7cb9)
+
+
 This process effectively scans the entire field of view, enabling us to measure distances necessary for ray-casting, as illustrated by the green vector.
 This green vector is the vector we will use to take measurements needed for each iteration, for every vertical row of pixels on our screen.
 
