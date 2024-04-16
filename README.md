@@ -52,7 +52,7 @@ Additionally, you can rotate the point of view using the mouse. To activate mous
 
 
 
-
+## Authors  - [Luis Balsa](https://github.com/LuisBalsa) - [Adam Kirst](https://github.com/adamckirst)
 
 ---
 
